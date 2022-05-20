@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareSquare, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import * as actions from '../../../../store/actions';
-import { PATHS, SYSTEM_ROLES, SYSTEM_MENUS, LANGUAGES } from '../../../../utils';
+import { PATHS, SYSTEM_ROLES, SYSTEM_MENUS, LANGUAGES, LocalStorage } from '../../../../utils';
 import Menu from '../Menu/Menu';
 import SystemStyles from '../../../../styles/System.module.scss';
 import HeaderStyles from './Header.module.scss';
@@ -23,7 +23,7 @@ class Header extends Component {
 	};
 
 	componentDidMount() {
-		const { userInfo } = this.props;
+		const userInfo = LocalStorage.get('userInfo');
 		let menus = [];
 
 		if (userInfo) {
@@ -40,8 +40,9 @@ class Header extends Component {
 	}
 
 	render() {
-		const { logoutUser, userInfo, language } = this.props;
+		const { logoutUser, language } = this.props;
 		const { menus } = this.state;
+		const userInfo = LocalStorage.get('userInfo');
 
 		return (
 			<div className={`${HeaderStyles.header} bg-primary border-bottom`}>
@@ -97,7 +98,6 @@ class Header extends Component {
 const mapStateToProps = (state) => {
 	return {
 		language: state.app.language,
-		userInfo: state.user.userInfo,
 	};
 };
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { PATHS, SYSTEM_ROLES, LocalStorage, Functions } from '../../utils';
+import { PATHS, SYSTEM_ROLES, LocalStorage } from '../../utils';
 
 const Auth = ({ children, role, ...rest }) => {
-	const isLoggedIn = Boolean(LocalStorage.get('persist:user')?.isLoggedIn);
-	const userInfo = Functions.jsonParse(LocalStorage.get('persist:user')?.userInfo);
+	const isLoggedIn = Boolean(LocalStorage.get('isLoggedIn'));
+	const userInfo = LocalStorage.get('userInfo');
 
 	return (
 		<Route

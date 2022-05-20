@@ -18,16 +18,10 @@ const appPersistConfig = {
 	whitelist: ['language'],
 };
 
-const userPersistConfig = {
-	...persistCommonConfig,
-	key: 'user',
-	whitelist: ['isLoggedIn', 'userInfo'],
-};
-
 const rootReducer = () =>
 	combineReducers({
 		app: persistReducer(appPersistConfig, appReducer),
-		user: persistReducer(userPersistConfig, userReducer),
+		user: userReducer,
 		allCode: allCodeReducer,
 		doctor: doctorReducer,
 	});

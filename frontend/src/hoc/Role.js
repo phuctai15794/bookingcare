@@ -1,11 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { PATHS } from '../utils';
+import { PATHS, LocalStorage } from '../utils';
 
 export const hasRole = (ComponentWrapped, Role) => {
 	function HoCCheckRole(props) {
-		const userInfo = useSelector((state) => state.user.userInfo);
+		const userInfo = LocalStorage.get('userInfo');
 
 		return userInfo && userInfo.roleId === Role ? (
 			<ComponentWrapped {...props} />

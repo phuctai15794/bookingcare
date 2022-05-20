@@ -5,16 +5,16 @@ class Cookies {
 
 		for (let i = 0; i < ca.length; i++) {
 			let c = ca[i];
-			while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+			while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+			if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
 		}
 
 		return null;
 	}
 
-	static set(name, value, days, path) {
+	static set(name, value, days, dir) {
 		let expires = '';
-		const path = `; path=${path || '/'}`;
+		const path = `; path=${dir || '/'}`;
 
 		if (days) {
 			const date = new Date();
@@ -30,4 +30,4 @@ class Cookies {
 	}
 }
 
-export default LocalStorage;
+export default Cookies;

@@ -6,7 +6,7 @@ import { AuthRoute, AdminRoute, DoctorRoute } from '../../routes/System';
 import Header from '../../containers/System/Layouts/Header/Header';
 import Footer from '../../containers/System/Layouts/Footer/Footer';
 import Dashboard from '../../containers/System/Layouts/Dashboard';
-import { PATHS } from '../../utils';
+import { PATHS, LocalStorage } from '../../utils';
 import CheckAuth from './Auth/CheckAuth';
 import Login from './Auth/Login';
 import Loading from './Layouts/Loading/Loading';
@@ -14,7 +14,7 @@ import SystemStyles from '../../styles/System.module.scss';
 
 class System extends Component {
 	render() {
-		const { isLoggedIn } = this.props;
+		const isLoggedIn = Boolean(LocalStorage.get('isLoggedIn'));
 
 		return (
 			<>
@@ -49,9 +49,7 @@ class System extends Component {
 }
 
 const mapStateToProps = (state) => {
-	return {
-		isLoggedIn: state.user.isLoggedIn,
-	};
+	return {};
 };
 
 const mapDispatchToProps = (dispatch) => {

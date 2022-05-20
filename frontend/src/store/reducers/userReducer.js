@@ -2,8 +2,6 @@ import actionTypes from '../actions/actionTypes';
 import { LocalStorage } from '../../utils';
 
 const initialState = {
-	isLoggedIn: false,
-	userInfo: null,
 	users: [],
 	loading: false,
 	message: {
@@ -55,16 +53,18 @@ const userReducer = (state = initialState, action) => {
 			const message = action.data.message;
 
 			if (message.type === 'success') {
+				LocalStorage.set('isLoggedIn', '1');
+				LocalStorage.set('userInfo', action.data.data);
 				LocalStorage.set('accessToken', action.data.accessToken);
 				LocalStorage.set('refreshToken', action.data.refreshToken);
 
 				newsState = {
 					...state,
-					isLoggedIn: true,
 					loading: false,
-					userInfo: action.data.data,
 				};
 			} else {
+				LocalStorage.set('isLoggedIn', '');
+				LocalStorage.set('userInfo', null);
 				LocalStorage.set('accessToken', '');
 				LocalStorage.set('refreshToken', '');
 
@@ -95,13 +95,13 @@ const userReducer = (state = initialState, action) => {
 				loading: true,
 			};
 		case actionTypes.LOGOUT_USER_DONE:
-			LocalStorage.remove('accessToken');
-			LocalStorage.remove('refreshToken');
+			LocalStorage.set('isLoggedIn', '');
+			LocalStorage.set('userInfo', null);
+			LocalStorage.set('accessToken', '');
+			LocalStorage.set('refreshToken', '');
 
 			return {
 				...state,
-				isLoggedIn: false,
-				userInfo: null,
 				loading: false,
 			};
 		case actionTypes.REFRESH_TOKEN_USER:
