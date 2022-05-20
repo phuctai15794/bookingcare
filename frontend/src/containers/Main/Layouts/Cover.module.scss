@@ -1,0 +1,166 @@
+@import '../../../styles/variables';
+
+.cover {
+	@include background(url('../assets/images/slideshow.jpg'), cover, no-repeat, top center);
+
+	.coverContain {
+		padding-top: 85px;
+		@include flex(center, center, column);
+		@include background(linear-gradient(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.1)));
+
+		.coverTitle {
+			color: #ffffff;
+			font-size: 32px;
+			margin-bottom: 1.5rem;
+			text-align: center;
+			text-transform: uppercase;
+			text-shadow: 1px 1px 1px #333;
+
+			.coverTitleFirst {
+				font-weight: 400;
+			}
+
+			.coverTitleSecond {
+				font-weight: 700;
+			}
+		}
+
+		.coverSearch {
+			width: 100%;
+			max-width: 450px;
+			overflow: hidden;
+			border-radius: 30px;
+			background-color: $colorSub;
+			@include flex(center, flex-start);
+
+			i {
+				width: 50px;
+				height: 50px;
+				color: #222222;
+				line-height: 54px;
+				text-align: center;
+			}
+
+			input {
+				border: 0px;
+				outline: none;
+				width: calc(100% - 50px);
+				height: 50px;
+				background-color: transparent;
+			}
+		}
+
+		.coverOptions {
+			width: 100%;
+			margin-top: 5rem;
+			padding-top: 30px;
+			padding-bottom: 20px;
+			@include background(linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), white));
+
+			.blockContent {
+				@include flex(flex-start, space-between);
+
+				.coverLink {
+					cursor: pointer;
+					padding: 0px 10px;
+
+					.coverImage {
+						width: 50px;
+						height: 50px;
+						margin: 0 auto 0.75rem auto;
+						border-radius: 50%;
+						background-color: #fff;
+						-moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+						-webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+						box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+					}
+
+					&#khamChuyenKhoa .coverImage {
+						@include background(
+							url('../assets/images/icon-kham-chuyen-khoa.png'),
+							30px,
+							no-repeat,
+							center center
+						);
+					}
+
+					&#khamTuXa .coverImage {
+						@include background(
+							url('../assets/images/icon-kham-tu-xa.png'),
+							30px,
+							no-repeat,
+							center center
+						);
+					}
+
+					&#khamTongQuat .coverImage {
+						@include background(
+							url('../assets/images/icon-kham-tong-quat.png'),
+							30px,
+							no-repeat,
+							center center
+						);
+					}
+
+					&#xetNghiemYHoc .coverImage {
+						@include background(
+							url('../assets/images/icon-xet-nghiem-y-hoc.png'),
+							30px,
+							no-repeat,
+							center center
+						);
+					}
+
+					&#sucKhoeTinhThan .coverImage {
+						@include background(
+							url('../assets/images/icon-suc-khoe-tinh-than.png'),
+							30px,
+							no-repeat,
+							center center
+						);
+					}
+
+					&#khamNhaKhoa .coverImage {
+						@include background(
+							url('../assets/images/icon-kham-nha-khoa.png'),
+							30px,
+							no-repeat,
+							center center
+						);
+					}
+
+					&#goiPhauThuat .coverImage {
+						@include background(
+							url('../assets/images/icon-goi-phau-thuat.png'),
+							30px,
+							no-repeat,
+							center center
+						);
+					}
+
+					&#sanPhamYTe .coverImage {
+						@include background(
+							url('../assets/images/icon-san-pham-y-te.png'),
+							30px,
+							no-repeat,
+							center center
+						);
+					}
+
+					.coverName {
+						font-size: 15px;
+						font-weight: 600;
+						text-transform: capitalize;
+						max-width: 120px;
+						text-align: center;
+						margin-bottom: 0px;
+					}
+
+					&:hover .coverName {
+						color: $colorMain;
+					}
+				}
+			}
+		}
+	}
+}

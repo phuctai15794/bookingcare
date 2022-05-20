@@ -1,0 +1,68 @@
+@import '../../../styles/variables';
+
+.footer {
+	.footerArticle {
+		background-color: #efefef;
+
+		.blockContent {
+			padding-top: 40px;
+			padding-bottom: 40px;
+
+			.footerLogo {
+				width: 160px;
+				height: 40px;
+				display: block;
+				margin-bottom: 1rem;
+				@include background(url('../../../assets/images/logo.svg'), cover, no-repeat, left center);
+			}
+
+			.footerInfo {
+				p {
+					margin-bottom: 0.5rem;
+				}
+
+				ul {
+					li {
+						margin-bottom: 0.5rem;
+
+						i {
+							width: 20px;
+							text-align: center;
+							margin-top: 4px;
+							margin-right: 5px;
+							vertical-align: top;
+							font-size: 15px;
+						}
+					}
+				}
+			}
+
+			.footerList {
+				li {
+					margin-bottom: 0.5rem;
+
+					a {
+						display: block;
+						color: $colorMain;
+						text-decoration: none;
+
+						&:hover {
+							color: $colorSub;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.footerPowered {
+		color: #ffffff;
+		text-align: center;
+		background-color: $colorMain;
+
+		.blockContent {
+			padding-top: 15px;
+			padding-bottom: 15px;
+		}
+	}
+}

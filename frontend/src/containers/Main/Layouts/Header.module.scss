@@ -1,0 +1,98 @@
+@import '../../../styles/variables';
+
+.header {
+	position: sticky;
+	top: 0px;
+	z-index: 100;
+	background-color: #ffffff;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+
+	.blockContent {
+		padding-top: 1.25rem;
+		padding-bottom: 1.25rem;
+		@include flex(center, space-between);
+
+		.headerLeft {
+			@include flex(center, flex-start);
+
+			.headerMenu {
+				margin-right: 1rem;
+
+				i {
+					color: gray;
+					cursor: pointer;
+					font-size: 18px;
+					padding-top: 0.375rem;
+				}
+			}
+
+			.headerLogo {
+				width: 160px;
+				height: 40px;
+				@include background(url('../assets/images/logo.svg'), cover, no-repeat, left center);
+			}
+		}
+
+		.headerCenter {
+			@include flex(flex-start, flex-start);
+
+			.headerLink {
+				cursor: pointer;
+				margin-right: 2rem;
+
+				&:last-child {
+					margin-right: 0;
+				}
+
+				.headerLinkName {
+					font-size: 13px;
+					font-weight: 600;
+					margin-bottom: 0;
+				}
+
+				.headerLinkDesc {
+					font-size: 11px;
+					color: #969495;
+				}
+			}
+		}
+
+		.headerRight {
+			@include flex(center, flex-start);
+
+			.headerLang {
+				margin-right: 1rem;
+
+				span {
+					opacity: 0.5;
+					font-weight: 500;
+					cursor: pointer;
+
+					&.active {
+						color: $colorSub;
+						opacity: 1;
+					}
+
+					&:hover {
+						opacity: 0.8;
+					}
+				}
+			}
+
+			.headerSupport {
+				cursor: pointer;
+
+				i {
+					color: $colorMain;
+					font-size: 15px;
+					margin-right: 0.25rem;
+				}
+
+				strong {
+					color: #969495;
+					font-weight: 600;
+				}
+			}
+		}
+	}
+}

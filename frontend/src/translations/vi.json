@@ -1,0 +1,142 @@
+{
+	"app": {
+		"view-more": "Xem thêm",
+		"welcome": "Xin chào",
+		"notify": "Thông báo",
+		"or": "hoặc",
+		"back-to-home": "Trở về trang chủ",
+		"not-found-title": "Không tìm thấy trang",
+		"not-found-message": "Xin lỗi, đã xảy ra lỗi, không tìm thấy trang được yêu cầu!Sorry, an error has occured, Requested page not found!",
+		"no-results-found": "Không tìm thấy kết quả",
+		"delete-confirmation": "Bạn có chắc muốn xóa mục này ?"
+	},
+	"header": {
+		"link": {
+			"specialist": {
+				"name": "Chuyên khoa",
+				"desc": "Tìm bác sĩ theo chuyên khoa"
+			},
+			"health-facilities": {
+				"name": "Cơ sở y tế",
+				"desc": "Chọn bệnh viện phòng khám"
+			},
+			"doctor": {
+				"name": "Bác sĩ",
+				"desc": "Chọn bác sĩ giỏi"
+			},
+			"examination-package": {
+				"name": "Gói khám",
+				"desc": "Khám sức khỏe tổng quát"
+			}
+		},
+		"support": "Hỗ trợ"
+	},
+	"cover": {
+		"title": {
+			"first": "Nền tảng y tế",
+			"second": "Chăm sóc sức khỏe toàn diện"
+		},
+		"link": {
+			"specialist-examination": "Khám chuyên khoa",
+			"remote-examination": "Khám từ xa",
+			"general-examination": "Khám tổng quát",
+			"medical-test": "Xét nghiệm y học",
+			"mental-health": "Sức khỏe tinh thần",
+			"dental-examination": "Khám nha khoa",
+			"surgery-pack": "Gói phẩu thuật",
+			"medical-products": "Sản phẩm y tế"
+		}
+	},
+	"search": {
+		"placeholder": "Nhập từ khóa tìm kiếm"
+	},
+	"section": {
+		"specialty": "Chuyên khoa phổ biến",
+		"health-facility": "Cơ sở y tế nổi bật",
+		"doctor-in-week": "Bác sĩ tuần qua",
+		"handbook": "Cẩm nang",
+		"communication": "Truyền thông nói về BookingCare"
+	},
+	"menu": {
+		"admin": {
+			"dashboard": {
+				"name": "Dashboard"
+			},
+			"user-management": {
+				"name": "Người dùng",
+				"types": {
+					"user": "Quản lý người dùng",
+					"user-list": "Danh sách người dùng",
+					"doctor": "Quản lý bác sĩ",
+					"admin": "Quản lý admin"
+				}
+			},
+			"clinic-management": {
+				"name": "Phòng khám",
+				"types": {
+					"clinic": "Quản lý phòng khám"
+				}
+			},
+			"specialty-management": {
+				"name": "Chuyên khoa",
+				"types": {
+					"specialty": "Quản lý chuyên khoa"
+				}
+			},
+			"handbook-management": {
+				"name": "Cẩm nang",
+				"types": {
+					"handbook": "Quản lý cẩm nang"
+				}
+			}
+		},
+		"doctor": {
+			"dashboard": {
+				"name": "Dashboard"
+			},
+			"user-management": {
+				"name": "Bác sĩ",
+				"types": {
+					"schedule": "Quản lý lịch khám"
+				}
+			}
+		}
+	},
+	"form": {
+		"actions": {
+			"create": "Tạo mới",
+			"update": "Cập nhật",
+			"save": "Lưu",
+			"cancel": "Hủy bỏ",
+			"choose-a-doctor": "Chọn bác sĩ",
+			"choose-a-date": "Chọn ngày",
+			"choose-a-time": "Chọn giờ"
+		},
+		"others": {
+			"list-of-doctor": "Danh sách bác sĩ"
+		},
+		"attributes": {
+			"avatar": "Ảnh đại diện",
+			"email": "Email",
+			"password": "Mật khẩu",
+			"firstName": "Tên",
+			"lastName": "Họ",
+			"address": "Địa chỉ",
+			"phone": "Số điện thoại",
+			"gender": {
+				"title": "Giới tính",
+				"optionDefault": "Chọn giới tính"
+			},
+			"role": {
+				"title": "Vai trò",
+				"optionDefault": "Chọn vai trò"
+			},
+			"position": {
+				"title": "Vị trí",
+				"optionDefault": "Chọn vị trí"
+			},
+			"description": "Mô tả",
+			"content": "Nội dung"
+		}
+	}
+}

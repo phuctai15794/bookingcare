@@ -1,0 +1,28 @@
+@import 'variables';
+@import './CustomSwiper.scss';
+
+.blockContent {
+	width: 100%;
+	max-width: 1230px;
+	margin: 0px auto;
+	padding: 0px 15px;
+}
+
+.titleMain {
+	text-transform: uppercase;
+	font-size: 20px;
+	font-weight: 700;
+	color: #333333;
+}
+
+.videoIframe {
+	position: relative;
+
+	iframe {
+		position: absolute !important;
+		top: 0px !important;
+		left: 0px !important;
+		width: 100% !important;
+		height: 100% !important;
+	}
+}

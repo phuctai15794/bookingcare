@@ -1,0 +1,57 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/" title="Home">Home</a></li>
+        <li class="breadcrumb-item"><a href="/user/list" title="List of users">List of users</a></li>
+        <li class="breadcrumb-item active" aria-current="page">User detail</li>
+    </ol>
+</nav>
+<h2 class="mb-4">User info</h2>
+<% if (message) { %>
+    <div class="alert alert-<%= message.type %>"><%= message.text %></div>
+<% } %>
+<% if(detail) { %>
+    <form action="/user/update/<%= detail.id %>?_method=PUT" method="POST">
+        <div class="row">
+            <div class="form-group col-4">
+                <label for="firstName">First name:</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" value="<%= detail.firstName %>" />
+            </div>
+            <div class="form-group col-4">
+                <label for="lastName">Last name:</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" value="<%= detail.lastName %>" />
+            </div>
+            <div class="form-group col-4">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" id="email" name="email" value="<%= detail.email %>" />
+            </div>
+            <div class="form-group col-4">
+                <label for="phone">Phone:</label>
+                <input type="text" class="form-control" id="phone" name="phone" value="<%= detail.phone %>" />
+            </div>
+            <div class="form-group col-4">
+                <label for="gender">Gender</label>
+                <select class="form-control" id="gender" name="gender" required>
+                    <option value="">Choose a gender</option>
+                    <option <%= detail.gender === 1 ? 'selected' : '' %> value="1">Male</option>
+                    <option <%= detail.gender === 2 ? 'selected' : '' %> value="2">Female</option>
+                </select>
+            </div>
+            <div class="form-group col-4">
+                <label for="roleId">Role</label>
+                <select class="form-control" id="roleId" name="roleId" required>
+                    <option value="">Choose a role</option>
+                    <option <%= detail.roleId === '1' ? 'selected' : '' %> value="1">Admin</option>
+                    <option <%= detail.roleId === '2' ? 'selected' : '' %> value="2">Doctor</option>
+                    <option <%= detail.roleId === '3' ? 'selected' : '' %> value="3">Patient</option>
+                </select>
+            </div>
+            <div class="form-group col-8">
+                <label>Address:</label>
+                <input type="text" class="form-control" id="address" name="address" value="<%= detail.address %>" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+<% } else { %>
+    <div class="alert alert-warning">No result found</div>
+<% } %>

@@ -1,0 +1,36 @@
+@import '../../../../styles/variables';
+
+.header {
+	background-color: $colorSystem;
+
+	.blockContent {
+		padding-top: 5px;
+		padding-bottom: 5px;
+		@include flex(center, space-between);
+
+		.headerAccount {
+			color: #ffffff;
+			margin-left: auto;
+			margin-right: 1rem;
+		}
+
+		.headerLang {
+			color: #ffffff;
+			margin-right: 1rem;
+
+			span {
+				font-weight: 500;
+				cursor: pointer;
+
+				&.active {
+					color: $colorSub;
+					opacity: 1;
+				}
+			}
+		}
+
+		.headerViewWebsite {
+			margin-right: 0.5rem;
+		}
+	}
+}

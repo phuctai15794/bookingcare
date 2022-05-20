@@ -1,0 +1,140 @@
+@import '../../../../styles/variables';
+
+.menu {
+	ul {
+		width: 100%;
+		padding: 0px;
+		margin: auto;
+		list-style: none;
+
+		&.menuMain {
+			@include flex(center, space-between);
+		}
+
+		li {
+			position: relative;
+			z-index: 1;
+
+			a {
+				display: block;
+				position: relative;
+				font-size: 13px;
+				color: #ffffff;
+				padding: 12px 12px 11px 12px;
+				font-weight: 500;
+				text-transform: uppercase;
+				text-decoration: none;
+
+				&.hasChild {
+					padding-right: 20px;
+
+					&:after {
+						content: '';
+						position: absolute;
+						bottom: calc(50% - 4px / 2);
+						right: 8px;
+						width: 5px;
+						height: 5px;
+						border: 1px solid #fafafa;
+						border-top: 0px;
+						border-left: 0px;
+						-moz-transform: rotate(45deg);
+						-webkit-transform: rotate(45deg);
+						-o-transform: rotate(45deg);
+						-ms-transform: rotate(45deg);
+						transform: rotate(45deg);
+						-webkit-transition: all 0.4s ease-out;
+						-moz-transition: all 0.4s ease-out;
+						-o-transition: all 0.4s ease-out;
+						-ms-transition: all 0.3s ease-out;
+						transition: all 0.3s ease-out;
+					}
+				}
+			}
+
+			ul {
+				position: absolute;
+				min-width: 250px;
+				padding-top: 0.25rem;
+				padding-bottom: 0.25rem;
+				background-color: #fafafa;
+				-webkit-box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.15);
+				box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.15);
+				-webkit-transform: perspective(600px) rotateX(-90deg);
+				transform: perspective(600px) rotateX(-90deg);
+				-webkit-transform-origin: 0 0 0;
+				transform-origin: 0 0 0;
+				opacity: 0;
+				visibility: hidden;
+				transition: all 0.5s;
+			}
+
+			&:hover > ul {
+				-webkit-transform: perspective(600px) rotateX(0);
+				transform: perspective(600px) rotateX(0);
+				transform-origin: 0 0 0;
+				-webkit-transform-origin: 0 0 0;
+				opacity: 1;
+				visibility: visible;
+				transition: all 0.7s;
+			}
+
+			ul li {
+				padding-left: 0.75rem;
+				padding-right: 0.75rem;
+
+				a {
+					text-align: left;
+					color: #313131;
+					border-bottom: 1px solid #ececec;
+				}
+
+				&:last-child > a {
+					border-bottom: 0px;
+				}
+
+				a {
+					&.hasChild {
+						margin-right: 0px;
+
+						&:after {
+							border-color: #313131;
+							-moz-transform: rotate(-45deg);
+							-webkit-transform: rotate(-45deg);
+							-o-transform: rotate(-45deg);
+							-ms-transform: rotate(-45deg);
+							transform: rotate(-45deg);
+						}
+					}
+
+					&.active {
+						color: $colorMain;
+					}
+				}
+
+				&:hover > a {
+					color: $colorMain;
+
+					&.hasChild:after {
+						border-color: $colorMain;
+					}
+				}
+
+				a {
+					&.active.hasChild:after {
+						border-color: $colorMain;
+					}
+
+					padding: 9px 0px;
+					text-transform: capitalize;
+				}
+
+				ul {
+					top: -0.75rem;
+					left: 100%;
+					margin-top: 0px;
+				}
+			}
+		}
+	}
+}
