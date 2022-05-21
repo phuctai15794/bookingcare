@@ -38,6 +38,7 @@ let route = (app) => {
 	router.get('/api/doctor/list-in-week', DoctorController.listInWeekAPI);
 	router.post('/api/doctor/update-info', DoctorController.updateInfoAPI);
 	router.get('/api/doctor/detail/:id', DoctorController.getDetailAPI);
+	router.post('/api/doctor/create-schedule', DoctorController.createScheduleAPI);
 
 	return app.use('/', router);
 };

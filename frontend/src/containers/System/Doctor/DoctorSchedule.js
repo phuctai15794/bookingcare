@@ -52,7 +52,7 @@ class DoctorSchedule extends Component {
 	handleSave = () => {
 		const { times, select, currentDate } = this.state;
 		const doctorSelected = select.selected;
-		const dateSelected = Functions.formatDate(currentDate, Constants.DATE_FORMAT.STANDARD);
+		const dateSelected = Functions.formatDate(currentDate, Constants.DATE_FORMAT.DATETIME);
 		const timesSelected = times.filter((time) => time.isActive);
 		let result = [];
 
@@ -67,7 +67,7 @@ class DoctorSchedule extends Component {
 				let temp = {};
 				temp.doctorId = doctorSelected.value;
 				temp.date = dateSelected;
-				temp.time = timeSelected.keyMap;
+				temp.timeType = timeSelected.keyMap;
 				result.push(temp);
 			});
 		}

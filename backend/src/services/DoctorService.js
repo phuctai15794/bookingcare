@@ -166,9 +166,49 @@ let getDetailAPI = (id) => {
 	});
 };
 
+let createScheduleAPI = (data) => {
+	return new Promise(async (resole, reject) => {
+		try {
+			const message = {
+				text: '',
+				type: '',
+			};
+			const [doctor] = data;
+
+			const doctorDetail = await db.User.findOne({
+				where: {
+					id: doctor.doctorId,
+					roleId: 'R2',
+				},
+			});
+
+			if (doctorDetail === null) {
+				message.text = 'Doctor is invalid';
+				message.type = 'error';
+			} else {
+				const schedulesList = await db.Schedule.findAll({
+					where: {
+						doctorId: doctorDetail.id,
+					},
+				});
+				// const isExist = schedulesList && schedulesList.some(scheduleItem => data.some())
+				// const schedules = await db.Schedule.bulkCreate(data);
+
+				message.text = 'Create schedule successfully';
+				message.type = 'success';
+			}
+
+			resole(message);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};
+
 module.exports = {
 	listAPI,
 	listInWeekAPI,
 	updateInfoAPI,
 	getDetailAPI,
+	createScheduleAPI,
 };
