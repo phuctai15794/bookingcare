@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
+import _ from 'lodash';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
@@ -8,7 +9,7 @@ import Select from 'react-select';
 import subDays from 'date-fns/subDays';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { HtmlRaw, LANGUAGES } from '../../../utils';
+import { Constants, Functions, HtmlRaw } from '../../../utils';
 import * as actions from '../../../store/actions';
 import SystemStyles from '../../../styles/System.module.scss';
 
@@ -17,7 +18,7 @@ class DoctorSchedule extends Component {
 		super(props);
 		this.state = {
 			times: [],
-			startDate: new Date(),
+			currentDate: new Date(),
 			select: {
 				list: [],
 				selected: null,
@@ -30,9 +31,6 @@ class DoctorSchedule extends Component {
 	}
 
 	handleOnChangeSelect = async (selectedOption) => {
-		const { getDetailDoctor } = this.props;
-		await getDetailDoctor(selectedOption.value);
-
 		this.setState({
 			select: {
 				...this.state.select,
@@ -47,8 +45,32 @@ class DoctorSchedule extends Component {
 
 	handleOnChangeDate = async (selectedDated) => {
 		this.setState({
-			startDate: selectedDated,
+			currentDate: selectedDated,
 		});
+	};
+
+	handleSave = () => {
+		const { times, select, currentDate } = this.state;
+		const doctorSelected = select.selected;
+		const dateSelected = Functions.formatDate(currentDate, Constants.DATE_FORMAT.STANDARD);
+		const timesSelected = times.filter((time) => time.isActive);
+		let result = [];
+
+		if (_.isEmpty(doctorSelected)) {
+			toast.error('Please choose a doctor');
+		} else if (_.isEmpty(dateSelected) || (dateSelected && dateSelected === 'Invalid date')) {
+			toast.error('Please choose a date');
+		} else if (_.isEmpty(timesSelected)) {
+			toast.error('Please choose a times');
+		} else {
+			timesSelected.forEach((timeSelected) => {
+				let temp = {};
+				temp.doctorId = doctorSelected.value;
+				temp.date = dateSelected;
+				temp.time = timeSelected.keyMap;
+				result.push(temp);
+			});
+		}
 	};
 
 	buildDoctorsSelect = (doctors) => {
@@ -59,13 +81,27 @@ class DoctorSchedule extends Component {
 			doctors.map((doctor) => ({
 				value: doctor.id,
 				label:
-					language === LANGUAGES.VI
+					language === Constants.LANGUAGES.VI
 						? `${doctor.firstName} ${doctor.lastName}`
-						: language === LANGUAGES.EN
+						: language === Constants.LANGUAGES.EN
 						? `${doctor.lastName} ${doctor.firstName}`
 						: '',
 			}))
 		);
+	};
+
+	handleOnClickChooseTime = (timeId) => {
+		const { times } = this.state;
+		const newTimes = times.map((time) => {
+			if (time.id === timeId) {
+				time.isActive = !time.isActive;
+			}
+			return time;
+		});
+
+		this.setState({
+			times: newTimes,
+		});
 	};
 
 	async componentDidMount() {
@@ -75,7 +111,7 @@ class DoctorSchedule extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		const { language, doctors, doctorDetail, times, messageDoctor } = this.props;
+		const { language, doctors, times, messageDoctor } = this.props;
 
 		if (prevProps.doctors !== doctors || prevProps.language !== language) {
 			const optionsDoctor = this.buildDoctorsSelect(doctors);
@@ -119,33 +155,10 @@ class DoctorSchedule extends Component {
 				message: messageDoctor,
 			});
 		}
-
-		if (prevProps.doctorDetail !== doctorDetail) {
-			const optionsDoctor = this.buildDoctorsSelect(doctors);
-
-			this.setState({
-				select: {
-					list: optionsDoctor || [],
-					selected: {
-						value: doctorDetail.id,
-						label:
-							language === LANGUAGES.VI
-								? `${doctorDetail.firstName} ${doctorDetail.lastName}`
-								: language === LANGUAGES.EN
-								? `${doctorDetail.lastName} ${doctorDetail.firstName}`
-								: '',
-					},
-				},
-				message: {
-					text: '',
-					type: '',
-				},
-			});
-		}
 	}
 
 	render() {
-		const { startDate, select, times } = this.state;
+		const { currentDate, select, times } = this.state;
 		const { intl, language } = this.props;
 		const keyLang = `${language[0].toUpperCase()}${language.slice(1)}`;
 		const selectLang = {
@@ -180,7 +193,7 @@ class DoctorSchedule extends Component {
 								</label>
 								<DatePicker
 									className="form-control"
-									selected={startDate}
+									selected={currentDate}
 									minDate={subDays(new Date(), 0)}
 									disabledKeyboardNavigation
 									closeOnScroll={true}
@@ -191,24 +204,31 @@ class DoctorSchedule extends Component {
 								<label className="fw-bold mb-1">
 									<FormattedMessage id="form.actions.choose-a-time" />:
 								</label>
-								<div>
+								<ul className="list-unstyled p-0 m-0">
 									{times && times.length
 										? times.map((time) => {
 												return (
 													<button
-														className="btn btn-outline-success me-2 mb-2"
+														type="button"
+														className={`btn btn-outline-success ${
+															time.isActive && 'active'
+														} me-2 mb-2`}
 														key={time.id}
-														value={time.keyMap}
+														onClick={() => this.handleOnClickChooseTime(time.id)}
 													>
 														{time[`value${keyLang}`]}
 													</button>
 												);
 										  })
 										: ''}
-								</div>
+								</ul>
 							</div>
 						</div>
-						<button type="button" className="btn btn-sm btn-primary px-3 py-2">
+						<button
+							type="button"
+							className="btn btn-sm btn-primary px-3 py-2"
+							onClick={() => this.handleSave()}
+						>
 							<i>
 								<FontAwesomeIcon className="me-2" icon={faFloppyDisk} />
 							</i>
@@ -227,7 +247,6 @@ const mapStateToProps = (state) => {
 		loadingDoctor: state.doctor.loading,
 		messageDoctor: state.doctor.message,
 		doctors: state.doctor.doctors,
-		doctorDetail: state.doctor.doctorDetail,
 		times: state.allCode.times.data,
 	};
 };
@@ -235,7 +254,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchDoctors: () => dispatch(actions.fetchDoctors()),
-		getDetailDoctor: (id) => dispatch(actions.getDetailDoctor(id)),
 		fetchAllCode: (type) => dispatch(actions.fetchAllCode(type)),
 	};
 };

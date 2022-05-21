@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareSquare, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import * as actions from '../../../../store/actions';
-import { PATHS, SYSTEM_ROLES, SYSTEM_MENUS, LANGUAGES, LocalStorage } from '../../../../utils';
+import { Constants, LocalStorage } from '../../../../utils';
 import Menu from '../Menu/Menu';
 import SystemStyles from '../../../../styles/System.module.scss';
 import HeaderStyles from './Header.module.scss';
@@ -27,10 +27,10 @@ class Header extends Component {
 		let menus = [];
 
 		if (userInfo) {
-			if (userInfo.roleId === SYSTEM_ROLES.ADMIN) {
-				menus = SYSTEM_MENUS.ADMIN;
-			} else if (userInfo.roleId === SYSTEM_ROLES.DOCTOR) {
-				menus = SYSTEM_MENUS.DOCTOR;
+			if (userInfo.roleId === Constants.SYSTEM_ROLES.ADMIN) {
+				menus = Constants.SYSTEM_MENUS.ADMIN;
+			} else if (userInfo.roleId === Constants.SYSTEM_ROLES.DOCTOR) {
+				menus = Constants.SYSTEM_MENUS.DOCTOR;
 			}
 		}
 
@@ -55,15 +55,15 @@ class Header extends Component {
 
 					<div className={HeaderStyles.headerLang}>
 						<span
-							className={language === LANGUAGES.VI ? HeaderStyles.active : ''}
-							onClick={() => this.handleChangeLanguage(LANGUAGES.VI)}
+							className={language === Constants.LANGUAGES.VI ? HeaderStyles.active : ''}
+							onClick={() => this.handleChangeLanguage(Constants.LANGUAGES.VI)}
 						>
 							VN
 						</span>{' '}
 						/{' '}
 						<span
-							className={language === LANGUAGES.EN ? HeaderStyles.active : ''}
-							onClick={() => this.handleChangeLanguage(LANGUAGES.EN)}
+							className={language === Constants.LANGUAGES.EN ? HeaderStyles.active : ''}
+							onClick={() => this.handleChangeLanguage(Constants.LANGUAGES.EN)}
 						>
 							EN
 						</span>
@@ -72,7 +72,7 @@ class Header extends Component {
 					<div className={HeaderStyles.headerViewWebsite}>
 						<a
 							className="btn btn-sm btn-warning"
-							href={PATHS.MAIN.HOME}
+							href={Constants.PATHS.MAIN.HOME}
 							target="_blank"
 							rel="noopener noreferrer"
 						>

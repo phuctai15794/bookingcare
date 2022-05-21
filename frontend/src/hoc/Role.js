@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { PATHS, LocalStorage } from '../utils';
+import { Constants, LocalStorage } from '../utils';
 
 export const hasRole = (ComponentWrapped, Role) => {
 	function HoCCheckRole(props) {
@@ -9,7 +9,7 @@ export const hasRole = (ComponentWrapped, Role) => {
 		return userInfo && userInfo.roleId === Role ? (
 			<ComponentWrapped {...props} />
 		) : (
-			<Redirect to={PATHS.SYSTEM.DASHBOARD} />
+			<Redirect to={Constants.PATHS.SYSTEM.DASHBOARD} />
 		);
 	}
 

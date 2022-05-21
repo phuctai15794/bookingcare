@@ -1,6 +1,5 @@
-export * from './Constants';
+export * as Constants from './Constants';
 export { default as Functions } from './Functions';
-export { default as Cookies } from './Cookies';
 export { default as LocalStorage } from './LocalStorage';
 export { default as Languages } from './Languages';
 export { default as HtmlRaw } from './HtmlRaw';

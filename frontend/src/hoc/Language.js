@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { Languages } from '../utils';
 
-const messages = Languages.getFlattenedMessages();
-
 class Language extends Component {
 	render() {
 		const { children, language } = this.props;
+		const messages = Languages.getFlattenedMessages();
 
 		return (
 			<IntlProvider locale={language} messages={messages[language]} defaultLocale="vi">

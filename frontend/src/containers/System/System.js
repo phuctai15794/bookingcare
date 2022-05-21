@@ -5,7 +5,7 @@ import { isNotAuthenticated } from '../../hoc/Authentication';
 import { AuthRoute, AdminRoute, DoctorRoute, DashboardRoute } from '../../routes/System';
 import Header from '../../containers/System/Layouts/Header/Header';
 import Footer from '../../containers/System/Layouts/Footer/Footer';
-import { PATHS, LocalStorage } from '../../utils';
+import { Constants, LocalStorage } from '../../utils';
 import CheckAuth from './Auth/CheckAuth';
 import Login from './Auth/Login';
 import Loading from './Layouts/Loading/Loading';
@@ -37,16 +37,24 @@ class System extends Component {
 				{isLoggedIn && <Header />}
 				<Switch>
 					<Route path="/" exact component={CheckAuth} />
-					<Route path={PATHS.SYSTEM.LOGIN} component={isNotAuthenticated(Login)} />
+					<Route path={Constants.PATHS.SYSTEM.LOGIN} component={isNotAuthenticated(Login)} />
 					<>
 						<div className={`${SystemStyles.blockContent} py-4`}>
 							<Switch>
-								<AuthRoute path={PATHS.SYSTEM.DASHBOARD} component={DashboardRoute} />
-								<AuthRoute path={`${PATHS.SYSTEM.HOME}/admin`} component={AdminRoute} role="ADMIN" />
-								<AuthRoute path={`${PATHS.SYSTEM.HOME}/doctor`} component={DoctorRoute} role="DOCTOR" />
+								<AuthRoute path={Constants.PATHS.SYSTEM.DASHBOARD} component={DashboardRoute} />
+								<AuthRoute
+									path={`${Constants.PATHS.SYSTEM.HOME}/admin`}
+									component={AdminRoute}
+									role="ADMIN"
+								/>
+								<AuthRoute
+									path={`${Constants.PATHS.SYSTEM.HOME}/doctor`}
+									component={DoctorRoute}
+									role="DOCTOR"
+								/>
 								<Route
 									component={() => {
-										return <Redirect to={PATHS.SYSTEM.DASHBOARD} />;
+										return <Redirect to={Constants.PATHS.SYSTEM.DASHBOARD} />;
 									}}
 								/>
 							</Switch>

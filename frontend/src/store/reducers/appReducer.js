@@ -1,8 +1,8 @@
 import actionTypes from '../actions/actionTypes';
-import { LANGUAGES } from '../../utils';
+import { Constants } from '../../utils';
 
 const initialState = {
-	language: LANGUAGES.VI,
+	language: Constants.LANGUAGES.VI,
 };
 
 const appReducer = (state = initialState, action) => {

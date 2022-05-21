@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { PATHS } from '../utils';
+import { Constants } from '../utils';
 import '../styles/Styles.scss';
 import Main from './Main/Main';
 import System from './System/System';
@@ -14,8 +14,8 @@ class App extends Component {
 			<Router>
 				<div className="main">
 					<Switch>
-						<Route path={PATHS.SYSTEM.HOME} component={System} />
-						<Route path={PATHS.MAIN.HOME} component={Main} />
+						<Route path={Constants.PATHS.SYSTEM.HOME} component={System} />
+						<Route path={Constants.PATHS.MAIN.HOME} component={Main} />
 					</Switch>
 					<ToastContainer
 						position="top-right"

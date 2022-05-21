@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import * as actions from '../../../store/actions';
-import { HtmlRaw, SYSTEM_ACTIONS, Functions } from '../../../utils';
+import { HtmlRaw, Constants, Functions } from '../../../utils';
 import UserList from './UserList';
 import SystemStyles from '../../../styles/System.module.scss';
 
@@ -16,7 +16,7 @@ class UserManage extends Component {
 		super(props);
 		this.resetFile = React.createRef();
 		this.state = {
-			action: SYSTEM_ACTIONS.CREATE,
+			action: Constants.SYSTEM_ACTIONS.CREATE,
 			attributes: {
 				id: '',
 				avatar: '',
@@ -140,11 +140,11 @@ class UserManage extends Component {
 			const { action } = this.state;
 			const data = { ...this.state.attributes };
 
-			if (action === SYSTEM_ACTIONS.CREATE) {
+			if (action === Constants.SYSTEM_ACTIONS.CREATE) {
 				delete data.id;
 				await createUser(data);
 				await resetActionUser('create');
-			} else if (action === SYSTEM_ACTIONS.EDIT) {
+			} else if (action === Constants.SYSTEM_ACTIONS.EDIT) {
 				delete data.email;
 				delete data.password;
 				await updateUser(data);
@@ -159,7 +159,7 @@ class UserManage extends Component {
 		const avatarBase64 = Functions.bufferToBase64(user.image);
 
 		this.setState({
-			action: SYSTEM_ACTIONS.EDIT,
+			action: Constants.SYSTEM_ACTIONS.EDIT,
 			attributes: {
 				id: user.id,
 				avatar: avatarBase64,
@@ -182,7 +182,7 @@ class UserManage extends Component {
 
 	handleCancelEditUser = () => {
 		this.setState({
-			action: SYSTEM_ACTIONS.CREATE,
+			action: Constants.SYSTEM_ACTIONS.CREATE,
 			attributes: {
 				id: '',
 				avatar: '',
@@ -235,7 +235,7 @@ class UserManage extends Component {
 		if (prevProps.messageCreateUser.text !== messageCreateUser.text) {
 			if (messageCreateUser.type === 'success') {
 				this.setState({
-					action: SYSTEM_ACTIONS.CREATE,
+					action: Constants.SYSTEM_ACTIONS.CREATE,
 					attributes: {
 						id: '',
 						avatar: '',
@@ -284,7 +284,7 @@ class UserManage extends Component {
 			}
 
 			this.setState({
-				action: SYSTEM_ACTIONS.CREATE,
+				action: Constants.SYSTEM_ACTIONS.CREATE,
 				attributes: {
 					id: '',
 					avatar: '',
@@ -329,7 +329,7 @@ class UserManage extends Component {
 
 			if (idDelete === attributes.id) {
 				this.setState({
-					action: SYSTEM_ACTIONS.CREATE,
+					action: Constants.SYSTEM_ACTIONS.CREATE,
 					attributes: {
 						id: '',
 						avatar: '',
@@ -461,7 +461,7 @@ class UserManage extends Component {
 									name="email"
 									required
 									value={email}
-									disabled={action === SYSTEM_ACTIONS.EDIT ? 'disabled' : ''}
+									disabled={action === Constants.SYSTEM_ACTIONS.EDIT ? 'disabled' : ''}
 									onChange={(event) => this.handleOnChangeInput(event, 'email')}
 									onKeyPress={(event) => this.handleOnKeyPressInput(event)}
 								/>
@@ -477,7 +477,7 @@ class UserManage extends Component {
 									name="password"
 									required
 									value={password}
-									disabled={action === SYSTEM_ACTIONS.EDIT ? 'disabled' : ''}
+									disabled={action === Constants.SYSTEM_ACTIONS.EDIT ? 'disabled' : ''}
 									onChange={(event) => this.handleOnChangeInput(event, 'password')}
 									onKeyPress={(event) => this.handleOnKeyPressInput(event)}
 								/>
@@ -617,7 +617,7 @@ class UserManage extends Component {
 								</select>
 							</div>
 						</div>
-						{action === SYSTEM_ACTIONS.EDIT ? (
+						{action === Constants.SYSTEM_ACTIONS.EDIT ? (
 							<>
 								<button
 									type="button"

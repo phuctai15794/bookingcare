@@ -15,6 +15,10 @@ export const PATHS = {
 	},
 };
 
+export const DATE_FORMAT = {
+	STANDARD: 'DD/MM/YYYY',
+};
+
 export const SYSTEM_ACTIONS = {
 	CREATE: 'CREATE',
 	EDIT: 'EDIT',

@@ -8,7 +8,7 @@ import Select from 'react-select';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
-import { HtmlRaw, LANGUAGES } from '../../../utils';
+import { HtmlRaw, Constants } from '../../../utils';
 import * as actions from '../../../store/actions';
 import SystemStyles from '../../../styles/System.module.scss';
 
@@ -107,9 +107,9 @@ class DoctorManage extends Component {
 			doctors.map((doctor) => ({
 				value: doctor.id,
 				label:
-					language === LANGUAGES.VI
+					language === Constants.LANGUAGES.VI
 						? `${doctor.firstName} ${doctor.lastName}`
-						: language === LANGUAGES.EN
+						: language === Constants.LANGUAGES.EN
 						? `${doctor.lastName} ${doctor.firstName}`
 						: '',
 			}))
@@ -178,9 +178,9 @@ class DoctorManage extends Component {
 					selected: {
 						value: doctorDetail.id,
 						label:
-							language === LANGUAGES.VI
+							language === Constants.LANGUAGES.VI
 								? `${doctorDetail.firstName} ${doctorDetail.lastName}`
-								: language === LANGUAGES.EN
+								: language === Constants.LANGUAGES.EN
 								? `${doctorDetail.lastName} ${doctorDetail.firstName}`
 								: '',
 					},

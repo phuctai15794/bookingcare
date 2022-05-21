@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { PATHS } from '../../utils';
+import { Constants } from '../../utils';
 import Header from './Layouts/Header';
 import Footer from './Layouts/Footer';
 import Home from './Home/Home';
@@ -14,11 +14,11 @@ class Main extends Component {
 			<>
 				<Header />
 				<Switch>
-					<Route path={PATHS.MAIN.HOME} exact component={Home} />
+					<Route path={Constants.PATHS.MAIN.HOME} exact component={Home} />
 					<>
 						<div className="contain">
 							<Switch>
-								<Route path={`${PATHS.MAIN.DOCTOR_DETAIL}/:id`} component={DoctorDetail} />
+								<Route path={`${Constants.PATHS.MAIN.DOCTOR_DETAIL}/:id`} component={DoctorDetail} />
 								<Route component={NotFound} />
 							</Switch>
 						</div>

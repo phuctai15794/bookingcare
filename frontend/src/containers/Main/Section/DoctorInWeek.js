@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { PATHS, Functions } from '../../../utils';
+import { Constants, Functions } from '../../../utils';
 import * as actions from '../../../store/actions';
 import MainStyles from '../../../styles/Main.module.scss';
 import SectionStyles from './Section.module.scss';
@@ -63,7 +63,10 @@ class DoctorInWeek extends Component {
 										return (
 											<SwiperSlide key={doctor.id}>
 												<div className={SectionStyles.sectionItemBorder}>
-													<Link to={`${PATHS.MAIN.DOCTOR_DETAIL}/${doctor.id}`} title={title}>
+													<Link
+														to={`${Constants.PATHS.MAIN.DOCTOR_DETAIL}/${doctor.id}`}
+														title={title}
+													>
 														<img
 															onError={({ target }) => Functions.errorImage(target)}
 															src={avatar}
@@ -72,7 +75,7 @@ class DoctorInWeek extends Component {
 													</Link>
 													<h3>
 														<Link
-															to={`${PATHS.MAIN.DOCTOR_DETAIL}/${doctor.id}`}
+															to={`${Constants.PATHS.MAIN.DOCTOR_DETAIL}/${doctor.id}`}
 															title={title}
 														>
 															{title}

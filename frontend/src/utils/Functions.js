@@ -1,4 +1,5 @@
 import { Buffer } from 'buffer';
+import moment from 'moment';
 import NoImage from '../assets/images/noimage.png';
 
 class Functions {
@@ -17,6 +18,10 @@ class Functions {
 
 	static bufferToBase64(buffer) {
 		return (buffer && new Buffer.from(buffer, 'base64').toString('binary')) || '';
+	}
+
+	static formatDate(date, format) {
+		return (date && format && moment(date).format(format)) || '';
 	}
 
 	static jsonParse(jsonString) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { PATHS } from '../../../utils';
+import { Constants } from '../../../utils';
 import './NotFound.scss';
 
 class NotFound extends React.Component {
@@ -17,7 +17,7 @@ class NotFound extends React.Component {
 						<FormattedMessage id="app.not-found-message" />
 					</div>
 					<div className="error-actions">
-						<NavLink className="btn btn-primary" to={PATHS.MAIN.HOME}>
+						<NavLink className="btn btn-primary" to={Constants.PATHS.MAIN.HOME}>
 							<FormattedMessage id="app.back-to-home" />
 						</NavLink>
 					</div>

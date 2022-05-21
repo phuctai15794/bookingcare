@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { PATHS } from '../../../utils';
+import { Constants } from '../../../utils';
 import MainStyles from '../../../styles/Main.module.scss';
 import FooterStyles from './Footer.module.scss';
 
@@ -16,7 +16,7 @@ class Footer extends Component {
 						<div className={`${MainStyles.blockContent} ${FooterStyles.blockContent}`}>
 							<div className="row">
 								<div className="col-6">
-									<Link className={FooterStyles.footerLogo} to={PATHS.MAIN.HOME}></Link>
+									<Link className={FooterStyles.footerLogo} to={Constants.PATHS.MAIN.HOME}></Link>
 									<div className={FooterStyles.footerInfo}>
 										<p>
 											<strong>Công ty Cổ phần Công nghệ BookingCare</strong>
@@ -40,22 +40,22 @@ class Footer extends Component {
 								<div className="col-3">
 									<ul className={`${FooterStyles.footerList} list-unstyled p-0 m-0`}>
 										<li>
-											<Link to={PATHS.MAIN.HOME}>Liên hệ hợp tác</Link>
+											<Link to={Constants.PATHS.MAIN.HOME}>Liên hệ hợp tác</Link>
 										</li>
 										<li>
-											<Link to={PATHS.MAIN.HOME}>Câu hỏi thường gặp</Link>
+											<Link to={Constants.PATHS.MAIN.HOME}>Câu hỏi thường gặp</Link>
 										</li>
 										<li>
-											<Link to={PATHS.MAIN.HOME}>Điều khoản sử dụng</Link>
+											<Link to={Constants.PATHS.MAIN.HOME}>Điều khoản sử dụng</Link>
 										</li>
 										<li>
-											<Link to={PATHS.MAIN.HOME}>Chính sách bảo mật</Link>
+											<Link to={Constants.PATHS.MAIN.HOME}>Chính sách bảo mật</Link>
 										</li>
 										<li>
-											<Link to={PATHS.MAIN.HOME}>Quy trình hỗ trợ</Link>
+											<Link to={Constants.PATHS.MAIN.HOME}>Quy trình hỗ trợ</Link>
 										</li>
 										<li>
-											<Link to={PATHS.MAIN.HOME}>Quy chế hoạt động</Link>
+											<Link to={Constants.PATHS.MAIN.HOME}>Quy chế hoạt động</Link>
 										</li>
 									</ul>
 								</div>

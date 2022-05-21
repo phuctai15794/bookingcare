@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import * as actions from '../../../store/actions';
-import { PATHS, LANGUAGES } from '../../../utils';
+import { Constants } from '../../../utils';
 import MainStyles from '../../../styles/Main.module.scss';
 import HeaderStyles from './Header.module.scss';
 
@@ -28,7 +28,7 @@ class Header extends Component {
 									<FontAwesomeIcon icon={faBars} />
 								</i>
 							</div>
-							<Link className={HeaderStyles.headerLogo} to={PATHS.MAIN.HOME}></Link>
+							<Link className={HeaderStyles.headerLogo} to={Constants.PATHS.MAIN.HOME}></Link>
 						</div>
 						<div className={HeaderStyles.headerCenter}>
 							<div className={HeaderStyles.headerLink}>
@@ -67,15 +67,15 @@ class Header extends Component {
 						<div className={HeaderStyles.headerRight}>
 							<div className={HeaderStyles.headerLang}>
 								<span
-									className={language === LANGUAGES.VI ? HeaderStyles.active : ''}
-									onClick={() => this.handleChangeLanguage(LANGUAGES.VI)}
+									className={language === Constants.LANGUAGES.VI ? HeaderStyles.active : ''}
+									onClick={() => this.handleChangeLanguage(Constants.LANGUAGES.VI)}
 								>
 									VN
 								</span>{' '}
 								/{' '}
 								<span
-									className={language === LANGUAGES.EN ? HeaderStyles.active : ''}
-									onClick={() => this.handleChangeLanguage(LANGUAGES.EN)}
+									className={language === Constants.LANGUAGES.EN ? HeaderStyles.active : ''}
+									onClick={() => this.handleChangeLanguage(Constants.LANGUAGES.EN)}
 								>
 									EN
 								</span>

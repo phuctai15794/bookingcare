@@ -17,4 +17,7 @@ img {
 
 .form-control {
 	min-height: 38px;
+	&[type='file'] {
+		min-height: 34px;
+	}
 }

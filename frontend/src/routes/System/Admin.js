@@ -3,19 +3,19 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import UserManage from '../../containers/System/User/UserManage';
 import DoctorManage from '../../containers/System/Doctor/DoctorManage';
 import DoctorSchedule from '../../containers/System/Doctor/DoctorSchedule';
-import { PATHS } from '../../utils';
+import { Constants } from '../../utils';
 
 class AdminRoute extends Component {
 	render() {
 		return (
 			<>
 				<Switch>
-					<Route path={`${PATHS.SYSTEM.HOME}/admin/user-manage`} component={UserManage} />
-					<Route path={`${PATHS.SYSTEM.HOME}/admin/doctor-manage`} component={DoctorManage} />
-					<Route path={`${PATHS.SYSTEM.HOME}/admin/doctor-schedule`} component={DoctorSchedule} />
+					<Route path={`${Constants.PATHS.SYSTEM.HOME}/admin/user-manage`} component={UserManage} />
+					<Route path={`${Constants.PATHS.SYSTEM.HOME}/admin/doctor-manage`} component={DoctorManage} />
+					<Route path={`${Constants.PATHS.SYSTEM.HOME}/admin/doctor-schedule`} component={DoctorSchedule} />
 					<Route
 						component={() => {
-							return <Redirect to={PATHS.SYSTEM.DASHBOARD} />;
+							return <Redirect to={Constants.PATHS.SYSTEM.DASHBOARD} />;
 						}}
 					/>
 				</Switch>
