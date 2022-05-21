@@ -1,27 +1,35 @@
 import React from 'react';
+import { useLocation } from 'react-router';
 import { Redirect, Route } from 'react-router-dom';
 import { PATHS, SYSTEM_ROLES, LocalStorage } from '../../utils';
 
-const Auth = ({ children, role, ...rest }) => {
+const AuthRoute = ({ component: Component, role, ...rest }) => {
 	const isLoggedIn = Boolean(LocalStorage.get('isLoggedIn'));
 	const userInfo = LocalStorage.get('userInfo');
+	const location = useLocation();
+	const redirectPath =
+		(location.pathname && location.pathname !== PATHS.SYSTEM.HOME && `?back=${location.pathname}`) || '';
 
 	return (
 		<Route
 			{...rest}
-			render={() => {
+			render={(...props) => {
 				return isLoggedIn ? (
-					userInfo && userInfo.roleId === SYSTEM_ROLES[role.toUpperCase()] ? (
-						children
+					role ? (
+						userInfo && userInfo.roleId === SYSTEM_ROLES[role.toUpperCase()] ? (
+							<Component {...props} />
+						) : (
+							<Redirect to={PATHS.SYSTEM.DASHBOARD} />
+						)
 					) : (
-						<Redirect to={PATHS.SYSTEM.DASHBOARD} />
+						<Component {...props} />
 					)
 				) : (
-					<Redirect to={PATHS.SYSTEM.LOGIN} />
+					<Redirect to={`${PATHS.SYSTEM.LOGIN}${redirectPath}`} />
 				);
 			}}
 		/>
 	);
 };
 
-export default Auth;
+export default AuthRoute;

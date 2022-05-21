@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import DoctorSchedule from '../../containers/System/Doctor/DoctorSchedule';
 import { PATHS } from '../../utils';
 
-class Doctor extends Component {
+class DoctorRoute extends Component {
 	render() {
 		return (
 			<>
@@ -20,4 +20,4 @@ class Doctor extends Component {
 	}
 }
 
-export default Doctor;
+export default DoctorRoute;

@@ -5,7 +5,7 @@ import DoctorManage from '../../containers/System/Doctor/DoctorManage';
 import DoctorSchedule from '../../containers/System/Doctor/DoctorSchedule';
 import { PATHS } from '../../utils';
 
-class Admin extends Component {
+class AdminRoute extends Component {
 	render() {
 		return (
 			<>
@@ -24,4 +24,4 @@ class Admin extends Component {
 	}
 }
 
-export default Admin;
+export default AdminRoute;

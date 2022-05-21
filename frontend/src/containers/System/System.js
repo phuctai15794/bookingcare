@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { isAuthenticated, isNotAuthenticated } from '../../hoc/Authentication';
-import { AuthRoute, AdminRoute, DoctorRoute } from '../../routes/System';
+import { isNotAuthenticated } from '../../hoc/Authentication';
+import { AuthRoute, AdminRoute, DoctorRoute, DashboardRoute } from '../../routes/System';
 import Header from '../../containers/System/Layouts/Header/Header';
 import Footer from '../../containers/System/Layouts/Footer/Footer';
-import Dashboard from '../../containers/System/Layouts/Dashboard';
 import { PATHS, LocalStorage } from '../../utils';
 import CheckAuth from './Auth/CheckAuth';
 import Login from './Auth/Login';
@@ -13,8 +12,25 @@ import Loading from './Layouts/Loading/Loading';
 import SystemStyles from '../../styles/System.module.scss';
 
 class System extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			isLoggedIn: Boolean(LocalStorage.get('isLoggedIn')),
+		};
+	}
+
+	componentDidUpdate(prevState) {
+		const { isLoggedIn } = this.props;
+
+		if (prevState.isLoggedIn !== isLoggedIn) {
+			this.setState({
+				isLoggedIn,
+			});
+		}
+	}
+
 	render() {
-		const isLoggedIn = Boolean(LocalStorage.get('isLoggedIn'));
+		const { isLoggedIn } = this.state;
 
 		return (
 			<>
@@ -25,13 +41,9 @@ class System extends Component {
 					<>
 						<div className={`${SystemStyles.blockContent} py-4`}>
 							<Switch>
-								<Route path={PATHS.SYSTEM.DASHBOARD} component={isAuthenticated(Dashboard)} />
-								<AuthRoute path={`${PATHS.SYSTEM.HOME}/admin`} role="ADMIN">
-									<AdminRoute path={`${PATHS.SYSTEM.HOME}/admin`} />
-								</AuthRoute>
-								<AuthRoute path={`${PATHS.SYSTEM.HOME}/doctor`} role="DOCTOR">
-									<DoctorRoute path={`${PATHS.SYSTEM.HOME}/doctor`} />
-								</AuthRoute>
+								<AuthRoute path={PATHS.SYSTEM.DASHBOARD} component={DashboardRoute} />
+								<AuthRoute path={`${PATHS.SYSTEM.HOME}/admin`} component={AdminRoute} role="ADMIN" />
+								<AuthRoute path={`${PATHS.SYSTEM.HOME}/doctor`} component={DoctorRoute} role="DOCTOR" />
 								<Route
 									component={() => {
 										return <Redirect to={PATHS.SYSTEM.DASHBOARD} />;
@@ -49,7 +61,9 @@ class System extends Component {
 }
 
 const mapStateToProps = (state) => {
-	return {};
+	return {
+		isLoggedIn: state.user.isLoggedIn,
+	};
 };
 
 const mapDispatchToProps = (dispatch) => {

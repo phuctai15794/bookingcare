@@ -2,6 +2,8 @@ import actionTypes from '../actions/actionTypes';
 import { LocalStorage } from '../../utils';
 
 const initialState = {
+	iseLoggedIn: false,
+	userInfo: null,
 	users: [],
 	loading: false,
 	message: {
@@ -60,6 +62,8 @@ const userReducer = (state = initialState, action) => {
 
 				newsState = {
 					...state,
+					isLoggedIn: true,
+					userInfo: action.data.data,
 					loading: false,
 				};
 			} else {
@@ -70,6 +74,8 @@ const userReducer = (state = initialState, action) => {
 
 				newsState = {
 					...state,
+					isLoggedIn: false,
+					userInfo: null,
 					loading: false,
 					message: {
 						...state.message,
@@ -102,6 +108,8 @@ const userReducer = (state = initialState, action) => {
 
 			return {
 				...state,
+				isLoggedIn: false,
+				userInfo: null,
 				loading: false,
 			};
 		case actionTypes.REFRESH_TOKEN_USER:
