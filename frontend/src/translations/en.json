@@ -123,6 +123,7 @@
 			"lastName": "Last name",
 			"address": "Address",
 			"phone": "Phone",
+			"maxNumberPatient": "Max number of patients booked",
 			"gender": {
 				"title": "Gender",
 				"optionDefault": "Choose a gender"

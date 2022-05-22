@@ -123,6 +123,7 @@
 			"lastName": "Họ",
 			"address": "Địa chỉ",
 			"phone": "Số điện thoại",
+			"maxNumberPatient": "Số lượng tối đa bệnh nhân đặt lịch",
 			"gender": {
 				"title": "Giới tính",
 				"optionDefault": "Chọn giới tính"

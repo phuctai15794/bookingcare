@@ -19,6 +19,7 @@ class DoctorSchedule extends Component {
 		this.state = {
 			times: [],
 			currentDate: new Date(),
+			maxNumberPatient: '',
 			select: {
 				list: [],
 				selected: null,
@@ -46,6 +47,12 @@ class DoctorSchedule extends Component {
 	handleOnChangeDate = async (selectedDated) => {
 		this.setState({
 			currentDate: selectedDated,
+		});
+	};
+
+	handleOnChangeInput = (event) => {
+		this.setState({
+			maxNumberPatient: event.target.value,
 		});
 	};
 
@@ -180,7 +187,7 @@ class DoctorSchedule extends Component {
 	}
 
 	render() {
-		const { currentDate, select, times, message } = this.state;
+		const { currentDate, select, times, maxNumberPatient, message } = this.state;
 		const { intl, language } = this.props;
 		const keyLang = `${language[0].toUpperCase()}${language.slice(1)}`;
 		const selectLang = {
@@ -203,7 +210,7 @@ class DoctorSchedule extends Component {
 					)}
 					<form action="#" method="POST" onSubmit={(event) => event.preventDefault()}>
 						<div className="row mb-3">
-							<div className="col-3 mb-3">
+							<div className="col-4 mb-3">
 								<label className="fw-bold mb-1">
 									<FormattedMessage id="form.actions.choose-a-doctor" />:
 								</label>
@@ -216,7 +223,7 @@ class DoctorSchedule extends Component {
 									onChange={this.handleOnChangeSelect}
 								/>
 							</div>
-							<div className="col-3 mb-3">
+							<div className="col-4 mb-3">
 								<label className="fw-bold mb-1">
 									<FormattedMessage id="form.actions.choose-a-date" />:
 								</label>
@@ -227,6 +234,20 @@ class DoctorSchedule extends Component {
 									disabledKeyboardNavigation
 									closeOnScroll={true}
 									onChange={(date) => this.handleOnChangeDate(date)}
+								/>
+							</div>
+							<div className="col-4 mb-3">
+								<label className="fw-bold mb-1" htmlFor="maxNumberPatient">
+									<FormattedMessage id="form.attributes.maxNumberPatient" />:
+								</label>
+								<input
+									type="number"
+									className="form-control"
+									id="maxNumberPatient"
+									name="maxNumberPatient"
+									required
+									value={maxNumberPatient}
+									onChange={(event) => this.handleOnChangeInput(event)}
 								/>
 							</div>
 							<div className="col-12">
