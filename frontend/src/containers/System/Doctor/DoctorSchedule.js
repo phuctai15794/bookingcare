@@ -49,16 +49,17 @@ class DoctorSchedule extends Component {
 		});
 	};
 
-	handleSave = () => {
+	handleSave = async () => {
+		const { createScheduleDoctor } = this.props;
 		const { times, select, currentDate } = this.state;
 		const doctorSelected = select.selected;
 		const dateSelected = Functions.formatDate(currentDate, Constants.DATE_FORMAT.DATETIME);
-		const timesSelected = times.filter((time) => time.isActive);
+		const timesSelected = !_.isEmpty(times) && times.filter((time) => time.isActive);
 		let result = [];
 
 		if (_.isEmpty(doctorSelected)) {
 			toast.error('Please choose a doctor');
-		} else if (_.isEmpty(dateSelected) || (dateSelected && dateSelected === 'Invalid date')) {
+		} else if (_.isEmpty(dateSelected) || (!_.isEmpty(dateSelected) && dateSelected === 'Invalid date')) {
 			toast.error('Please choose a date');
 		} else if (_.isEmpty(timesSelected)) {
 			toast.error('Please choose a times');
@@ -70,6 +71,10 @@ class DoctorSchedule extends Component {
 				temp.timeType = timeSelected.keyMap;
 				result.push(temp);
 			});
+
+			if (!_.isEmpty(result)) {
+				await createScheduleDoctor(result);
+			}
 		}
 	};
 
@@ -77,7 +82,7 @@ class DoctorSchedule extends Component {
 		const { language } = this.props;
 
 		return (
-			doctors &&
+			!_.isEmpty(doctors) &&
 			doctors.map((doctor) => ({
 				value: doctor.id,
 				label:
@@ -92,12 +97,14 @@ class DoctorSchedule extends Component {
 
 	handleOnClickChooseTime = (timeId) => {
 		const { times } = this.state;
-		const newTimes = times.map((time) => {
-			if (time.id === timeId) {
-				time.isActive = !time.isActive;
-			}
-			return time;
-		});
+		const newTimes =
+			!_.isEmpty(times) &&
+			times.map((time) => {
+				if (time.id === timeId) {
+					time.isActive = !time.isActive;
+				}
+				return time;
+			});
 
 		this.setState({
 			times: newTimes,
@@ -111,7 +118,7 @@ class DoctorSchedule extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		const { language, doctors, times, messageDoctor } = this.props;
+		const { language, doctors, times, loadingDoctor, messageDoctor } = this.props;
 
 		if (prevProps.doctors !== doctors || prevProps.language !== language) {
 			const optionsDoctor = this.buildDoctorsSelect(doctors);
@@ -125,10 +132,25 @@ class DoctorSchedule extends Component {
 		}
 
 		if (prevProps.times !== times) {
-			const newTimes = times.map((time) => ({ ...time, isActive: false }));
+			const newTimes = !_.isEmpty(times) && times.map((time) => ({ ...time, isActive: false }));
 			this.setState({
 				times: newTimes,
 			});
+		}
+
+		if (prevProps.loadingDoctor !== loadingDoctor) {
+			if (loadingDoctor) {
+				this.setState({
+					message: {
+						text: 'Creating data ...',
+						type: 'info',
+					},
+				});
+			} else {
+				this.setState({
+					message: messageDoctor,
+				});
+			}
 		}
 
 		if (prevProps.messageDoctor !== messageDoctor) {
@@ -158,7 +180,7 @@ class DoctorSchedule extends Component {
 	}
 
 	render() {
-		const { currentDate, select, times } = this.state;
+		const { currentDate, select, times, message } = this.state;
 		const { intl, language } = this.props;
 		const keyLang = `${language[0].toUpperCase()}${language.slice(1)}`;
 		const selectLang = {
@@ -172,6 +194,13 @@ class DoctorSchedule extends Component {
 					<FormattedMessage id="menu.doctor.user-management.types.schedule" />
 				</div>
 				<div className={SystemStyles.contentMain}>
+					{message.type !== '' ? (
+						<div className={`alert alert-${message.type === 'error' ? 'danger' : message.type}`}>
+							{message.text}
+						</div>
+					) : (
+						''
+					)}
 					<form action="#" method="POST" onSubmit={(event) => event.preventDefault()}>
 						<div className="row mb-3">
 							<div className="col-3 mb-3">
@@ -205,7 +234,7 @@ class DoctorSchedule extends Component {
 									<FormattedMessage id="form.actions.choose-a-time" />:
 								</label>
 								<ul className="list-unstyled p-0 m-0">
-									{times && times.length
+									{!_.isEmpty(times)
 										? times.map((time) => {
 												return (
 													<button
@@ -255,6 +284,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchDoctors: () => dispatch(actions.fetchDoctors()),
 		fetchAllCode: (type) => dispatch(actions.fetchAllCode(type)),
+		createScheduleDoctor: (data) => dispatch(actions.createScheduleDoctor(data)),
 	};
 };
 

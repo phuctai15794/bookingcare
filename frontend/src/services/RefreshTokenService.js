@@ -9,7 +9,8 @@ const RefreshTokenService = () => {
 	axios.callVerify.interceptors.request.use(
 		async (config) => {
 			let currentDate = new Date();
-			const decodedToken = jwtDecode(LocalStorage.get('accessToken'));
+			const currentAccessToken = LocalStorage.get('accessToken');
+			const decodedToken = jwtDecode(currentAccessToken);
 
 			if (decodedToken.exp * 1000 < currentDate.getTime()) {
 				const data = await RefreshTokenUserService();

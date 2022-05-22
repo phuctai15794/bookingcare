@@ -3,7 +3,7 @@ import HomeController from '../controllers/HomeController';
 import UserController from '../controllers/UserController';
 import AllCodeController from '../controllers/AllCodeController';
 import DoctorController from '../controllers/DoctorController';
-import Auths from '../utils/Auths';
+import { Auths } from '../utils';
 
 // Init
 let router = express.Router();
@@ -27,8 +27,8 @@ let route = (app) => {
 	router.post('/api/refresh', UserController.refreshTokenAPI);
 	router.get('/api/user/list', UserController.listAPI);
 	router.put('/api/user/update/:id', Auths.verify, UserController.updateAPI);
-	router.delete('/api/user/delete/:id', UserController.deleteAPI);
-	router.post('/api/user/create', UserController.createAPI);
+	router.delete('/api/user/delete/:id', Auths.verify, UserController.deleteAPI);
+	router.post('/api/user/create', Auths.verify, UserController.createAPI);
 
 	// API: AllCode
 	router.get('/api/allcode/list', AllCodeController.listAPI);
@@ -36,9 +36,9 @@ let route = (app) => {
 	// API: Doctor
 	router.get('/api/doctor/list', DoctorController.listAPI);
 	router.get('/api/doctor/list-in-week', DoctorController.listInWeekAPI);
-	router.post('/api/doctor/update-info', DoctorController.updateInfoAPI);
-	router.get('/api/doctor/detail/:id', DoctorController.getDetailAPI);
-	router.post('/api/doctor/create-schedule', DoctorController.createScheduleAPI);
+	router.post('/api/doctor/update-info', Auths.verify, DoctorController.updateInfoAPI);
+	router.get('/api/doctor/detail/:id', Auths.verify, DoctorController.getDetailAPI);
+	router.post('/api/doctor/create-schedule', Auths.verify, DoctorController.createScheduleAPI);
 
 	return app.use('/', router);
 };

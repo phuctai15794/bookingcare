@@ -1,4 +1,6 @@
+import _ from 'lodash';
 import db from '../models/index';
+import { Constants, Functions } from '../utils';
 
 let listAPI = (limit) => {
 	return new Promise(async (resole, reject) => {
@@ -191,11 +193,35 @@ let createScheduleAPI = (data) => {
 						doctorId: doctorDetail.id,
 					},
 				});
-				// const isExist = schedulesList && schedulesList.some(scheduleItem => data.some())
-				// const schedules = await db.Schedule.bulkCreate(data);
+				const schedulesNew =
+					(!_.isEmpty(schedulesList) &&
+						data.filter(
+							(scheduleNewItem) =>
+								schedulesList.every((scheduleListItem) => {
+									let dateList = Functions.formatDate(
+										scheduleListItem.date,
+										Constants.DATE_FORMAT.STANDARD,
+									);
+									let dateNew = Functions.formatDate(
+										scheduleNewItem.date,
+										Constants.DATE_FORMAT.STANDARD,
+									);
 
-				message.text = 'Create schedule successfully';
-				message.type = 'success';
+									return (
+										dateList !== dateNew || scheduleListItem.timeType !== scheduleNewItem.timeType
+									);
+								}) && scheduleNewItem,
+						)) ||
+					(_.isEmpty(schedulesList) && data);
+
+				if (!_.isEmpty(schedulesNew)) {
+					await db.Schedule.bulkCreate(schedulesNew);
+					message.text = 'Create schedule successfully';
+					message.type = 'success';
+				} else {
+					message.text = 'Schedules already exists';
+					message.type = 'info';
+				}
 			}
 
 			resole(message);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -81,7 +82,7 @@ class UserList extends Component {
 				<div className={SystemStyles.contentMain}>
 					{loadingFetchUsers ? (
 						<div className="alert alert-info">Loading data ...</div>
-					) : Object.keys(users).length > 0 ? (
+					) : !_.isEmpty(users) ? (
 						<>
 							<table className="table table-bordered">
 								<thead>

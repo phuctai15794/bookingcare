@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -103,7 +104,7 @@ class DoctorManage extends Component {
 		const { language } = this.props;
 
 		return (
-			doctors &&
+			!_.isEmpty(doctors) &&
 			doctors.map((doctor) => ({
 				value: doctor.id,
 				label:
@@ -289,7 +290,6 @@ class DoctorManage extends Component {
 const mapStateToProps = (state) => {
 	return {
 		language: state.app.language,
-		loadingDoctor: state.doctor.loading,
 		messageDoctor: state.doctor.message,
 		doctors: state.doctor.doctors,
 		doctorDetail: state.doctor.doctorDetail,

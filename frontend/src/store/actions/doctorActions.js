@@ -4,6 +4,7 @@ import {
 	ListDoctorsInWeekService,
 	UpdateInfoDoctorService,
 	GetDetailDoctorService,
+	CreateScheduleDoctorService,
 } from '../../services/doctorService';
 
 export const fetchDoctors = () => {
@@ -111,5 +112,32 @@ export const getDetailDoctorSuccess = (data) => ({
 
 export const getDetailDoctorFail = (error) => ({
 	type: actionTypes.GET_DETAIL_DOCTOR_FAIL,
+	error,
+});
+
+export const createScheduleDoctor = (data) => {
+	return async (dispatch) => {
+		dispatch(createScheduleDoctorStart());
+		await CreateScheduleDoctorService(data)
+			.then((response) => {
+				dispatch(createScheduleDoctorSuccess(response.data.message));
+			})
+			.catch((error) => {
+				dispatch(createScheduleDoctorFail(error));
+			});
+	};
+};
+
+export const createScheduleDoctorStart = () => ({
+	type: actionTypes.CREATE_SCHEDULE_DOCTOR_START,
+});
+
+export const createScheduleDoctorSuccess = (message) => ({
+	type: actionTypes.CREATE_SCHEDULE_DOCTOR_SUCCESS,
+	message,
+});
+
+export const createScheduleDoctorFail = (error) => ({
+	type: actionTypes.CREATE_SCHEDULE_DOCTOR_FAIL,
 	error,
 });

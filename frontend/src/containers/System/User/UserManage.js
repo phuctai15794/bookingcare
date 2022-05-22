@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFloppyDisk, faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -557,7 +558,7 @@ class UserManage extends Component {
 									onChange={(event) => this.handleOnChangeInput(event, 'gender')}
 								>
 									<option value="">{optionsDefaultLang.gender}</option>
-									{dataGender && dataGender.length
+									{!_.isEmpty(dataGender)
 										? dataGender.map((gender) => {
 												return (
 													<option key={gender.id} value={gender.keyMap}>
@@ -581,7 +582,7 @@ class UserManage extends Component {
 									onChange={(event) => this.handleOnChangeInput(event, 'roleId')}
 								>
 									<option value="">{optionsDefaultLang.role}</option>
-									{dataRole && dataRole.length
+									{!_.isEmpty(dataRole)
 										? dataRole.map((role) => {
 												return (
 													<option key={role.id} value={role.keyMap}>
@@ -605,7 +606,7 @@ class UserManage extends Component {
 									onChange={(event) => this.handleOnChangeInput(event, 'positionId')}
 								>
 									<option value="">{optionsDefaultLang.position}</option>
-									{dataPosition && dataPosition.length
+									{!_.isEmpty(dataPosition)
 										? dataPosition.map((position) => {
 												return (
 													<option key={position.id} value={position.keyMap}>

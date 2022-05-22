@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
 import { FormattedMessage } from 'react-intl';
 import MenuStyles from './Menu.module.scss';
 
@@ -9,7 +10,7 @@ class Menu extends Component {
 
 		return (
 			<>
-				{menus && (
+				{!_.isEmpty(menus) && (
 					<div className={MenuStyles.menu}>
 						<ul className={MenuStyles.menuMain}>
 							{menus.map((group, groupIndex) => {
@@ -24,7 +25,7 @@ class Menu extends Component {
 												<FormattedMessage id={group.name} />
 											</a>
 										)}
-										{group.menus && (
+										{!_.isEmpty(group.menus) && (
 											<ul>
 												{group.menus.map((item, itemIndex) => {
 													return (

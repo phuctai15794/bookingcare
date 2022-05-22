@@ -26,7 +26,11 @@ const ListUsersService = async () => {
 };
 
 const CreateUserService = async (data) => {
-	return await axios.callAPI.post('/api/user/create', data);
+	return await axios.callVerify.post('/api/user/create', data, {
+		headers: {
+			authorization: `Bearer ${LocalStorage.get('accessToken')}`,
+		},
+	});
 };
 
 const UpdateUserService = async (data) => {
@@ -38,7 +42,11 @@ const UpdateUserService = async (data) => {
 };
 
 const DeleteUserService = async (id) => {
-	return await axios.callAPI.delete(`/api/user/delete/${id}`);
+	return await axios.callVerify.delete(`/api/user/delete/${id}`, {
+		headers: {
+			authorization: `Bearer ${LocalStorage.get('accessToken')}`,
+		},
+	});
 };
 
 export {
