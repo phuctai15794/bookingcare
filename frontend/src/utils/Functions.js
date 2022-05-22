@@ -40,6 +40,10 @@ class Functions {
 		return /^[a-zA-Z0-9]+$/.test(str);
 	}
 
+	static isNumber(numb) {
+		return /^[0-9]+$/.test(numb);
+	}
+
 	static errorImage(target) {
 		target.onerror = null;
 		target.src = NoImage;

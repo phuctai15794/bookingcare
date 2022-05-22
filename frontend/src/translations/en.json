@@ -4,6 +4,8 @@
 		"welcome": "Welcome",
 		"notify": "Notification",
 		"or": "or",
+		"person": "person",
+		"persons": "persons",
 		"back-to-home": "Back to home",
 		"not-found-title": "Page not found",
 		"not-found-message": "Sorry, an error has occured, Requested page not found!",
@@ -123,7 +125,7 @@
 			"lastName": "Last name",
 			"address": "Address",
 			"phone": "Phone",
-			"maxNumberPatient": "Max number of patients booked",
+			"maxNumberPatient": "Number of patients booked",
 			"gender": {
 				"title": "Gender",
 				"optionDefault": "Choose a gender"

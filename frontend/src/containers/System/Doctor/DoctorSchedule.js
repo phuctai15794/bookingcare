@@ -50,15 +50,21 @@ class DoctorSchedule extends Component {
 		});
 	};
 
-	handleOnChangeInput = (event) => {
-		this.setState({
-			maxNumberPatient: event.target.value,
-		});
+	handleOnChangeNumberPatient = (event) => {
+		const maxNumberPatient = event.target.value;
+
+		if (!Functions.isNumber(maxNumberPatient)) {
+			toast.error('Number is invalid');
+		} else {
+			this.setState({
+				maxNumberPatient: event.target.value,
+			});
+		}
 	};
 
 	handleSave = async () => {
 		const { createScheduleDoctor } = this.props;
-		const { times, select, currentDate } = this.state;
+		const { times, select, currentDate, maxNumberPatient } = this.state;
 		const doctorSelected = select.selected;
 		const dateSelected = Functions.formatDate(currentDate, Constants.DATE_FORMAT.DATETIME);
 		const timesSelected = !_.isEmpty(times) && times.filter((time) => time.isActive);
@@ -68,12 +74,15 @@ class DoctorSchedule extends Component {
 			toast.error('Please choose a doctor');
 		} else if (_.isEmpty(dateSelected) || (!_.isEmpty(dateSelected) && dateSelected === 'Invalid date')) {
 			toast.error('Please choose a date');
+		} else if (_.isEmpty(maxNumberPatient)) {
+			toast.error('Please enter a number');
 		} else if (_.isEmpty(timesSelected)) {
 			toast.error('Please choose a times');
 		} else {
 			timesSelected.forEach((timeSelected) => {
 				let temp = {};
 				temp.doctorId = doctorSelected.value;
+				temp.maxNumber = maxNumberPatient;
 				temp.date = dateSelected;
 				temp.timeType = timeSelected.keyMap;
 				result.push(temp);
@@ -241,13 +250,13 @@ class DoctorSchedule extends Component {
 									<FormattedMessage id="form.attributes.maxNumberPatient" />:
 								</label>
 								<input
-									type="number"
+									type="text"
 									className="form-control"
 									id="maxNumberPatient"
 									name="maxNumberPatient"
 									required
 									value={maxNumberPatient}
-									onChange={(event) => this.handleOnChangeInput(event)}
+									onChange={(event) => this.handleOnChangeNumberPatient(event)}
 								/>
 							</div>
 							<div className="col-12">

@@ -4,6 +4,8 @@
 		"welcome": "Xin chào",
 		"notify": "Thông báo",
 		"or": "hoặc",
+		"person": "người",
+		"persons": "người",
 		"back-to-home": "Trở về trang chủ",
 		"not-found-title": "Không tìm thấy trang",
 		"not-found-message": "Xin lỗi, đã xảy ra lỗi, không tìm thấy trang được yêu cầu!Sorry, an error has occured, Requested page not found!",
@@ -123,7 +125,7 @@
 			"lastName": "Họ",
 			"address": "Địa chỉ",
 			"phone": "Số điện thoại",
-			"maxNumberPatient": "Số lượng tối đa bệnh nhân đặt lịch",
+			"maxNumberPatient": "Số lượng bệnh nhân đặt lịch",
 			"gender": {
 				"title": "Giới tính",
 				"optionDefault": "Chọn giới tính"
