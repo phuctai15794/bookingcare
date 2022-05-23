@@ -9,6 +9,7 @@
 			padding-bottom: 40px;
 
 			.doctorDetailInformation {
+				margin-bottom: 3rem;
 				@include flex(flex-start, flex-start);
 
 				.doctorDetailAvatar {
@@ -32,6 +33,17 @@
 						line-height: 1.5;
 						max-width: 600px;
 					}
+				}
+			}
+
+			.doctorDetailSchedule {
+				@include flex(flex-start, flex-start);
+
+				.doctorDetailScheduleBooking {
+					width: 50%;
+				}
+				.doctorDetailScheduleInformation {
+					width: 50%;
 				}
 			}
 		}

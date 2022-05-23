@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { HtmlRaw, Functions } from '../../../utils';
 import * as actions from '../../../store/actions';
 import MainStyles from '../../../styles/Main.module.scss';
+import DoctorSchedule from './DoctorSchedule';
 import DoctorDetailStyles from './DoctorDetail.module.scss';
 
 class DoctorDetail extends Component {
@@ -60,6 +61,12 @@ class DoctorDetail extends Component {
 												{doctorDetail.markdownData.description}
 											</div>
 										</div>
+									</div>
+									<div className={DoctorDetailStyles.doctorDetailSchedule}>
+										<div className={DoctorDetailStyles.doctorDetailScheduleBooking}>
+											<DoctorSchedule doctorId={doctorDetail.id} />
+										</div>
+										<div className={DoctorDetailStyles.doctorDetailScheduleInformation}></div>
 									</div>
 								</div>
 							</div>

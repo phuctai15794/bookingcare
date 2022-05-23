@@ -15,7 +15,8 @@ img {
 	vertical-align: top;
 }
 
-.form-control {
+.form-control,
+.form-select {
 	min-height: 38px;
 	&[type='file'] {
 		min-height: 34px;

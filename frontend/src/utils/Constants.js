@@ -18,6 +18,9 @@ export const PATHS = {
 export const DATE_FORMAT = {
 	DATETIME: 'YYYY-MM-DD HH:mm:ss',
 	STANDARD: 'DD/MM/YYYY',
+	DAYS_LOCALE: {
+		[LANGUAGES.VI]: ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'],
+	},
 };
 
 export const SYSTEM_ACTIONS = {

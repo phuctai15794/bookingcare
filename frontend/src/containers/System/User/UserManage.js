@@ -95,25 +95,25 @@ class UserManage extends Component {
 		};
 		let inputs = Object.keys(this.state.attributes);
 
-		for (let i = 0; i < inputs.length; i++) {
-			if (!['id', 'avatar'].includes(inputs[i]) && !this.state.attributes[inputs[i]]) {
-				message.type = inputs[i];
-				message.text = `${inputs[i][0].toUpperCase()}${inputs[i].slice(1)} is missing`;
+		for (let index = 0; index < inputs.length; index++) {
+			if (!['id', 'avatar'].includes(inputs[index]) && !this.state.attributes[inputs[index]]) {
+				message.type = inputs[index];
+				message.text = `${inputs[index][0].toUpperCase()}${inputs[index].slice(1)} is missing`;
 				break;
-			} else if (inputs[i] === 'email' && !Functions.isEmail(this.state.attributes[inputs[i]])) {
-				message.type = inputs[i];
+			} else if (inputs[index] === 'email' && !Functions.isEmail(this.state.attributes[inputs[index]])) {
+				message.type = inputs[index];
 				message.text = `Email is invalid`;
 				break;
-			} else if (inputs[i] === 'phone' && !Functions.isPhone(this.state.attributes[inputs[i]])) {
-				message.type = inputs[i];
+			} else if (inputs[index] === 'phone' && !Functions.isPhone(this.state.attributes[inputs[index]])) {
+				message.type = inputs[index];
 				message.text = `Phone is invalid`;
 				break;
-			} else if (inputs[i] === 'firstName' && !Functions.isAlphaNum(this.state.attributes[inputs[i]])) {
-				message.type = inputs[i];
+			} else if (inputs[index] === 'firstName' && !Functions.isAlphaNum(this.state.attributes[inputs[index]])) {
+				message.type = inputs[index];
 				message.text = `First name is invalid`;
 				break;
-			} else if (inputs[i] === 'lastName' && !Functions.isAlphaNum(this.state.attributes[inputs[i]])) {
-				message.type = inputs[i];
+			} else if (inputs[index] === 'lastName' && !Functions.isAlphaNum(this.state.attributes[inputs[index]])) {
+				message.type = inputs[index];
 				message.text = `Last name is invalid`;
 				break;
 			}

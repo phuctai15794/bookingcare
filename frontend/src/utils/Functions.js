@@ -1,5 +1,7 @@
 import { Buffer } from 'buffer';
 import moment from 'moment';
+import 'moment/locale/vi';
+import { LANGUAGES, DATE_FORMAT } from './Constants';
 import NoImage from '../assets/images/noimage.png';
 
 class Functions {
@@ -22,6 +24,25 @@ class Functions {
 
 	static formatDate(date, format) {
 		return (date && format && moment(date).format(format)) || '';
+	}
+
+	static getDaysOfWeek(language = LANGUAGES.VI) {
+		const result = [];
+
+		if (language === LANGUAGES.VI) {
+			moment.updateLocale(LANGUAGES.VI, {
+				weekdays: DATE_FORMAT.DAYS_LOCALE[LANGUAGES.VI],
+			});
+		}
+
+		for (let index = 0; index < 7; index++) {
+			let day = {};
+			day.label = moment(new Date()).locale(language).add(index, 'days').format('dddd - DD/MM');
+			day.value = moment(new Date()).locale(language).add(index, 'days').startOf('day').valueOf();
+			result.push(day);
+		}
+
+		return result;
 	}
 
 	static jsonParse(jsonString) {
