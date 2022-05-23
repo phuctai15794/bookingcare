@@ -6,7 +6,7 @@ import { AuthRoute, AdminRoute, DoctorRoute, DashboardRoute } from '../../routes
 import Header from '../../containers/System/Layouts/Header/Header';
 import Footer from '../../containers/System/Layouts/Footer/Footer';
 import { Constants, LocalStorage } from '../../utils';
-import CheckAuth from './Auth/CheckAuth';
+import Home from './Layouts/Home/Home';
 import Login from './Auth/Login';
 import Loading from './Layouts/Loading/Loading';
 import SystemStyles from '../../styles/System.module.scss';
@@ -36,7 +36,7 @@ class System extends Component {
 			<>
 				{isLoggedIn && <Header />}
 				<Switch>
-					<Route path="/" exact component={CheckAuth} />
+					<Route path={Constants.PATHS.SYSTEM.HOME} exact component={Home} />
 					<Route path={Constants.PATHS.SYSTEM.LOGIN} component={isNotAuthenticated(Login)} />
 					<>
 						<div className={`${SystemStyles.blockContent} py-4`}>
