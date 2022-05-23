@@ -86,10 +86,34 @@ let createScheduleAPI = async (req, res) => {
 	});
 };
 
+let getScheduleDetailAPI = async (req, res) => {
+	const id = req.params.id;
+	let result = {
+		message: {
+			type: '',
+			text: '',
+		},
+		info: {},
+	};
+
+	if (!id) {
+		result.message.type = 'error';
+		result.message.text = 'User is invalid';
+	} else {
+		result.info = await DoctorService.getScheduleDetailAPI(id);
+	}
+
+	return res.status(200).json({
+		data: result.info,
+		message: result.message,
+	});
+};
+
 module.exports = {
 	listAPI,
 	listInWeekAPI,
 	updateInfoAPI,
 	getDetailAPI,
 	createScheduleAPI,
+	getScheduleDetailAPI,
 };

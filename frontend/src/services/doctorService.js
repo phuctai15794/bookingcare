@@ -18,11 +18,7 @@ const UpdateInfoDoctorService = async (data) => {
 };
 
 const GetDetailDoctorService = async (id) => {
-	return await axios.callVerify.get(`/api/doctor/detail/${id}`, {
-		headers: {
-			authorization: `Bearer ${LocalStorage.get('accessToken')}`,
-		},
-	});
+	return await axios.callAPI.get(`/api/doctor/detail/${id}`);
 };
 
 const CreateScheduleDoctorService = async (data) => {
