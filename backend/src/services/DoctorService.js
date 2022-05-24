@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import db from '../models/index';
-import { Constants, Functions } from '../utils';
 
 let listAPI = (limit) => {
 	return new Promise(async (resole, reject) => {
@@ -197,20 +196,11 @@ let createScheduleAPI = (data) => {
 					(!_.isEmpty(schedulesList) &&
 						data.filter(
 							(scheduleNewItem) =>
-								schedulesList.every((scheduleListItem) => {
-									let dateList = Functions.formatDate(
-										scheduleListItem.date,
-										Constants.DATE_FORMAT.STANDARD,
-									);
-									let dateNew = Functions.formatDate(
-										scheduleNewItem.date,
-										Constants.DATE_FORMAT.STANDARD,
-									);
-
-									return (
-										dateList !== dateNew || scheduleListItem.timeType !== scheduleNewItem.timeType
-									);
-								}) && scheduleNewItem,
+								schedulesList.every(
+									(scheduleListItem) =>
+										scheduleListItem.date !== scheduleNewItem.date ||
+										scheduleListItem.timeType !== scheduleNewItem.timeType,
+								) && scheduleNewItem,
 						)) ||
 					(_.isEmpty(schedulesList) && data);
 

@@ -66,15 +66,15 @@ class DoctorSchedule extends Component {
 		const { createScheduleDoctor } = this.props;
 		const { times, select, currentDate, maxNumberPatient } = this.state;
 		const doctorSelected = select.selected;
-		const dateSelected = Functions.formatDate(currentDate, Constants.DATE_FORMAT.DATETIME);
+		const dateSelected = Functions.formatDate(currentDate, '', 'startOfDay');
 		const timesSelected = !_.isEmpty(times) && times.filter((time) => time.isActive);
 		let result = [];
 
 		if (_.isEmpty(doctorSelected)) {
 			toast.error('Please choose a doctor');
-		} else if (_.isEmpty(dateSelected) || (!_.isEmpty(dateSelected) && dateSelected === 'Invalid date')) {
+		} else if (!dateSelected || (dateSelected && dateSelected === 'Invalid date')) {
 			toast.error('Please choose a date');
-		} else if (_.isEmpty(maxNumberPatient)) {
+		} else if (!maxNumberPatient) {
 			toast.error('Please enter a number');
 		} else if (_.isEmpty(timesSelected)) {
 			toast.error('Please choose a times');
