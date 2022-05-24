@@ -231,25 +231,13 @@ let createScheduleAPI = (data) => {
 	});
 };
 
-let getScheduleDetailAPI = (id) => {
+let getScheduleByDateAPI = (doctorId, date) => {
 	return new Promise(async (resole, reject) => {
 		try {
-			const data = await db.User.findAll({
-				raw: true,
-				nest: true,
-				attributes: {
-					exclude: ['password'],
-				},
-				include: [
-					{
-						model: db.Schedule,
-						as: 'scheduleData',
-						attributes: ['doctorId', 'currentNumber', 'maxNumber', 'date', 'timeType'],
-					},
-				],
+			const data = await db.Schedule.findAll({
 				where: {
-					id,
-					roleId: 'R2',
+					doctorId,
+					date,
 				},
 			});
 
@@ -266,5 +254,5 @@ module.exports = {
 	updateInfoAPI,
 	getDetailAPI,
 	createScheduleAPI,
-	getScheduleDetailAPI,
+	getScheduleByDateAPI,
 };

@@ -86,8 +86,9 @@ let createScheduleAPI = async (req, res) => {
 	});
 };
 
-let getScheduleDetailAPI = async (req, res) => {
-	const id = req.params.id;
+let getScheduleByDateAPI = async (req, res) => {
+	const doctorId = req.params.doctorId;
+	const date = req.params.date;
 	let result = {
 		message: {
 			type: '',
@@ -96,11 +97,11 @@ let getScheduleDetailAPI = async (req, res) => {
 		info: {},
 	};
 
-	if (!id) {
+	if (!doctorId || !date) {
 		result.message.type = 'error';
-		result.message.text = 'User is invalid';
+		result.message.text = 'Data is invalid';
 	} else {
-		result.info = await DoctorService.getScheduleDetailAPI(id);
+		result.info = await DoctorService.getScheduleByDateAPI(doctorId, date);
 	}
 
 	return res.status(200).json({
@@ -115,5 +116,5 @@ module.exports = {
 	updateInfoAPI,
 	getDetailAPI,
 	createScheduleAPI,
-	getScheduleDetailAPI,
+	getScheduleByDateAPI,
 };

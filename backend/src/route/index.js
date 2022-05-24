@@ -39,7 +39,7 @@ let route = (app) => {
 	router.post('/api/doctor/update-info', Auths.verify, DoctorController.updateInfoAPI);
 	router.get('/api/doctor/detail/:id', DoctorController.getDetailAPI);
 	router.post('/api/doctor/create-schedule', Auths.verify, DoctorController.createScheduleAPI);
-	router.get('/api/doctor/detail-schedule/:id', DoctorController.getScheduleDetailAPI);
+	router.get('/api/doctor/schedule-by-date/:doctorId/:date', DoctorController.getScheduleByDateAPI);
 
 	return app.use('/', router);
 };
