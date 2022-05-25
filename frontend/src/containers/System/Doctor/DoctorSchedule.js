@@ -63,7 +63,7 @@ class DoctorSchedule extends Component {
 	};
 
 	handleSave = async () => {
-		const { createScheduleDoctor } = this.props;
+		const { createSchedule } = this.props;
 		const { times, select, currentDate, maxNumberPatient } = this.state;
 		const doctorSelected = select.selected;
 		const dateSelected = Functions.formatDate(currentDate, '', 'startOfDay');
@@ -89,7 +89,7 @@ class DoctorSchedule extends Component {
 			});
 
 			if (!_.isEmpty(result)) {
-				await createScheduleDoctor(result);
+				await createSchedule(result);
 			}
 		}
 	};
@@ -134,7 +134,7 @@ class DoctorSchedule extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		const { language, doctors, times, loadingDoctor, messageDoctor } = this.props;
+		const { language, doctors, times, loadingSchedule, messageSchedule } = this.props;
 
 		if (prevProps.doctors !== doctors || prevProps.language !== language) {
 			const optionsDoctor = this.buildDoctorsSelect(doctors);
@@ -154,8 +154,8 @@ class DoctorSchedule extends Component {
 			});
 		}
 
-		if (prevProps.loadingDoctor !== loadingDoctor) {
-			if (loadingDoctor) {
+		if (prevProps.loadingSchedule !== loadingSchedule) {
+			if (loadingSchedule) {
 				this.setState({
 					message: {
 						text: 'Creating data ...',
@@ -164,13 +164,13 @@ class DoctorSchedule extends Component {
 				});
 			} else {
 				this.setState({
-					message: messageDoctor,
+					message: messageSchedule,
 				});
 			}
 		}
 
-		if (prevProps.messageDoctor !== messageDoctor) {
-			if (messageDoctor.type === 'success') {
+		if (prevProps.messageSchedule !== messageSchedule) {
+			if (messageSchedule.type === 'success') {
 				const optionsDoctor = this.buildDoctorsSelect(doctors);
 
 				this.setState({
@@ -184,13 +184,13 @@ class DoctorSchedule extends Component {
 					},
 				});
 
-				toast.success(<HtmlRaw>{`${messageDoctor.text}`}</HtmlRaw>);
-			} else if (messageDoctor.type === 'error') {
-				toast.error(<HtmlRaw>{`${messageDoctor.text}`}</HtmlRaw>);
+				toast.success(<HtmlRaw>{`${messageSchedule.text}`}</HtmlRaw>);
+			} else if (messageSchedule.type === 'error') {
+				toast.error(<HtmlRaw>{`${messageSchedule.text}`}</HtmlRaw>);
 			}
 
 			this.setState({
-				message: messageDoctor,
+				message: messageSchedule,
 			});
 		}
 	}
@@ -303,8 +303,8 @@ class DoctorSchedule extends Component {
 const mapStateToProps = (state) => {
 	return {
 		language: state.app.language,
-		loadingDoctor: state.doctor.loading,
-		messageDoctor: state.doctor.message,
+		loadingSchedule: state.schedule.loading,
+		messageSchedule: state.schedule.message,
 		doctors: state.doctor.doctors,
 		times: state.allCode.times.data,
 	};
@@ -314,7 +314,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchDoctors: () => dispatch(actions.fetchDoctors()),
 		fetchAllCode: (type) => dispatch(actions.fetchAllCode(type)),
-		createScheduleDoctor: (data) => dispatch(actions.createScheduleDoctor(data)),
+		createSchedule: (data) => dispatch(actions.createSchedule(data)),
 	};
 };
 

@@ -65,56 +65,9 @@ let getDetailAPI = async (req, res) => {
 	});
 };
 
-let createScheduleAPI = async (req, res) => {
-	let data = req.body;
-	let result = {
-		message: {
-			type: '',
-			text: '',
-		},
-	};
-
-	if (_.isEmpty(data)) {
-		result.message.type = 'error';
-		result.message.text = 'Data is invalid';
-	} else {
-		result.message = await DoctorService.createScheduleAPI(data);
-	}
-
-	return res.status(200).json({
-		message: result.message,
-	});
-};
-
-let getScheduleByDateAPI = async (req, res) => {
-	const doctorId = req.params.doctorId;
-	const date = req.params.date;
-	let result = {
-		message: {
-			type: '',
-			text: '',
-		},
-		info: {},
-	};
-
-	if (!doctorId || !date) {
-		result.message.type = 'error';
-		result.message.text = 'Data is invalid';
-	} else {
-		result.info = await DoctorService.getScheduleByDateAPI(doctorId, date);
-	}
-
-	return res.status(200).json({
-		data: result.info,
-		message: result.message,
-	});
-};
-
 module.exports = {
 	listAPI,
 	listInWeekAPI,
 	updateInfoAPI,
 	getDetailAPI,
-	createScheduleAPI,
-	getScheduleByDateAPI,
 };

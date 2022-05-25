@@ -21,18 +21,4 @@ const GetDetailDoctorService = async (id) => {
 	return await axios.callAPI.get(`/api/doctor/detail/${id}`);
 };
 
-const CreateScheduleDoctorService = async (data) => {
-	return await axios.callVerify.post('/api/doctor/create-schedule', data, {
-		headers: {
-			authorization: `Bearer ${LocalStorage.get('accessToken')}`,
-		},
-	});
-};
-
-export {
-	ListDoctorsService,
-	ListDoctorsInWeekService,
-	UpdateInfoDoctorService,
-	GetDetailDoctorService,
-	CreateScheduleDoctorService,
-};
+export { ListDoctorsService, ListDoctorsInWeekService, UpdateInfoDoctorService, GetDetailDoctorService };

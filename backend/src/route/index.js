@@ -3,6 +3,7 @@ import HomeController from '../controllers/HomeController';
 import UserController from '../controllers/UserController';
 import AllCodeController from '../controllers/AllCodeController';
 import DoctorController from '../controllers/DoctorController';
+import ScheduleController from '../controllers/ScheduleController';
 import { Auths } from '../utils';
 
 // Init
@@ -38,8 +39,10 @@ let route = (app) => {
 	router.get('/api/doctor/list-in-week', DoctorController.listInWeekAPI);
 	router.post('/api/doctor/update-info', Auths.verify, DoctorController.updateInfoAPI);
 	router.get('/api/doctor/detail/:id', DoctorController.getDetailAPI);
-	router.post('/api/doctor/create-schedule', Auths.verify, DoctorController.createScheduleAPI);
-	router.get('/api/doctor/schedule-by-date/:doctorId/:date', DoctorController.getScheduleByDateAPI);
+
+	// API: Schedule
+	router.post('/api/schedule/create', ScheduleController.createScheduleAPI);
+	router.get('/api/schedule/by-date/:doctorId/:date', ScheduleController.getScheduleByDateAPI);
 
 	return app.use('/', router);
 };

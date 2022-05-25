@@ -84,26 +84,6 @@ const doctorReducer = (state = initialState, action) => {
 				doctorDetail: null,
 				loading: false,
 			};
-		case actionTypes.CREATE_SCHEDULE_DOCTOR_START:
-			return {
-				...state,
-				loading: true,
-			};
-		case actionTypes.CREATE_SCHEDULE_DOCTOR_SUCCESS:
-			return {
-				...state,
-				loading: false,
-				message: action.message,
-			};
-		case actionTypes.CREATE_SCHEDULE_DOCTOR_FAIL:
-			return {
-				...state,
-				loading: false,
-				message: {
-					text: 'Error. Please try again later',
-					type: 'error',
-				},
-			};
 		default:
 			return state;
 	}
