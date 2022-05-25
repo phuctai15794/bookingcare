@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import { HtmlRaw, Functions } from '../../../utils';
 import * as actions from '../../../store/actions';
 import MainStyles from '../../../styles/Main.module.scss';
@@ -63,10 +64,18 @@ class DoctorDetail extends Component {
 										</div>
 									</div>
 									<div className={DoctorDetailStyles.doctorDetailSchedule}>
-										<div className={DoctorDetailStyles.doctorDetailScheduleBooking}>
-											<DoctorSchedule doctorId={doctorDetail.id} />
+										<div className="row">
+											<div className="col-6">
+												<div className={DoctorDetailStyles.doctorDetailScheduleBooking}>
+													<DoctorSchedule doctorId={doctorDetail.id} />
+												</div>
+											</div>
+											<div className="col-6">
+												<div
+													className={DoctorDetailStyles.doctorDetailScheduleInformation}
+												></div>
+											</div>
 										</div>
-										<div className={DoctorDetailStyles.doctorDetailScheduleInformation}></div>
 									</div>
 								</div>
 							</div>
@@ -78,7 +87,9 @@ class DoctorDetail extends Component {
 						</div>
 					</>
 				) : (
-					<div className="alert alert-warning">No results found ...</div>
+					<div className="alert alert-warning">
+						<FormattedMessage id="app.no-results-found" />
+					</div>
 				)}
 			</>
 		);

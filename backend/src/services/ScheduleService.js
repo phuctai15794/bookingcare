@@ -59,6 +59,15 @@ let getScheduleByDateAPI = (doctorId, date) => {
 	return new Promise(async (resole, reject) => {
 		try {
 			const data = await db.Schedule.findAll({
+				raw: true,
+				nest: true,
+				include: [
+					{
+						model: db.AllCode,
+						as: 'timeData',
+						attributes: ['valueVi', 'valueEn'],
+					},
+				],
 				where: {
 					doctorId,
 					date,

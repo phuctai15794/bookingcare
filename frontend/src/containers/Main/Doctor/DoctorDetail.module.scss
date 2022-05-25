@@ -37,13 +37,15 @@
 			}
 
 			.doctorDetailSchedule {
-				@include flex(flex-start, flex-start);
-
-				.doctorDetailScheduleBooking {
-					width: 50%;
-				}
-				.doctorDetailScheduleInformation {
-					width: 50%;
+				position: relative;
+				&:after {
+					content: '';
+					position: absolute;
+					width: 1px;
+					height: 100%;
+					top: 0px;
+					left: calc(50% - 1px / 2);
+					background-color: #cccccc;
 				}
 			}
 		}

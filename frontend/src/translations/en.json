@@ -6,6 +6,8 @@
 		"or": "or",
 		"person": "person",
 		"persons": "persons",
+		"medical-schedule": "Medical schedule",
+		"and-booking-free": "and booking free",
 		"back-to-home": "Back to home",
 		"not-found-title": "Page not found",
 		"not-found-message": "Sorry, an error has occured, Requested page not found!",
@@ -115,7 +117,6 @@
 			"choose-a-time": "Chọn a time"
 		},
 		"others": {
-			"list-of-date": "List of dates",
 			"list-of-doctor": "List of doctors"
 		},
 		"attributes": {

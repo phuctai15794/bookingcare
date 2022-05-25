@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarDays, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { Functions } from '../../../utils';
 import * as actions from '../../../store/actions';
 import DoctorScheduleStyles from './DoctorSchedule.module.scss';
@@ -26,9 +28,14 @@ class DoctorSchedule extends Component {
 		});
 	};
 
-	componentDidMount() {
-		const { language } = this.props;
+	async componentDidMount() {
+		const { language, doctorId, getScheduleByDate } = this.props;
 		const daysOfWeek = Functions.getDaysOfWeek(language);
+
+		if (!_.isEmpty(daysOfWeek)) {
+			const [firstDay] = daysOfWeek;
+			await getScheduleByDate(doctorId, firstDay.value);
+		}
 
 		this.setState({
 			daysOfWeek,
@@ -55,10 +62,8 @@ class DoctorSchedule extends Component {
 
 	render() {
 		const { selectedDay, daysOfWeek, timesByDate } = this.state;
-		const { intl } = this.props;
-		const optionsDefaultLang = {
-			daysOfWeek: intl.formatMessage({ id: 'form.others.list-of-date' }),
-		};
+		const { language } = this.props;
+		const keyLang = `${language[0].toUpperCase()}${language.slice(1)}`;
 
 		return (
 			<>
@@ -73,7 +78,6 @@ class DoctorSchedule extends Component {
 								value={selectedDay}
 								onChange={(event) => this.handleOnChangeSelect(event)}
 							>
-								<option value="">{optionsDefaultLang.daysOfWeek}</option>
 								{!_.isEmpty(daysOfWeek) &&
 									daysOfWeek.map((day) => {
 										return (
@@ -84,17 +88,36 @@ class DoctorSchedule extends Component {
 									})}
 							</select>
 						</div>
-						{!_.isEmpty(timesByDate) && (
-							<div className="col-12">
-								{timesByDate.map((time) => {
-									return (
-										<span className="btn btn-sm btn-outline-primary me-2 mb-1" key={time.id}>
-											{time.timeType}
-										</span>
-									);
-								})}
+						<div className="col-12">
+							<div className="mb-3">
+								<FontAwesomeIcon className="me-2" icon={faCalendarDays} />
+								<strong>
+									<FormattedMessage id="app.medical-schedule" />:
+								</strong>
 							</div>
-						)}
+							{(!_.isEmpty(timesByDate) &&
+								timesByDate.map((time) => {
+									return (
+										<button
+											className={`btn ${DoctorScheduleStyles.doctorScheduleButtonTime} rounded-0 me-2 mb-2`}
+											key={time.id}
+										>
+											{time.timeData[`value${keyLang}`]}
+										</button>
+									);
+								})) || (
+								<div className="alert alert-warning mb-0">
+									<FormattedMessage id="app.no-results-found" />
+								</div>
+							)}
+							{!_.isEmpty(timesByDate) && (
+								<p className="mt-2 mb-0">
+									<FormattedMessage id="form.actions.choose-a-time" />{' '}
+									<FontAwesomeIcon className="px-2" icon={faThumbsUp} />{' '}
+									<FormattedMessage id="app.and-booking-free" />
+								</p>
+							)}
+						</div>
 					</div>
 				</div>
 			</>
@@ -115,4 +138,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(DoctorSchedule));
+export default connect(mapStateToProps, mapDispatchToProps)(DoctorSchedule);

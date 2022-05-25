@@ -6,6 +6,8 @@
 		"or": "hoặc",
 		"person": "người",
 		"persons": "người",
+		"medical-schedule": "Lịch khám",
+		"and-booking-free": "và đặt miễn phí",
 		"back-to-home": "Trở về trang chủ",
 		"not-found-title": "Không tìm thấy trang",
 		"not-found-message": "Xin lỗi, đã xảy ra lỗi, không tìm thấy trang được yêu cầu!Sorry, an error has occured, Requested page not found!",
@@ -115,7 +117,6 @@
 			"choose-a-time": "Chọn giờ"
 		},
 		"others": {
-			"list-of-date": "Danh sách ngày",
 			"list-of-doctor": "Danh sách bác sĩ"
 		},
 		"attributes": {

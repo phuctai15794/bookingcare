@@ -1,0 +1,15 @@
+@import '../../../styles/variables';
+
+.doctorSchedule {
+	.doctorScheduleButtonTime {
+		min-width: 110px;
+		text-align: center;
+		border-color: $colorSub;
+		background-color: $colorSub;
+		&:hover {
+			color: #ffffff;
+			border-color: $colorMain;
+			background-color: $colorMain;
+		}
+	}
+}

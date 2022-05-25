@@ -88,7 +88,9 @@ class DoctorInWeek extends Component {
 									})}
 								</Swiper>
 							) : (
-								<div className="alert alert-warning">No results found ...</div>
+								<div className="alert alert-warning">
+									<FormattedMessage id="app.no-results-found" />
+								</div>
 							)}
 						</div>
 					</div>

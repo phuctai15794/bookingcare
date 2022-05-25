@@ -137,7 +137,9 @@ class UserList extends Component {
 							</table>
 						</>
 					) : (
-						<div className="alert alert-warning">No results found ...</div>
+						<div className="alert alert-warning">
+							<FormattedMessage id="app.no-results-found" />
+						</div>
 					)}
 				</div>
 			</>

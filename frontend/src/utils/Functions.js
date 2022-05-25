@@ -42,16 +42,21 @@ class Functions {
 	static getDaysOfWeek(language = LANGUAGES.VI) {
 		const result = [];
 
-		if (language === LANGUAGES.VI) {
-			moment.updateLocale(LANGUAGES.VI, {
-				weekdays: DATE_FORMAT.DAYS_LOCALE[LANGUAGES.VI],
-			});
-		}
+		moment.updateLocale(language, {
+			weekdays: DATE_FORMAT.DAY_LOCALE[language],
+			calendar: {
+				sameDay: `[${DATE_FORMAT.CALENDER.SAME_DAY[language]}] - DD/MM`,
+			},
+		});
 
 		for (let index = 0; index < 7; index++) {
+			let timeStamp = moment(new Date()).locale(language).add(index, 'days').startOf('day').valueOf();
+			let isToday = moment(timeStamp).isSame(moment(), 'day');
 			let day = {};
-			day.label = moment(new Date()).locale(language).add(index, 'days').format('dddd - DD/MM');
-			day.value = moment(new Date()).locale(language).add(index, 'days').startOf('day').valueOf();
+			day.label =
+				(isToday && moment(new Date()).locale(language).add(index, 'days').calendar()) ||
+				moment(new Date()).locale(language).add(index, 'days').format('dddd - DD/MM');
+			day.value = timeStamp;
 			result.push(day);
 		}
 
