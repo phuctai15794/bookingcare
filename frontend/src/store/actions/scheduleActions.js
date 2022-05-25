@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { CreateScheduleService } from '../../services/scheduleService';
+import { CreateScheduleService, GetScheduleByDateService } from '../../services/scheduleService';
 
 export const createSchedule = (data) => {
 	return async (dispatch) => {
@@ -25,5 +25,32 @@ export const createScheduleSuccess = (message) => ({
 
 export const createScheduleFail = (error) => ({
 	type: actionTypes.CREATE_SCHEDULE_FAIL,
+	error,
+});
+
+export const getScheduleByDate = (doctorId, date) => {
+	return async (dispatch) => {
+		dispatch(getScheduleByDateStart());
+		await GetScheduleByDateService(doctorId, date)
+			.then((response) => {
+				dispatch(getScheduleByDateSuccess(response.data.data));
+			})
+			.catch((error) => {
+				dispatch(getScheduleByDateFail(error));
+			});
+	};
+};
+
+export const getScheduleByDateStart = () => ({
+	type: actionTypes.GET_SCHEDULE_BY_DATE_START,
+});
+
+export const getScheduleByDateSuccess = (data) => ({
+	type: actionTypes.GET_SCHEDULE_BY_DATE_SUCCESS,
+	data,
+});
+
+export const getScheduleByDateFail = (error) => ({
+	type: actionTypes.GET_SCHEDULE_BY_DATE_FAIL,
 	error,
 });

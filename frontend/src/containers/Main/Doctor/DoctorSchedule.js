@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { FormattedMessage, injectIntl } from 'react-intl';
-import { HtmlRaw, Functions } from '../../../utils';
+import { injectIntl } from 'react-intl';
+import { Functions } from '../../../utils';
 import * as actions from '../../../store/actions';
 import DoctorScheduleStyles from './DoctorSchedule.module.scss';
 
@@ -12,12 +12,17 @@ class DoctorSchedule extends Component {
 		this.state = {
 			selectedDay: '',
 			daysOfWeek: [],
+			timesByDate: [],
 		};
 	}
 
-	handleOnChangeSelect = (event) => {
+	handleOnChangeSelect = async (event) => {
+		const { doctorId, getScheduleByDate } = this.props;
+		const selectedDay = event.target.value;
+		await getScheduleByDate(doctorId, selectedDay);
+
 		this.setState({
-			selectedDay: event.target.value,
+			selectedDay,
 		});
 	};
 
@@ -31,7 +36,7 @@ class DoctorSchedule extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		const { language } = this.props;
+		const { language, timesByDate } = this.props;
 
 		if (prevProps.language !== language) {
 			const daysOfWeek = Functions.getDaysOfWeek(language);
@@ -40,11 +45,17 @@ class DoctorSchedule extends Component {
 				daysOfWeek,
 			});
 		}
+
+		if (prevProps.timesByDate !== timesByDate) {
+			this.setState({
+				timesByDate,
+			});
+		}
 	}
 
 	render() {
-		const { selectedDay, daysOfWeek } = this.state;
-		const { intl, doctorId } = this.props;
+		const { selectedDay, daysOfWeek, timesByDate } = this.state;
+		const { intl } = this.props;
 		const optionsDefaultLang = {
 			daysOfWeek: intl.formatMessage({ id: 'form.others.list-of-date' }),
 		};
@@ -53,7 +64,7 @@ class DoctorSchedule extends Component {
 			<>
 				<div className={DoctorScheduleStyles.doctorSchedule}>
 					<div className="row">
-						<div className="col-4">
+						<div className="col-4 mb-3">
 							<select
 								className="form-select"
 								id="selectedDay"
@@ -73,8 +84,18 @@ class DoctorSchedule extends Component {
 									})}
 							</select>
 						</div>
+						{!_.isEmpty(timesByDate) && (
+							<div className="col-12">
+								{timesByDate.map((time) => {
+									return (
+										<span className="btn btn-sm btn-outline-primary me-2 mb-1" key={time.id}>
+											{time.timeType}
+										</span>
+									);
+								})}
+							</div>
+						)}
 					</div>
-					{`Doctor detail is: ${doctorId}`}
 				</div>
 			</>
 		);
@@ -84,11 +105,14 @@ class DoctorSchedule extends Component {
 const mapStateToProps = (state) => {
 	return {
 		language: state.app.language,
+		timesByDate: state.schedule.timesByDate,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		getScheduleByDate: (doctorId, date) => dispatch(actions.getScheduleByDate(doctorId, date)),
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(DoctorSchedule));

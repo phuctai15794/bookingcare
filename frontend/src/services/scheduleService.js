@@ -9,4 +9,8 @@ const CreateScheduleService = async (data) => {
 	});
 };
 
-export { CreateScheduleService };
+const GetScheduleByDateService = async (doctorId, date) => {
+	return await axios.callAPI.get(`/api/schedule/by-date/${doctorId}/${date}`);
+};
+
+export { CreateScheduleService, GetScheduleByDateService };

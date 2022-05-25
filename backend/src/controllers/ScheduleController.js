@@ -30,18 +30,18 @@ let getScheduleByDateAPI = async (req, res) => {
 			type: '',
 			text: '',
 		},
-		info: {},
+		data: {},
 	};
 
 	if (!doctorId || !date) {
 		result.message.type = 'error';
 		result.message.text = 'Data is invalid';
 	} else {
-		result.info = await ScheduleService.getScheduleByDateAPI(doctorId, date);
+		result.data = await ScheduleService.getScheduleByDateAPI(doctorId, date);
 	}
 
 	return res.status(200).json({
-		data: result.info,
+		data: result.data,
 		message: result.message,
 	});
 };

@@ -22,18 +22,17 @@ class Functions {
 		return (buffer && new Buffer.from(buffer, 'base64').toString('binary')) || '';
 	}
 
-	static formatDate(date, format, option = '') {
+	static formatDate(input, format, option = '') {
 		let result = '';
 
-		if (!date) return '';
+		if (!input) return '';
 
 		switch (option) {
 			case 'startOfDay':
-				result = moment(date).startOf('day').valueOf();
+				result = moment(input).startOf('day').valueOf();
 				break;
-
 			default:
-				result = !format && moment(date).format(format);
+				result = format && moment(input).format(format);
 				break;
 		}
 
