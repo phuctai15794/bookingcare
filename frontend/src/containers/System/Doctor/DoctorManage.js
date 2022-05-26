@@ -22,8 +22,11 @@ class DoctorManage extends Component {
 		this.state = {
 			doctorId: '',
 			description: '',
+			note: '',
 			contentHTML: '',
 			contentMarkdown: '',
+			addressClinic: '',
+			nameClinic: '',
 			isEdit: false,
 			selectDoctors: {
 				list: [],
@@ -59,37 +62,41 @@ class DoctorManage extends Component {
 		});
 	};
 
-	handleOnChangeSelectDoctor = async (selectedOption) => {
-		const { getDetailDoctor } = this.props;
-		await getDetailDoctor(selectedOption.value);
+	handleOnChangeSelect = async (selectedOption, type) => {
+		if (type === 'doctors') {
+			const { getDetailDoctor } = this.props;
+			await getDetailDoctor(selectedOption.value);
 
-		this.setState({
-			doctorId: selectedOption.value,
-			selectDoctors: {
-				...this.state.selectDoctors,
-				selected: selectedOption,
-			},
-			message: {
-				text: '',
-				type: '',
-			},
-		});
+			this.setState({
+				doctorId: selectedOption.value,
+				selectDoctors: {
+					...this.state.selectDoctors,
+					selected: selectedOption,
+				},
+				message: {
+					text: '',
+					type: '',
+				},
+			});
+		} else {
+			const keySelect = Functions.toCapitalizCase(type);
+
+			this.setState({
+				[`select${keySelect}`]: {
+					...this.state[`select${keySelect}`],
+					selected: selectedOption,
+				},
+				message: {
+					text: '',
+					type: '',
+				},
+			});
+		}
 	};
 
-	handleOnChangeSelectAllCode = (selectedOption, type) => {
-		const keyAllCode = Functions.toCapitalizCase(type);
-
+	handleOnChangeInput = (event, type) => {
 		this.setState({
-			[`select${keyAllCode}`]: {
-				...this.state[`select${keyAllCode}`],
-				selected: selectedOption,
-			},
-		});
-	};
-
-	handleOnChangeDesciption = (event) => {
-		this.setState({
-			description: event.target.value,
+			[type]: event.target.value,
 			message: {
 				text: '',
 				type: '',
@@ -104,16 +111,19 @@ class DoctorManage extends Component {
 
 	handleCancel = async () => {
 		const { doctors, prices, payments, provinces } = this.props;
-		const optionsDoctors = this.buildDoctorsSelect(doctors);
-		const optionsPrices = this.buildAllCodeSelect(prices);
-		const optionsPayments = this.buildAllCodeSelect(payments);
-		const optionsProvince = this.buildAllCodeSelect(provinces);
+		const optionsDoctors = this.buildSelect(doctors, 'Doctor');
+		const optionsPrices = this.buildSelect(prices, 'Price');
+		const optionsPayments = this.buildSelect(payments, 'Payment');
+		const optionsProvince = this.buildSelect(provinces, 'Province');
 
 		this.setState({
 			doctorId: '',
 			description: '',
 			contentHTML: '',
 			contentMarkdown: '',
+			note: '',
+			addressClinic: '',
+			nameClinic: '',
 			isEdit: false,
 			selectDoctors: {
 				list: optionsDoctors || [],
@@ -138,33 +148,29 @@ class DoctorManage extends Component {
 		});
 	};
 
-	buildDoctorsSelect = (doctors) => {
-		const { language } = this.props;
-
-		return (
-			!_.isEmpty(doctors) &&
-			doctors.map((doctor) => ({
-				value: doctor.id,
-				label:
-					language === Constants.LANGUAGES.VI
-						? `${doctor.firstName} ${doctor.lastName}`
-						: language === Constants.LANGUAGES.EN
-						? `${doctor.lastName} ${doctor.firstName}`
-						: '',
-			}))
-		);
-	};
-
-	buildAllCodeSelect = (allcodes) => {
+	buildSelect = (options, type) => {
 		const { language } = this.props;
 		const keyLang = Functions.toCapitalizCase(language);
 
 		return (
-			!_.isEmpty(allcodes) &&
-			allcodes.map((item) => ({
-				value: item.id,
-				label: `${item[`value${keyLang}`]}`,
-			}))
+			(type === 'Doctor' &&
+				!_.isEmpty(options) &&
+				options.map((doctor) => ({
+					value: doctor.id,
+					label:
+						language === Constants.LANGUAGES.VI
+							? `${doctor.firstName} ${doctor.lastName}`
+							: language === Constants.LANGUAGES.EN
+							? `${doctor.lastName} ${doctor.firstName}`
+							: '',
+				}))) ||
+			(!_.isEmpty(options) &&
+				options.map((item) => ({
+					value: item.keyMap,
+					label:
+						(type === 'Price' && Functions.formatPrice(`${item[`value${keyLang}`]}`, language)) ||
+						`${item[`value${keyLang}`]}`,
+				})))
 		);
 	};
 
@@ -180,7 +186,7 @@ class DoctorManage extends Component {
 		const { language, doctors, doctorDetail, prices, payments, provinces, messageDoctor } = this.props;
 
 		if (prevProps.doctors !== doctors || prevProps.language !== language) {
-			const optionsDoctors = this.buildDoctorsSelect(doctors);
+			const optionsDoctors = this.buildSelect(doctors, 'Doctor');
 
 			this.setState({
 				selectDoctors: {
@@ -192,16 +198,34 @@ class DoctorManage extends Component {
 
 		if (prevProps.messageDoctor !== messageDoctor) {
 			if (messageDoctor.type === 'success') {
-				const optionsDoctors = this.buildDoctorsSelect(doctors);
+				const optionsDoctors = this.buildSelect(doctors, 'Doctor');
+				const optionsPrices = this.buildSelect(prices, 'Price');
+				const optionsPayments = this.buildSelect(payments, 'Payment');
+				const optionsProvince = this.buildSelect(provinces, 'Province');
 
 				this.setState({
 					doctorId: '',
 					description: '',
 					contentHTML: '',
 					contentMarkdown: '',
+					note: '',
+					addressClinic: '',
+					nameClinic: '',
 					isEdit: false,
 					selectDoctors: {
 						list: optionsDoctors || [],
+						selected: null,
+					},
+					selectPrices: {
+						list: optionsPrices || [],
+						selected: null,
+					},
+					selectPayments: {
+						list: optionsPayments || [],
+						selected: null,
+					},
+					selectProvinces: {
+						list: optionsProvince || [],
 						selected: null,
 					},
 					message: {
@@ -221,10 +245,10 @@ class DoctorManage extends Component {
 		}
 
 		if (prevProps.doctorDetail !== doctorDetail) {
-			const optionsDoctors = this.buildDoctorsSelect(doctors);
-			const optionsPrices = this.buildAllCodeSelect(prices);
-			const optionsPayments = this.buildAllCodeSelect(payments);
-			const optionsProvince = this.buildAllCodeSelect(provinces);
+			const optionsDoctors = this.buildSelect(doctors, 'Doctor');
+			const optionsPrices = this.buildSelect(prices, 'Price');
+			const optionsPayments = this.buildSelect(payments, 'Payment');
+			const optionsProvince = this.buildSelect(provinces, 'Province');
 
 			this.setState({
 				doctorId: doctorDetail.doctorId,
@@ -264,7 +288,7 @@ class DoctorManage extends Component {
 		}
 
 		if (prevProps.prices !== prices || prevProps.language !== language) {
-			const optionsPrices = this.buildAllCodeSelect(prices);
+			const optionsPrices = this.buildSelect(prices, 'Price');
 
 			this.setState({
 				selectPrices: {
@@ -275,7 +299,7 @@ class DoctorManage extends Component {
 		}
 
 		if (prevProps.payments !== payments || prevProps.language !== language) {
-			const optionsPayments = this.buildAllCodeSelect(payments);
+			const optionsPayments = this.buildSelect(payments, 'Payment');
 
 			this.setState({
 				selectPayments: {
@@ -286,7 +310,7 @@ class DoctorManage extends Component {
 		}
 
 		if (prevProps.provinces !== provinces || prevProps.language !== language) {
-			const optionsProvince = this.buildAllCodeSelect(provinces);
+			const optionsProvince = this.buildSelect(provinces, 'Province');
 
 			this.setState({
 				selectProvinces: {
@@ -304,6 +328,9 @@ class DoctorManage extends Component {
 			selectPayments,
 			selectProvinces,
 			contentMarkdown,
+			nameClinic,
+			addressClinic,
+			note,
 			description,
 			message,
 			isEdit,
@@ -342,7 +369,7 @@ class DoctorManage extends Component {
 									options={selectDoctors.list}
 									isSearchable
 									noOptionsMessage={() => selectLang.noMatched}
-									onChange={this.handleOnChangeSelectDoctor}
+									onChange={(selectedOption) => this.handleOnChangeSelect(selectedOption, 'doctors')}
 								/>
 							</div>
 							<div className="col-3 mb-3">
@@ -355,9 +382,7 @@ class DoctorManage extends Component {
 									options={selectPrices.list}
 									isSearchable
 									noOptionsMessage={() => selectLang.noMatched}
-									onChange={(selectedOption) =>
-										this.handleOnChangeSelectAllCode(selectedOption, 'prices')
-									}
+									onChange={(selectedOption) => this.handleOnChangeSelect(selectedOption, 'prices')}
 								/>
 							</div>
 							<div className="col-3 mb-3">
@@ -370,9 +395,7 @@ class DoctorManage extends Component {
 									options={selectPayments.list}
 									isSearchable
 									noOptionsMessage={() => selectLang.noMatched}
-									onChange={(selectedOption) =>
-										this.handleOnChangeSelectAllCode(selectedOption, 'payments')
-									}
+									onChange={(selectedOption) => this.handleOnChangeSelect(selectedOption, 'payments')}
 								/>
 							</div>
 							<div className="col-3 mb-3">
@@ -386,9 +409,50 @@ class DoctorManage extends Component {
 									isSearchable
 									noOptionsMessage={() => selectLang.noMatched}
 									onChange={(selectedOption) =>
-										this.handleOnChangeSelectAllCode(selectedOption, 'provinces')
+										this.handleOnChangeSelect(selectedOption, 'provinces')
 									}
 								/>
+							</div>
+							<div className="col-6 mb-3">
+								<label className="fw-bold mb-1" htmlFor="nameClinic">
+									<FormattedMessage id="form.attributes.nameClinic" />:
+								</label>
+								<input
+									type="text"
+									className="form-control"
+									id="nameClinic"
+									name="nameClinic"
+									required
+									value={nameClinic}
+									onChange={(event) => this.handleOnChangeInput(event, 'nameClinic')}
+								/>
+							</div>
+							<div className="col-6 mb-3">
+								<label className="fw-bold mb-1" htmlFor="addressClinic">
+									<FormattedMessage id="form.attributes.addressClinic" />:
+								</label>
+								<input
+									type="text"
+									className="form-control"
+									id="addressClinic"
+									name="addressClinic"
+									required
+									value={addressClinic}
+									onChange={(event) => this.handleOnChangeInput(event, 'addressClinic')}
+								/>
+							</div>
+							<div className="col-12 mb-3">
+								<label className="fw-bold mb-1" htmlFor="note">
+									<FormattedMessage id="form.attributes.note" />:
+								</label>
+								<textarea
+									className="form-control"
+									id="note"
+									name="note"
+									rows="5"
+									value={note}
+									onChange={(event) => this.handleOnChangeInput(event, 'note')}
+								></textarea>
 							</div>
 							<div className="col-12 mb-3">
 								<label className="fw-bold mb-1" htmlFor="description">
@@ -400,7 +464,7 @@ class DoctorManage extends Component {
 									name="description"
 									rows="5"
 									value={description}
-									onChange={(event) => this.handleOnChangeDesciption(event)}
+									onChange={(event) => this.handleOnChangeInput(event, 'description')}
 								></textarea>
 							</div>
 							<div className="col-12">

@@ -89,6 +89,7 @@ let updateInfoAPI = (data) => {
 				message.text = 'Doctor is invalid';
 				message.type = 'error';
 			} else {
+				// Markdown
 				const doctorMarkdownDetail = await db.Markdown.findOne({
 					where: {
 						doctorId: data.doctorId,
@@ -113,6 +114,41 @@ let updateInfoAPI = (data) => {
 						},
 						{
 							where: { id: doctorMarkdownDetail.id },
+						},
+					);
+				}
+
+				// Info
+				const doctorInfoDetail = await db.DoctorInfo.findOne({
+					where: {
+						doctorId: data.doctorId,
+					},
+				});
+
+				if (doctorInfoDetail === null) {
+					await db.DoctorInfo.create({
+						doctorId: data.doctorId,
+						priceId: data.selectPrices.selected.value,
+						provinceId: data.selectProvinces.selected.value,
+						paymentId: data.selectPayments.selected.value,
+						nameClinic: data.nameClinic,
+						addressClinic: data.addressClinic,
+						note: data.note,
+					});
+				} else {
+					await db.DoctorInfo.update(
+						{
+							doctorId: data.doctorId,
+							priceId: data.selectPrices.selected.value,
+							provinceId: data.selectProvinces.selected.value,
+							paymentId: data.selectPayments.selected.value,
+							nameClinic: data.nameClinic,
+							addressClinic: data.addressClinic,
+							note: data.note,
+							updatedAt: new Date(),
+						},
+						{
+							where: { id: doctorInfoDetail.id },
 						},
 					);
 				}
@@ -142,6 +178,11 @@ let getDetailAPI = (id) => {
 						model: db.Markdown,
 						as: 'markdownData',
 						attributes: ['contentHTML', 'contentMarkdown', 'description'],
+					},
+					{
+						model: db.DoctorInfo,
+						as: 'infoData',
+						attributes: ['priceId', 'provinceId', 'paymentId'],
 					},
 					{
 						model: db.AllCode,

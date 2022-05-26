@@ -133,6 +133,8 @@
 			"lastName": "Họ",
 			"address": "Địa chỉ",
 			"phone": "Số điện thoại",
+			"nameClinic": "Tên phòng khám",
+			"addressClinic": "Địa chỉ phòng khám",
 			"maxNumberPatient": "Số lượng bệnh nhân đặt lịch",
 			"gender": {
 				"title": "Giới tính",
@@ -146,6 +148,7 @@
 				"title": "Vị trí",
 				"optionDefault": "Chọn vị trí"
 			},
+			"note": "Ghi chú",
 			"description": "Mô tả",
 			"content": "Nội dung"
 		}

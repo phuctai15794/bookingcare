@@ -30,6 +30,15 @@ let updateInfoAPI = async (req, res) => {
 	if (!data.doctorId) {
 		result.message.type = 'error';
 		result.message.text = 'Please choose a doctor';
+	} else if (!data.selectPrices.selected.value) {
+		result.message.type = 'error';
+		result.message.text = 'Please choose a price';
+	} else if (!data.selectPayments.selected.value) {
+		result.message.type = 'error';
+		result.message.text = 'Please choose a payment';
+	} else if (!data.selectProvinces.selected.value) {
+		result.message.type = 'error';
+		result.message.text = 'Please choose a province';
 	} else if (!data.contentHTML || !data.contentMarkdown) {
 		result.message.type = 'error';
 		result.message.text = 'Please enter your content';

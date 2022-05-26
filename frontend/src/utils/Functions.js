@@ -26,6 +26,12 @@ class Functions {
 		return str && str.length >= 2 && `${str[0].toUpperCase()}${str.slice(1)}`;
 	}
 
+	static formatPrice(price, language) {
+		return language === LANGUAGES.VI
+			? `${price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')} VNĐ`
+			: `${price} USD`;
+	}
+
 	static formatDate(input, format, option = '') {
 		let result = '';
 

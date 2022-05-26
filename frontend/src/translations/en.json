@@ -133,6 +133,8 @@
 			"lastName": "Last name",
 			"address": "Address",
 			"phone": "Phone",
+			"nameClinic": "Name clinic",
+			"addressClinic": "Address clinic",
 			"maxNumberPatient": "Number of patients booked",
 			"gender": {
 				"title": "Gender",
@@ -146,6 +148,7 @@
 				"title": "Position",
 				"optionDefault": "Chọn a position"
 			},
+			"note": "Note",
 			"description": "Description",
 			"content": "Content"
 		}
