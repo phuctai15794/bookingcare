@@ -182,7 +182,24 @@ let getDetailAPI = (id) => {
 					{
 						model: db.DoctorInfo,
 						as: 'infoData',
-						attributes: ['priceId', 'provinceId', 'paymentId'],
+						attributes: ['priceId', 'paymentId', 'provinceId', 'nameClinic', 'addressClinic', 'note'],
+						include: [
+							{
+								model: db.AllCode,
+								as: 'priceData',
+								attributes: ['valueVi', 'valueEn'],
+							},
+							{
+								model: db.AllCode,
+								as: 'paymentData',
+								attributes: ['valueVi', 'valueEn'],
+							},
+							{
+								model: db.AllCode,
+								as: 'provinceData',
+								attributes: ['valueVi', 'valueEn'],
+							},
+						],
 					},
 					{
 						model: db.AllCode,
