@@ -22,6 +22,10 @@ class Functions {
 		return (buffer && new Buffer.from(buffer, 'base64').toString('binary')) || '';
 	}
 
+	static toCapitalizCase(str) {
+		return str && str.length >= 2 && `${str[0].toUpperCase()}${str.slice(1)}`;
+	}
+
 	static formatDate(input, format, option = '') {
 		let result = '';
 

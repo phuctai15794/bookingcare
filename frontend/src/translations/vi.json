@@ -113,11 +113,17 @@
 			"save": "Lưu",
 			"cancel": "Hủy bỏ",
 			"choose-a-doctor": "Chọn bác sĩ",
+			"choose-a-price": "Chọn giá",
+			"choose-a-payment": "Chọn thanh toán",
+			"choose-a-province": "Chọn tỉnh thành",
 			"choose-a-date": "Chọn ngày",
 			"choose-a-time": "Chọn giờ"
 		},
 		"others": {
-			"list-of-doctor": "Danh sách bác sĩ"
+			"list-of-doctors": "Danh sách bác sĩ",
+			"list-of-prices": "Danh sách giá",
+			"list-of-payments": "Danh sách thanh toán",
+			"list-of-provinces": "Danh sách tỉnh thành"
 		},
 		"attributes": {
 			"avatar": "Ảnh đại diện",

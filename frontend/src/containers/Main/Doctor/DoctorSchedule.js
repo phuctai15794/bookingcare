@@ -63,7 +63,7 @@ class DoctorSchedule extends Component {
 	render() {
 		const { selectedDay, daysOfWeek, timesByDate } = this.state;
 		const { language } = this.props;
-		const keyLang = `${language[0].toUpperCase()}${language.slice(1)}`;
+		const keyLang = Functions.toCapitalizCase(language);
 
 		return (
 			<>

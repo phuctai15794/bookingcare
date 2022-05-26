@@ -35,7 +35,7 @@ class DoctorDetail extends Component {
 	render() {
 		const { doctorDetail } = this.state;
 		const { language } = this.props;
-		const keyLang = `${language[0].toUpperCase()}${language.slice(1)}`;
+		const keyLang = Functions.toCapitalizCase(language);
 		const avatar = doctorDetail && doctorDetail.image && Functions.bufferToBase64(doctorDetail.image);
 		const title =
 			doctorDetail &&

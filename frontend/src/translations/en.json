@@ -113,11 +113,17 @@
 			"save": "Save",
 			"cancel": "Cancel",
 			"choose-a-doctor": "Choose a doctor",
+			"choose-a-price": "Choose a price",
+			"choose-a-payment": "Chọn a payment",
+			"choose-a-province": "Chọn a province",
 			"choose-a-date": "Chọn a date",
 			"choose-a-time": "Chọn a time"
 		},
 		"others": {
-			"list-of-doctor": "List of doctors"
+			"list-of-doctors": "List of doctors",
+			"list-of-prices": "List of prices",
+			"list-of-payments": "List of payments",
+			"list-of-provinces": "List of provinces"
 		},
 		"attributes": {
 			"avatar": "Avatar",
