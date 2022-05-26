@@ -118,8 +118,11 @@ class DoctorManage extends Component {
 	};
 
 	async componentDidMount() {
-		const { fetchDoctors } = this.props;
+		const { fetchDoctors, fetchAllCode } = this.props;
 		await fetchDoctors();
+		await fetchAllCode('PRICE');
+		await fetchAllCode('PAYMENT');
+		await fetchAllCode('PROVINCE');
 	}
 
 	componentDidUpdate(prevProps) {
@@ -292,6 +295,9 @@ const mapStateToProps = (state) => {
 		language: state.app.language,
 		messageDoctor: state.doctor.message,
 		doctors: state.doctor.doctors,
+		prices: state.allCode.prices.data,
+		payments: state.allCode.payments.data,
+		provinces: state.allCode.provinces.data,
 		doctorDetail: state.doctor.doctorDetail,
 	};
 };
@@ -299,6 +305,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchDoctors: () => dispatch(actions.fetchDoctors()),
+		fetchAllCode: (type) => dispatch(actions.fetchAllCode(type)),
 		updateInfoDoctor: (data) => dispatch(actions.updateInfoDoctor(data)),
 		getDetailDoctor: (id) => dispatch(actions.getDetailDoctor(id)),
 	};

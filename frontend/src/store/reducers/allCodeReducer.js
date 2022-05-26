@@ -18,6 +18,15 @@ const initialState = {
 	times: {
 		...allCodeState,
 	},
+	prices: {
+		...allCodeState,
+	},
+	payments: {
+		...allCodeState,
+	},
+	provinces: {
+		...allCodeState,
+	},
 };
 
 const allCodeReducer = (state = initialState, action) => {
