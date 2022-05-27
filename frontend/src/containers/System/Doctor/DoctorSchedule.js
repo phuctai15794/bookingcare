@@ -32,6 +32,11 @@ class DoctorSchedule extends Component {
 	}
 
 	handleOnChangeSelect = async (selectedOption) => {
+		const { getScheduleByDate } = this.props;
+		const { currentDate } = this.state;
+		const dateSelected = Functions.formatDate(currentDate, '', 'startOfDay');
+		await getScheduleByDate(selectedOption.value, dateSelected);
+
 		this.setState({
 			select: {
 				...this.state.select,
@@ -45,6 +50,14 @@ class DoctorSchedule extends Component {
 	};
 
 	handleOnChangeDate = async (selectedDated) => {
+		const { getScheduleByDate } = this.props;
+		const { select } = this.state;
+
+		if (select.selected && select.selected.value) {
+			const dateSelected = Functions.formatDate(selectedDated, '', 'startOfDay');
+			await getScheduleByDate(select.selected.value, dateSelected);
+		}
+
 		this.setState({
 			currentDate: selectedDated,
 		});
@@ -134,7 +147,7 @@ class DoctorSchedule extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		const { language, doctors, times, loadingSchedule, messageSchedule } = this.props;
+		const { language, doctors, times, schedulesByDate, loadingSchedule, messageSchedule } = this.props;
 
 		if (prevProps.doctors !== doctors || prevProps.language !== language) {
 			const optionsDoctor = this.buildDoctorsSelect(doctors);
@@ -149,9 +162,33 @@ class DoctorSchedule extends Component {
 
 		if (prevProps.times !== times) {
 			const newTimes = !_.isEmpty(times) && times.map((time) => ({ ...time, isActive: false }));
+
 			this.setState({
 				times: newTimes,
 			});
+		}
+
+		if (prevProps.schedulesByDate !== schedulesByDate) {
+			const newState = { ...this.state };
+			const firstSchedule = !_.isEmpty(schedulesByDate) && schedulesByDate.at(0);
+			const newTimesByDate =
+				!_.isEmpty(times) &&
+				times.map((time) => {
+					let isActive =
+						!_.isEmpty(schedulesByDate) &&
+						schedulesByDate.some((schedule) => schedule.timeType === time.keyMap);
+					return { ...time, isActive: isActive };
+				});
+
+			if (firstSchedule && firstSchedule.maxNumber) {
+				newState.maxNumberPatient = firstSchedule.maxNumber;
+			}
+
+			if (!_.isEmpty(newTimesByDate)) {
+				newState.times = newTimesByDate;
+			}
+
+			this.setState({ ...newState });
 		}
 
 		if (prevProps.loadingSchedule !== loadingSchedule) {
@@ -305,6 +342,7 @@ const mapStateToProps = (state) => {
 		language: state.app.language,
 		loadingSchedule: state.schedule.loading,
 		messageSchedule: state.schedule.message,
+		schedulesByDate: state.schedule.schedulesByDate,
 		doctors: state.doctor.doctors,
 		times: state.allCode.times.data,
 	};
@@ -315,6 +353,7 @@ const mapDispatchToProps = (dispatch) => {
 		fetchDoctors: () => dispatch(actions.fetchDoctors()),
 		fetchAllCode: (type) => dispatch(actions.fetchAllCode(type)),
 		createSchedule: (data) => dispatch(actions.createSchedule(data)),
+		getScheduleByDate: (doctorId, date) => dispatch(actions.getScheduleByDate(doctorId, date)),
 	};
 };
 

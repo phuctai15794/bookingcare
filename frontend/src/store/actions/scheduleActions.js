@@ -33,7 +33,7 @@ export const getScheduleByDate = (doctorId, date) => {
 		dispatch(getScheduleByDateStart());
 		await GetScheduleByDateService(doctorId, date)
 			.then((response) => {
-				dispatch(getScheduleByDateSuccess(response.data.data));
+				dispatch(getScheduleByDateSuccess(response.data));
 			})
 			.catch((error) => {
 				dispatch(getScheduleByDateFail(error));

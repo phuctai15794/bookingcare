@@ -1,7 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 
 const initialState = {
-	timesByDate: [],
+	schedulesByDate: [],
 	loading: false,
 	message: {
 		text: '',
@@ -39,14 +39,14 @@ const doctorReducer = (state = initialState, action) => {
 		case actionTypes.GET_SCHEDULE_BY_DATE_SUCCESS:
 			return {
 				...state,
-				timesByDate: action.data,
+				schedulesByDate: action.data.data,
 				loading: false,
-				message: action.message,
+				message: action.data.message,
 			};
 		case actionTypes.GET_SCHEDULE_BY_DATE_FAIL:
 			return {
 				...state,
-				timesByDate: [],
+				schedulesByDate: [],
 				loading: false,
 				message: {
 					text: 'Error. Please try again later',

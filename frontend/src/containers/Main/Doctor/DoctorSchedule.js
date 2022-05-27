@@ -14,7 +14,7 @@ class DoctorSchedule extends Component {
 		this.state = {
 			selectedDay: '',
 			daysOfWeek: [],
-			timesByDate: [],
+			schedulesByDate: [],
 		};
 	}
 
@@ -43,7 +43,7 @@ class DoctorSchedule extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		const { language, timesByDate } = this.props;
+		const { language, schedulesByDate } = this.props;
 
 		if (prevProps.language !== language) {
 			const daysOfWeek = Functions.getDaysOfWeek(language);
@@ -53,15 +53,15 @@ class DoctorSchedule extends Component {
 			});
 		}
 
-		if (prevProps.timesByDate !== timesByDate) {
+		if (prevProps.schedulesByDate !== schedulesByDate) {
 			this.setState({
-				timesByDate,
+				schedulesByDate,
 			});
 		}
 	}
 
 	render() {
-		const { selectedDay, daysOfWeek, timesByDate } = this.state;
+		const { selectedDay, daysOfWeek, schedulesByDate } = this.state;
 		const { language } = this.props;
 		const keyLang = Functions.toCapitalizCase(language);
 
@@ -95,8 +95,8 @@ class DoctorSchedule extends Component {
 									<FormattedMessage id="app.medical-schedule" />:
 								</strong>
 							</div>
-							{(!_.isEmpty(timesByDate) &&
-								timesByDate.map((time) => {
+							{(!_.isEmpty(schedulesByDate) &&
+								schedulesByDate.map((time) => {
 									return (
 										<button
 											className={`btn ${DoctorScheduleStyles.doctorScheduleButtonTime} rounded-0 me-2 mb-2`}
@@ -110,7 +110,7 @@ class DoctorSchedule extends Component {
 									<FormattedMessage id="app.no-results-found" />
 								</div>
 							)}
-							{!_.isEmpty(timesByDate) && (
+							{!_.isEmpty(schedulesByDate) && (
 								<p className="mt-2 mb-0">
 									<FormattedMessage id="form.actions.choose-a-time" />{' '}
 									<FontAwesomeIcon className="px-2" icon={faThumbsUp} />{' '}
@@ -128,7 +128,7 @@ class DoctorSchedule extends Component {
 const mapStateToProps = (state) => {
 	return {
 		language: state.app.language,
-		timesByDate: state.schedule.timesByDate,
+		schedulesByDate: state.schedule.schedulesByDate,
 	};
 };
 
