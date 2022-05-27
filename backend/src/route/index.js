@@ -43,6 +43,7 @@ let route = (app) => {
 	// API: Schedule
 	router.post('/api/schedule/create', Auths.verify, ScheduleController.createScheduleAPI);
 	router.get('/api/schedule/by-date/:doctorId/:date', ScheduleController.getScheduleByDateAPI);
+	router.get('/api/schedule/by-doctor/:doctorId', ScheduleController.getScheduleByDoctorAPI);
 
 	return app.use('/', router);
 };

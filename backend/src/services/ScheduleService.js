@@ -81,7 +81,33 @@ let getScheduleByDateAPI = (doctorId, date) => {
 	});
 };
 
+let getScheduleByDoctorAPI = (doctorid) => {
+	return new Promise(async (resole, reject) => {
+		try {
+			const data = await db.Schedule.findAll({
+				raw: true,
+				nest: true,
+				include: [
+					{
+						model: db.AllCode,
+						as: 'timeData',
+						attributes: ['valueVi', 'valueEn'],
+					},
+				],
+				where: {
+					doctorid,
+				},
+			});
+
+			resole(data);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};
+
 module.exports = {
 	createScheduleAPI,
 	getScheduleByDateAPI,
+	getScheduleByDoctorAPI,
 };

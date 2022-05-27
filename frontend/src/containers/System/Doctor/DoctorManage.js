@@ -249,12 +249,16 @@ class DoctorManage extends Component {
 			const optionsPrices = this.buildSelect(prices, 'Price');
 			const optionsPayments = this.buildSelect(payments, 'Payment');
 			const optionsProvince = this.buildSelect(provinces, 'Province');
+			const keyLang = Functions.toCapitalizCase(language);
 
 			this.setState({
 				doctorId: doctorDetail.doctorId,
 				description: doctorDetail.markdownData.description || '',
 				contentHTML: doctorDetail.markdownData.contentHTML || '',
 				contentMarkdown: doctorDetail.markdownData.contentMarkdown || '',
+				note: doctorDetail.infoData.note,
+				addressClinic: doctorDetail.infoData.addressClinic,
+				nameClinic: doctorDetail.infoData.nameClinic,
 				selectDoctors: {
 					list: optionsDoctors || [],
 					selected: {
@@ -269,15 +273,24 @@ class DoctorManage extends Component {
 				},
 				selectPrices: {
 					list: optionsPrices || [],
-					selected: null,
+					selected: {
+						value: doctorDetail.infoData.priceData.id,
+						label: `${doctorDetail.infoData.priceData[`value${keyLang}`]}`,
+					},
 				},
 				selectPayments: {
 					list: optionsPayments || [],
-					selected: null,
+					selected: {
+						value: doctorDetail.infoData.paymentData.id,
+						label: `${doctorDetail.infoData.paymentData[`value${keyLang}`]}`,
+					},
 				},
 				selectProvinces: {
 					list: optionsProvince || [],
-					selected: null,
+					selected: {
+						value: doctorDetail.infoData.provinceData.id,
+						label: `${doctorDetail.infoData.provinceData[`value${keyLang}`]}`,
+					},
 				},
 				isEdit: true,
 				message: {
