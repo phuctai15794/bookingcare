@@ -83,7 +83,7 @@ class DoctorSchedule extends Component {
 		const timesSelected = !_.isEmpty(times) && times.filter((time) => time.isActive);
 		let result = [];
 
-		if (_.isEmpty(doctorSelected)) {
+		if (!doctorSelected) {
 			toast.error('Please choose a doctor');
 		} else if (!dateSelected || (dateSelected && dateSelected === 'Invalid date')) {
 			toast.error('Please choose a date');
@@ -92,18 +92,17 @@ class DoctorSchedule extends Component {
 		} else if (_.isEmpty(timesSelected)) {
 			toast.error('Please choose a times');
 		} else {
-			timesSelected.forEach((timeSelected) => {
-				let temp = {};
-				temp.doctorId = doctorSelected.value;
-				temp.maxNumber = maxNumberPatient;
-				temp.date = dateSelected;
-				temp.timeType = timeSelected.keyMap;
-				result.push(temp);
-			});
+			!_.isEmpty(timesSelected) &&
+				timesSelected.forEach((timeSelected) => {
+					let temp = {};
+					temp.doctorId = doctorSelected.value;
+					temp.maxNumber = maxNumberPatient;
+					temp.date = dateSelected;
+					temp.timeType = timeSelected.keyMap;
+					result.push(temp);
+				});
 
-			if (!_.isEmpty(result)) {
-				await createSchedule(result);
-			}
+			await createSchedule(result);
 		}
 	};
 
@@ -207,10 +206,14 @@ class DoctorSchedule extends Component {
 		}
 
 		if (prevProps.messageSchedule !== messageSchedule) {
-			if (messageSchedule.type === 'success') {
+			if (['success', 'info'].includes(messageSchedule.type)) {
 				const optionsDoctor = this.buildDoctorsSelect(doctors);
+				const newTimes = !_.isEmpty(times) && times.map((time) => ({ ...time, isActive: false }));
 
 				this.setState({
+					currentDate: new Date(),
+					maxNumberPatient: '',
+					times: newTimes,
 					select: {
 						list: optionsDoctor || [],
 						selected: null,

@@ -21,29 +21,32 @@ let createScheduleAPI = (data) => {
 				message.text = 'Doctor is invalid';
 				message.type = 'error';
 			} else {
-				const schedulesList = await db.Schedule.findAll({
-					where: {
-						doctorId: doctorDetail.id,
-					},
-				});
-				const schedulesNew =
-					(!_.isEmpty(schedulesList) &&
-						data.filter(
-							(scheduleNewItem) =>
-								schedulesList.every(
-									(scheduleListItem) =>
-										scheduleListItem.date !== scheduleNewItem.date ||
-										scheduleListItem.timeType !== scheduleNewItem.timeType,
-								) && scheduleNewItem,
-						)) ||
-					(_.isEmpty(schedulesList) && data);
+				let schedulesDetail = null;
+				const firstNewSchedule = !_.isEmpty(data) && data.at(0);
 
-				if (!_.isEmpty(schedulesNew)) {
-					await db.Schedule.bulkCreate(schedulesNew);
+				if (firstNewSchedule) {
+					schedulesDetail = await db.Schedule.findOne({
+						where: {
+							doctorId: firstNewSchedule.doctorId,
+							date: firstNewSchedule.date,
+						},
+					});
+
+					await db.Schedule.destroy({
+						where: {
+							doctorId: firstNewSchedule.doctorId,
+							date: firstNewSchedule.date,
+						},
+					});
+				}
+
+				await db.Schedule.bulkCreate(data);
+
+				if (!schedulesDetail) {
 					message.text = 'Create schedule successfully';
 					message.type = 'success';
 				} else {
-					message.text = 'Schedules already exists';
+					message.text = 'Update schedule successfully';
 					message.type = 'info';
 				}
 			}
