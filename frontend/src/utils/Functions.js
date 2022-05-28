@@ -27,9 +27,12 @@ class Functions {
 	}
 
 	static formatPrice(price, language) {
-		return language === LANGUAGES.VI
-			? `${price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')} VNĐ`
-			: `${price} USD`;
+		return (
+			price &&
+			(language === LANGUAGES.VI
+				? `${price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')} VNĐ`
+				: `${price} USD`)
+		);
 	}
 
 	static formatDate(input, format, option = '') {

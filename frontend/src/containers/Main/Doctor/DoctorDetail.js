@@ -6,6 +6,7 @@ import { HtmlRaw, Functions } from '../../../utils';
 import * as actions from '../../../store/actions';
 import MainStyles from '../../../styles/Main.module.scss';
 import DoctorSchedule from './DoctorSchedule';
+import DoctorInfo from './DoctorInfo';
 import DoctorDetailStyles from './DoctorDetail.module.scss';
 
 class DoctorDetail extends Component {
@@ -64,16 +65,19 @@ class DoctorDetail extends Component {
 										</div>
 									</div>
 									<div className={DoctorDetailStyles.doctorDetailSchedule}>
-										<div className="row">
+										<div className="row gx-5">
 											<div className="col-6">
 												<div className={DoctorDetailStyles.doctorDetailScheduleBooking}>
-													<DoctorSchedule doctorId={doctorDetail.id} />
+													<DoctorSchedule
+														doctorId={doctorDetail.id}
+														doctorInfo={doctorDetail.infoData}
+													/>
 												</div>
 											</div>
 											<div className="col-6">
-												<div
-													className={DoctorDetailStyles.doctorDetailScheduleInformation}
-												></div>
+												<div className={DoctorDetailStyles.doctorDetailScheduleInformation}>
+													<DoctorInfo doctorInfo={doctorDetail.infoData} />
+												</div>
 											</div>
 										</div>
 									</div>

@@ -26,3 +26,50 @@
 		height: 100% !important;
 	}
 }
+
+.boxInfo {
+	border: 1px solid #dddddd;
+	.boxInfoTitle {
+		padding: 5px 10px;
+		background: #f8f8f8;
+		border-bottom: 1px solid #dddddd;
+		@include flex(center, space-between, '', true);
+		.boxInfoNote {
+			width: 100%;
+			margin-top: 0.5rem;
+			margin-bottom: 0px;
+			padding-top: 0.5rem;
+			border-top: 1px solid #dddddd;
+		}
+	}
+	.boxInfoContent {
+		padding: 8px 10px;
+		font-size: 13px;
+		background-color: #eeeeee;
+	}
+}
+
+.viewMore {
+	color: $colorMain;
+	cursor: pointer;
+}
+
+.modalMain {
+	.modalMainHeader {
+		padding: 15px;
+		border-bottom: 1px solid #dee2e6;
+		@include flex(center, space-between);
+		strong {
+			font-size: 15px;
+			font-weight: 600;
+			text-transform: capitalize;
+		}
+	}
+	.modalMainBody {
+		padding: 20px 15px;
+	}
+	.modalMainFooter {
+		padding: 15px;
+		border-top: 1px solid #dee2e6;
+	}
+}

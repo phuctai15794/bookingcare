@@ -6,12 +6,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { Functions } from '../../../utils';
 import * as actions from '../../../store/actions';
+import Booking from '../Modal/Booking';
 import DoctorScheduleStyles from './DoctorSchedule.module.scss';
 
 class DoctorSchedule extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			isOpenBooking: false,
+			infoBooking: null,
 			selectedDay: '',
 			daysOfWeek: [],
 			schedulesByDate: [],
@@ -25,6 +28,25 @@ class DoctorSchedule extends Component {
 
 		this.setState({
 			selectedDay,
+		});
+	};
+
+	handleOpenBooking = (time) => {
+		const { doctorInfo } = this.props;
+		const dataBooking = {
+			...time,
+			...doctorInfo,
+		};
+
+		this.setState({
+			isOpenBooking: true,
+			infoBooking: dataBooking,
+		});
+	};
+
+	handleCloseBooking = () => {
+		this.setState({
+			isOpenBooking: false,
 		});
 	};
 
@@ -61,7 +83,7 @@ class DoctorSchedule extends Component {
 	}
 
 	render() {
-		const { selectedDay, daysOfWeek, schedulesByDate } = this.state;
+		const { isOpenBooking, infoBooking, selectedDay, daysOfWeek, schedulesByDate } = this.state;
 		const { language } = this.props;
 		const keyLang = Functions.toCapitalizCase(language);
 
@@ -101,6 +123,7 @@ class DoctorSchedule extends Component {
 										<button
 											className={`btn ${DoctorScheduleStyles.doctorScheduleButtonTime} rounded-0 me-2 mb-2`}
 											key={time.id}
+											onClick={() => this.handleOpenBooking(time)}
 										>
 											{time.timeData[`value${keyLang}`]}
 										</button>
@@ -120,6 +143,11 @@ class DoctorSchedule extends Component {
 						</div>
 					</div>
 				</div>
+				<Booking
+					isOpenBooking={isOpenBooking}
+					infoBooking={infoBooking}
+					onCloseBooking={this.handleCloseBooking}
+				/>
 			</>
 		);
 	}
