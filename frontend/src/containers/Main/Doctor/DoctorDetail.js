@@ -14,7 +14,7 @@ class DoctorDetail extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			doctorDetail: null
+			doctorDetail: null,
 		};
 	}
 
@@ -29,7 +29,7 @@ class DoctorDetail extends Component {
 
 		if (prevProps.doctorDetail !== doctorDetail) {
 			this.setState({
-				doctorDetail
+				doctorDetail,
 			});
 		}
 	}
@@ -54,7 +54,7 @@ class DoctorDetail extends Component {
 											</div>
 											<div className="col-6">
 												<div className={DoctorDetailStyles.doctorDetailScheduleInformation}>
-													{/* <DoctorInfo doctorId={doctorDetail.id} /> */}
+													<DoctorInfo doctorId={doctorDetail.id} />
 												</div>
 											</div>
 										</div>
@@ -81,13 +81,13 @@ class DoctorDetail extends Component {
 const mapStateToProps = (state) => {
 	return {
 		language: state.app.language,
-		doctorDetail: state.doctor.doctorDetail
+		doctorDetail: state.doctor.doctorDetail,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getDetailDoctor: (id) => dispatch(actions.getDetailDoctor(id))
+		getDetailDoctor: (id) => dispatch(actions.getDetailDoctor(id)),
 	};
 };
 

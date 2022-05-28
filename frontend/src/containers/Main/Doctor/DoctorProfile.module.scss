@@ -1,29 +1,29 @@
 @import '../../../styles/variables';
 
 .doctorProfileInformation {
-    margin-bottom: 3rem;
-    @include flex(flex-start, flex-start);
+	margin-bottom: 3rem;
+	@include flex(flex-start, flex-start);
 
-    .doctorProfileAvatar {
-        margin-right: 15px;
+	.doctorProfileAvatar {
+		margin-right: 15px;
 
-        img {
-            max-width: 120px;
-            border-radius: 100%;
-        }
-    }
+		img {
+			max-width: 120px;
+			border-radius: 100%;
+		}
+	}
 
-    .doctorProfileIntroduce {
-        width: calc(100% - 135px);
+	.doctorProfileIntroduce {
+		width: calc(100% - 135px);
 
-        .doctorProfileName {
-            font-weight: 600;
-            font-size: 23px;
-        }
+		.doctorProfileName {
+			font-weight: 600;
+			font-size: 23px;
+		}
 
-        .doctorProfileDescription {
-            line-height: 1.5;
-            max-width: 600px;
-        }
-    }
+		.doctorProfileDescription {
+			line-height: 1.5;
+			max-width: 600px;
+		}
+	}
 }

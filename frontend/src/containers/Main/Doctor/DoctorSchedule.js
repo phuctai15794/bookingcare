@@ -14,9 +14,10 @@ class DoctorSchedule extends Component {
 		super(props);
 		this.state = {
 			isOpenBooking: false,
+			timeBooking: null,
 			selectedDay: '',
 			daysOfWeek: [],
-			schedulesByDate: []
+			schedulesByDate: [],
 		};
 	}
 
@@ -26,19 +27,20 @@ class DoctorSchedule extends Component {
 		await getScheduleByDate(doctorId, selectedDay);
 
 		this.setState({
-			selectedDay
+			selectedDay,
 		});
 	};
 
 	handleOpenBooking = (time) => {
 		this.setState({
-			isOpenBooking: true
+			isOpenBooking: true,
+			timeBooking: time,
 		});
 	};
 
 	handleCloseBooking = () => {
 		this.setState({
-			isOpenBooking: false
+			isOpenBooking: false,
 		});
 	};
 
@@ -52,7 +54,7 @@ class DoctorSchedule extends Component {
 		}
 
 		this.setState({
-			daysOfWeek
+			daysOfWeek,
 		});
 	}
 
@@ -63,19 +65,19 @@ class DoctorSchedule extends Component {
 			const daysOfWeek = Functions.getDaysOfWeek(language);
 
 			this.setState({
-				daysOfWeek
+				daysOfWeek,
 			});
 		}
 
 		if (prevProps.schedulesByDate !== schedulesByDate) {
 			this.setState({
-				schedulesByDate
+				schedulesByDate,
 			});
 		}
 	}
 
 	render() {
-		const { isOpenBooking, selectedDay, daysOfWeek, schedulesByDate } = this.state;
+		const { isOpenBooking, timeBooking, selectedDay, daysOfWeek, schedulesByDate } = this.state;
 		const { language, doctorId } = this.props;
 		const keyLang = Functions.toCapitalizCase(language);
 
@@ -135,7 +137,12 @@ class DoctorSchedule extends Component {
 						</div>
 					</div>
 				</div>
-				<Booking isOpenBooking={isOpenBooking} doctorId={doctorId} onCloseBooking={this.handleCloseBooking} />
+				<Booking
+					isOpenBooking={isOpenBooking}
+					timeBooking={timeBooking}
+					doctorId={doctorId}
+					onCloseBooking={this.handleCloseBooking}
+				/>
 			</>
 		);
 	}
@@ -144,13 +151,13 @@ class DoctorSchedule extends Component {
 const mapStateToProps = (state) => {
 	return {
 		language: state.app.language,
-		schedulesByDate: state.schedule.schedulesByDate
+		schedulesByDate: state.schedule.schedulesByDate,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getScheduleByDate: (doctorId, date) => dispatch(actions.getScheduleByDate(doctorId, date))
+		getScheduleByDate: (doctorId, date) => dispatch(actions.getScheduleByDate(doctorId, date)),
 	};
 };
 

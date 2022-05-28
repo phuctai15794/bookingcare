@@ -9,7 +9,7 @@ class DoctorProfile extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			doctorProfile: null
+			doctorProfile: null,
 		};
 	}
 
@@ -23,7 +23,7 @@ class DoctorProfile extends Component {
 
 		if (prevProps.doctorProfile !== doctorProfile) {
 			this.setState({
-				doctorProfile
+				doctorProfile,
 			});
 		}
 	}
@@ -64,13 +64,13 @@ class DoctorProfile extends Component {
 const mapStateToProps = (state) => {
 	return {
 		language: state.app.language,
-		doctorProfile: state.doctor.doctorProfile
+		doctorProfile: state.doctor.doctorProfile,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getProfileDoctor: (id) => dispatch(actions.getProfileDoctor(id))
+		getProfileDoctor: (id) => dispatch(actions.getProfileDoctor(id)),
 	};
 };
 

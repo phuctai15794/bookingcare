@@ -5,6 +5,7 @@ import {
 	UpdateInfoDoctorService,
 	GetDetailDoctorService,
 	GetProfileDoctorService,
+	GetInfoDoctorService,
 } from '../../services/doctorService';
 
 export const fetchDoctors = () => {
@@ -139,5 +140,32 @@ export const getProfileDoctorSuccess = (data) => ({
 
 export const getProfileDoctorFail = (error) => ({
 	type: actionTypes.GET_PROFILE_DOCTOR_FAIL,
+	error,
+});
+
+export const getInfoDoctor = (id) => {
+	return async (dispatch) => {
+		dispatch(getInfoDoctorStart());
+		await GetInfoDoctorService(id)
+			.then((response) => {
+				dispatch(getInfoDoctorSuccess(response.data.data));
+			})
+			.catch((error) => {
+				dispatch(getInfoDoctorFail(error));
+			});
+	};
+};
+
+export const getInfoDoctorStart = () => ({
+	type: actionTypes.GET_INFO_DOCTOR_START,
+});
+
+export const getInfoDoctorSuccess = (data) => ({
+	type: actionTypes.GET_INFO_DOCTOR_SUCCESS,
+	data,
+});
+
+export const getInfoDoctorFail = (error) => ({
+	type: actionTypes.GET_INFO_DOCTOR_FAIL,
 	error,
 });

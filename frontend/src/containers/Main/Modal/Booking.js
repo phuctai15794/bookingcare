@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Modal } from 'reactstrap';
-import { Functions } from '../../../utils';
+import { Functions, Constants } from '../../../utils';
 import DoctorProfile from '../Doctor/DoctorProfile';
 import MainStyles from '../../../styles/Main.module.scss';
 
@@ -19,14 +19,14 @@ class Booking extends Component {
 			gender: '',
 			message: {
 				text: '',
-				type: ''
-			}
+				type: '',
+			},
 		};
 	}
 
 	handleShowHideInfo = () => {
 		this.setState({
-			isShowInfo: !this.state.isShowInfo
+			isShowInfo: !this.state.isShowInfo,
 		});
 	};
 
@@ -35,11 +35,11 @@ class Booking extends Component {
 	};
 
 	render() {
-		const { language, isOpenBooking, doctorId } = this.props;
+		const { language, isOpenBooking, doctorId, timeBooking } = this.props;
 		const { onCloseBooking } = this.props;
 		const { fullName, phone, email, address, medicalReason, bookFor, gender } = this.state;
 		const keyLang = Functions.toCapitalizCase(language);
-		// const priceMedical = infoBooking && Functions.formatPrice(infoBooking.priceData[`value${keyLang}`], language);
+		const timeOfWeek = timeBooking && Functions.formatDate(timeBooking.date, Constants.DATE_FORMAT.STANDARD);
 
 		return (
 			<>
@@ -59,9 +59,15 @@ class Booking extends Component {
 					</div>
 					<div className={MainStyles.modalMainBody}>
 						<DoctorProfile doctorId={doctorId} />
-						<div className="alert alert-info d-inline-block w-auto">
-							<FormattedMessage id="app.medical-price" />: <strong>Đang lấy data price...</strong>
-						</div>
+						{timeBooking && (
+							<div className="text-info mb-3">
+								<strong>
+									{timeBooking.timeData[`value${keyLang}`]}
+									{' - '}
+									{`(${timeOfWeek})`}
+								</strong>
+							</div>
+						)}
 						<form action="#" method="POST" onSubmit={(event) => event.preventDefault()}>
 							<div className="row">
 								<div className="col-6 mb-3">
@@ -181,7 +187,7 @@ class Booking extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		language: state.app.language
+		language: state.app.language,
 	};
 };
 

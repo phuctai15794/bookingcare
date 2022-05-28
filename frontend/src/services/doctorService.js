@@ -12,8 +12,8 @@ const ListDoctorsService = async () => {
 const UpdateInfoDoctorService = async (data) => {
 	return await axios.callVerify.post('/api/doctor/update-info', data, {
 		headers: {
-			authorization: `Bearer ${LocalStorage.get('accessToken')}`
-		}
+			authorization: `Bearer ${LocalStorage.get('accessToken')}`,
+		},
 	});
 };
 
@@ -25,10 +25,15 @@ const GetProfileDoctorService = async (id) => {
 	return await axios.callAPI.get(`/api/doctor/profile/${id}`);
 };
 
+const GetInfoDoctorService = async (id) => {
+	return await axios.callAPI.get(`/api/doctor/info/${id}`);
+};
+
 export {
 	ListDoctorsService,
 	ListDoctorsInWeekService,
 	UpdateInfoDoctorService,
 	GetDetailDoctorService,
-	GetProfileDoctorService
+	GetProfileDoctorService,
+	GetInfoDoctorService,
 };
