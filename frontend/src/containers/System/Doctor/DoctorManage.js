@@ -254,23 +254,23 @@ class DoctorManage extends Component {
 				selectedPayment = null,
 				selectedProvince = null;
 
-			if (doctorDetail.infoData.priceData.id) {
+			if (doctorDetail.infoData.priceData.keyMap) {
 				selectedPrice = {
-					value: doctorDetail.infoData.priceData.id,
+					value: doctorDetail.infoData.priceData.keyMap,
 					label: `${doctorDetail.infoData.priceData[`value${keyLang}`]}`,
 				};
 			}
 
-			if (doctorDetail.infoData.paymentData.id) {
+			if (doctorDetail.infoData.paymentData.keyMap) {
 				selectedPayment = {
-					value: doctorDetail.infoData.paymentData.id,
+					value: doctorDetail.infoData.paymentData.keyMap,
 					label: `${doctorDetail.infoData.paymentData[`value${keyLang}`]}`,
 				};
 			}
 
-			if (doctorDetail.infoData.provinceData.id) {
+			if (doctorDetail.infoData.provinceData.keyMap) {
 				selectedProvince = {
-					value: doctorDetail.infoData.provinceData.id,
+					value: doctorDetail.infoData.provinceData.keyMap,
 					label: `${doctorDetail.infoData.provinceData[`value${keyLang}`]}`,
 				};
 			}

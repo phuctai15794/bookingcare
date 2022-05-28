@@ -187,17 +187,17 @@ let getDetailAPI = (id) => {
 							{
 								model: db.AllCode,
 								as: 'priceData',
-								attributes: ['valueVi', 'valueEn'],
+								attributes: ['keyMap', 'valueVi', 'valueEn'],
 							},
 							{
 								model: db.AllCode,
 								as: 'paymentData',
-								attributes: ['valueVi', 'valueEn'],
+								attributes: ['keyMap', 'valueVi', 'valueEn'],
 							},
 							{
 								model: db.AllCode,
 								as: 'provinceData',
-								attributes: ['valueVi', 'valueEn'],
+								attributes: ['keyMap', 'valueVi', 'valueEn'],
 							},
 						],
 					},
