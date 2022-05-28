@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Modal } from 'reactstrap';
 import { Functions } from '../../../utils';
+import DoctorProfile from '../Doctor/DoctorProfile';
 import MainStyles from '../../../styles/Main.module.scss';
-import DoctorDetailStyles from '../Doctor/DoctorDetail.module.scss';
 
 class Booking extends Component {
 	constructor(props) {
 		super(props);
-		this.resetFile = React.createRef();
 		this.state = {
 			fullName: '',
 			phone: '',
@@ -20,25 +19,27 @@ class Booking extends Component {
 			gender: '',
 			message: {
 				text: '',
-				type: '',
-			},
+				type: ''
+			}
 		};
 	}
 
 	handleShowHideInfo = () => {
 		this.setState({
-			isShowInfo: !this.state.isShowInfo,
+			isShowInfo: !this.state.isShowInfo
 		});
 	};
 
-	handleOnChangeInput = (event, type) => {};
+	handleOnChangeInput = (event, type) => {
+		console.log(type);
+	};
 
 	render() {
-		const { language, isOpenBooking, infoBooking } = this.props;
+		const { language, isOpenBooking, doctorId } = this.props;
 		const { onCloseBooking } = this.props;
 		const { fullName, phone, email, address, medicalReason, bookFor, gender } = this.state;
 		const keyLang = Functions.toCapitalizCase(language);
-		const priceMedical = infoBooking && Functions.formatPrice(infoBooking.priceData[`value${keyLang}`], language);
+		// const priceMedical = infoBooking && Functions.formatPrice(infoBooking.priceData[`value${keyLang}`], language);
 
 		return (
 			<>
@@ -57,8 +58,9 @@ class Booking extends Component {
 						<button className="btn-close" type="button" onClick={onCloseBooking}></button>
 					</div>
 					<div className={MainStyles.modalMainBody}>
+						<DoctorProfile doctorId={doctorId} />
 						<div className="alert alert-info d-inline-block w-auto">
-							<FormattedMessage id="app.medical-price" />: <strong>{priceMedical}</strong>
+							<FormattedMessage id="app.medical-price" />: <strong>Đang lấy data price...</strong>
 						</div>
 						<form action="#" method="POST" onSubmit={(event) => event.preventDefault()}>
 							<div className="row">
@@ -179,7 +181,7 @@ class Booking extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		language: state.app.language,
+		language: state.app.language
 	};
 };
 

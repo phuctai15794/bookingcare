@@ -3,12 +3,13 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
 	doctors: [],
 	doctorDetail: null,
+	doctorProfile: null,
 	doctorsInWeek: [],
 	loading: false,
 	message: {
 		text: '',
-		type: '',
-	},
+		type: ''
+	}
 };
 
 const doctorReducer = (state = initialState, action) => {
@@ -16,47 +17,47 @@ const doctorReducer = (state = initialState, action) => {
 		case actionTypes.FETCH_DOCTOR_START:
 			return {
 				...state,
-				loading: true,
+				loading: true
 			};
 		case actionTypes.FETCH_DOCTOR_SUCCESS:
 			return {
 				...state,
 				doctors: action.data,
-				loading: false,
+				loading: false
 			};
 		case actionTypes.FETCH_DOCTOR_FAIL:
 			return {
 				...state,
 				doctors: [],
-				loading: false,
+				loading: false
 			};
 		case actionTypes.FETCH_DOCTOR_IN_WEEK_START:
 			return {
 				...state,
-				loading: true,
+				loading: true
 			};
 		case actionTypes.FETCH_DOCTOR_IN_WEEK_SUCCESS:
 			return {
 				...state,
 				doctorsInWeek: action.data,
-				loading: false,
+				loading: false
 			};
 		case actionTypes.FETCH_DOCTOR_IN_WEEK_FAIL:
 			return {
 				...state,
 				doctorsInWeek: [],
-				loading: false,
+				loading: false
 			};
 		case actionTypes.UPDATE_INFO_DOCTOR_START:
 			return {
 				...state,
-				loading: true,
+				loading: true
 			};
 		case actionTypes.UPDATE_INFO_DOCTOR_SUCCESS:
 			return {
 				...state,
 				loading: false,
-				message: action.message,
+				message: action.message
 			};
 		case actionTypes.UPDATE_INFO_DOCTOR_FAIL:
 			return {
@@ -64,25 +65,42 @@ const doctorReducer = (state = initialState, action) => {
 				loading: false,
 				message: {
 					text: 'Error. Please try again later',
-					type: 'error',
-				},
+					type: 'error'
+				}
 			};
 		case actionTypes.GET_DETAIL_DOCTOR_START:
 			return {
 				...state,
-				loading: true,
+				loading: true
 			};
 		case actionTypes.GET_DETAIL_DOCTOR_SUCCESS:
 			return {
 				...state,
 				doctorDetail: action.data,
-				loading: false,
+				loading: false
 			};
 		case actionTypes.GET_DETAIL_DOCTOR_FAIL:
 			return {
 				...state,
 				doctorDetail: null,
-				loading: false,
+				loading: false
+			};
+		case actionTypes.GET_PROFILE_DOCTOR_START:
+			return {
+				...state,
+				loading: true
+			};
+		case actionTypes.GET_PROFILE_DOCTOR_SUCCESS:
+			return {
+				...state,
+				doctorProfile: action.data,
+				loading: false
+			};
+		case actionTypes.GET_PROFILE_DOCTOR_FAIL:
+			return {
+				...state,
+				doctorProfile: null,
+				loading: false
 			};
 		default:
 			return state;

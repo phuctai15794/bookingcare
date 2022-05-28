@@ -8,34 +8,6 @@
 			padding-top: 40px;
 			padding-bottom: 40px;
 
-			.doctorDetailInformation {
-				margin-bottom: 3rem;
-				@include flex(flex-start, flex-start);
-
-				.doctorDetailAvatar {
-					margin-right: 15px;
-
-					img {
-						max-width: 120px;
-						border-radius: 100%;
-					}
-				}
-
-				.doctorDetailIntroduce {
-					width: calc(100% - 135px);
-
-					.doctorDetailName {
-						font-weight: 600;
-						font-size: 23px;
-					}
-
-					.doctorDetailDescription {
-						line-height: 1.5;
-						max-width: 600px;
-					}
-				}
-			}
-
 			.doctorDetailSchedule {
 				position: relative;
 				&:after {

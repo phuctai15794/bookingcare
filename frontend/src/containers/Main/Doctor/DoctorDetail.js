@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { HtmlRaw, Functions } from '../../../utils';
+import { HtmlRaw } from '../../../utils';
 import * as actions from '../../../store/actions';
 import MainStyles from '../../../styles/Main.module.scss';
 import DoctorSchedule from './DoctorSchedule';
+import DoctorProfile from './DoctorProfile';
 import DoctorInfo from './DoctorInfo';
 import DoctorDetailStyles from './DoctorDetail.module.scss';
 
@@ -13,7 +14,7 @@ class DoctorDetail extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			doctorDetail: null,
+			doctorDetail: null
 		};
 	}
 
@@ -28,19 +29,13 @@ class DoctorDetail extends Component {
 
 		if (prevProps.doctorDetail !== doctorDetail) {
 			this.setState({
-				doctorDetail,
+				doctorDetail
 			});
 		}
 	}
 
 	render() {
 		const { doctorDetail } = this.state;
-		const { language } = this.props;
-		const keyLang = Functions.toCapitalizCase(language);
-		const avatar = doctorDetail && doctorDetail.image && Functions.bufferToBase64(doctorDetail.image);
-		const title =
-			doctorDetail &&
-			`${doctorDetail.positionData[`value${keyLang}`]}, ${doctorDetail.firstName} ${doctorDetail.lastName}`;
 
 		return (
 			<>
@@ -49,34 +44,17 @@ class DoctorDetail extends Component {
 						<div className={DoctorDetailStyles.doctorDetail}>
 							<div className={DoctorDetailStyles.doctorDetailTop}>
 								<div className={`${MainStyles.blockContent} ${DoctorDetailStyles.blockContent}`}>
-									<div className={DoctorDetailStyles.doctorDetailInformation}>
-										<div className={DoctorDetailStyles.doctorDetailAvatar}>
-											<img
-												onError={({ target }) => Functions.errorImage(target)}
-												src={avatar}
-												alt={title}
-											/>
-										</div>
-										<div className={DoctorDetailStyles.doctorDetailIntroduce}>
-											<h3 className={DoctorDetailStyles.doctorDetailName}>{`${title}`}</h3>
-											<div className={DoctorDetailStyles.doctorDetailDescription}>
-												{doctorDetail.markdownData.description}
-											</div>
-										</div>
-									</div>
+									<DoctorProfile doctorId={doctorDetail.id} />
 									<div className={DoctorDetailStyles.doctorDetailSchedule}>
 										<div className="row gx-5">
 											<div className="col-6">
 												<div className={DoctorDetailStyles.doctorDetailScheduleBooking}>
-													<DoctorSchedule
-														doctorId={doctorDetail.id}
-														doctorInfo={doctorDetail.infoData}
-													/>
+													<DoctorSchedule doctorId={doctorDetail.id} />
 												</div>
 											</div>
 											<div className="col-6">
 												<div className={DoctorDetailStyles.doctorDetailScheduleInformation}>
-													<DoctorInfo doctorInfo={doctorDetail.infoData} />
+													{/* <DoctorInfo doctorId={doctorDetail.id} /> */}
 												</div>
 											</div>
 										</div>
@@ -103,13 +81,13 @@ class DoctorDetail extends Component {
 const mapStateToProps = (state) => {
 	return {
 		language: state.app.language,
-		doctorDetail: state.doctor.doctorDetail,
+		doctorDetail: state.doctor.doctorDetail
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getDetailDoctor: (id) => dispatch(actions.getDetailDoctor(id)),
+		getDetailDoctor: (id) => dispatch(actions.getDetailDoctor(id))
 	};
 };
 

@@ -74,9 +74,33 @@ let getDetailAPI = async (req, res) => {
 	});
 };
 
+let getProfileAPI = async (req, res) => {
+	const id = req.params.id;
+	let result = {
+		message: {
+			type: '',
+			text: '',
+		},
+		info: {},
+	};
+
+	if (!id) {
+		result.message.type = 'error';
+		result.message.text = 'User is invalid';
+	} else {
+		result.info = await DoctorService.getProfileAPI(id);
+	}
+
+	return res.status(200).json({
+		data: result.info,
+		message: result.message,
+	});
+};
+
 module.exports = {
 	listAPI,
 	listInWeekAPI,
 	updateInfoAPI,
 	getDetailAPI,
+	getProfileAPI,
 };
