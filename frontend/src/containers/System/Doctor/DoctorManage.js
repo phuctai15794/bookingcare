@@ -250,15 +250,39 @@ class DoctorManage extends Component {
 			const optionsPayments = this.buildSelect(payments, 'Payment');
 			const optionsProvince = this.buildSelect(provinces, 'Province');
 			const keyLang = Functions.toCapitalizCase(language);
+			let selectedPrice = null,
+				selectedPayment = null,
+				selectedProvince = null;
+
+			if (doctorDetail.infoData.priceData.id) {
+				selectedPrice = {
+					value: doctorDetail.infoData.priceData.id,
+					label: `${doctorDetail.infoData.priceData[`value${keyLang}`]}`,
+				};
+			}
+
+			if (doctorDetail.infoData.paymentData.id) {
+				selectedPayment = {
+					value: doctorDetail.infoData.paymentData.id,
+					label: `${doctorDetail.infoData.paymentData[`value${keyLang}`]}`,
+				};
+			}
+
+			if (doctorDetail.infoData.provinceData.id) {
+				selectedProvince = {
+					value: doctorDetail.infoData.provinceData.id,
+					label: `${doctorDetail.infoData.provinceData[`value${keyLang}`]}`,
+				};
+			}
 
 			this.setState({
 				doctorId: doctorDetail.doctorId,
 				description: doctorDetail.markdownData.description || '',
 				contentHTML: doctorDetail.markdownData.contentHTML || '',
 				contentMarkdown: doctorDetail.markdownData.contentMarkdown || '',
-				note: doctorDetail.infoData.note,
-				addressClinic: doctorDetail.infoData.addressClinic,
-				nameClinic: doctorDetail.infoData.nameClinic,
+				note: doctorDetail.infoData.note || '',
+				addressClinic: doctorDetail.infoData.addressClinic || '',
+				nameClinic: doctorDetail.infoData.nameClinic || '',
 				selectDoctors: {
 					list: optionsDoctors || [],
 					selected: {
@@ -273,24 +297,15 @@ class DoctorManage extends Component {
 				},
 				selectPrices: {
 					list: optionsPrices || [],
-					selected: {
-						value: doctorDetail.infoData.priceData.id,
-						label: `${doctorDetail.infoData.priceData[`value${keyLang}`]}`,
-					},
+					selected: selectedPrice,
 				},
 				selectPayments: {
 					list: optionsPayments || [],
-					selected: {
-						value: doctorDetail.infoData.paymentData.id,
-						label: `${doctorDetail.infoData.paymentData[`value${keyLang}`]}`,
-					},
+					selected: selectedPayment,
 				},
 				selectProvinces: {
 					list: optionsProvince || [],
-					selected: {
-						value: doctorDetail.infoData.provinceData.id,
-						label: `${doctorDetail.infoData.provinceData[`value${keyLang}`]}`,
-					},
+					selected: selectedProvince,
 				},
 				isEdit: true,
 				message: {
