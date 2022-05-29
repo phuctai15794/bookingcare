@@ -212,14 +212,14 @@ class UserManage extends Component {
 		await resetActionUser('delete');
 	};
 
-	componentDidMount() {
+	async componentDidMount() {
 		const { fetchAllCode } = this.props;
-		fetchAllCode('GENDER');
-		fetchAllCode('ROLE');
-		fetchAllCode('POSITION');
+		await fetchAllCode('GENDER');
+		await fetchAllCode('ROLE');
+		await fetchAllCode('POSITION');
 	}
 
-	async componentDidUpdate(prevProps) {
+	componentDidUpdate(prevProps) {
 		const {
 			messageCreateUser,
 			messageUpdateUser,

@@ -14,6 +14,11 @@ let bookingPatientAPI = (data) => {
 				defaults: {
 					roleId: 'R3',
 					email: data.email,
+					firstName: data.firstName,
+					lastName: data.lastName,
+					phone: data.phone,
+					address: data.address,
+					gender: data.gender,
 				},
 			});
 

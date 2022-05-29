@@ -60,7 +60,7 @@ class UserList extends Component {
 		await fetchUsers();
 	}
 
-	async componentDidUpdate(prevProps) {
+	componentDidUpdate(prevProps) {
 		const { users } = this.props;
 
 		if (prevProps.users !== users) {
