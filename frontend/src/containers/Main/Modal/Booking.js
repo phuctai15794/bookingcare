@@ -41,7 +41,9 @@ class Booking extends Component {
 		const keyLang = Functions.toCapitalizCase(language);
 		const priceMedical =
 			timeBooking && Functions.formatPrice(timeBooking.infoData.priceData[`value${keyLang}`], language);
-		const timeOfWeek = timeBooking && Functions.formatDate(timeBooking.date, Constants.DATE_FORMAT.STANDARD);
+		const timeOfWeek =
+			timeBooking &&
+			Functions.formatDate(timeBooking.date, Constants.DATE_FORMAT.DAY_OF_WEEK, 'dayOfWeek', language);
 
 		return (
 			<>
@@ -62,15 +64,13 @@ class Booking extends Component {
 					<div className={MainStyles.modalMainBody}>
 						{doctorId && <DoctorProfile doctorId={doctorId} />}
 						{timeBooking && (
-							<div className="text-info mb-3">
-								<strong>
-									{priceMedical}
-									{' ('}
-									{timeBooking.timeData[`value${keyLang}`]}
-									{' - '}
-									{`${timeOfWeek}`}
-									{')'}
-								</strong>
+							<div className="alert alert-info mb-3">
+								{priceMedical}
+								{' ('}
+								{timeBooking.timeData[`value${keyLang}`]}
+								{', '}
+								{`${timeOfWeek}`}
+								{')'}
 							</div>
 						)}
 						<form action="#" method="POST" onSubmit={(event) => event.preventDefault()}>

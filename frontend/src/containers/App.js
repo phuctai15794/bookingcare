@@ -3,12 +3,24 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import moment from 'moment';
 import { Constants } from '../utils';
 import '../styles/Styles.scss';
 import Main from './Main/Main';
 import System from './System/System';
 
 class App extends Component {
+	componentDidMount() {
+		const { language } = this.props;
+
+		moment.updateLocale(language, {
+			weekdays: Constants.DATE_FORMAT.DAY_LOCALE[language],
+			calendar: {
+				sameDay: `[${Constants.DATE_FORMAT.CALENDER.SAME_DAY[language]}] - ${Constants.DATE_FORMAT.STANDARD}`,
+			},
+		});
+	}
+
 	render() {
 		return (
 			<Router>
@@ -36,7 +48,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		started: state.app.started,
+		language: state.app.language,
 	};
 };
 

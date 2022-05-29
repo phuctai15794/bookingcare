@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 import moment from 'moment';
 import 'moment/locale/vi';
-import { LANGUAGES, DATE_FORMAT } from './Constants';
+import { DATE_FORMAT, LANGUAGES } from './Constants';
 import NoImage from '../assets/images/noimage.png';
 
 class Functions {
@@ -35,7 +35,7 @@ class Functions {
 		);
 	}
 
-	static formatDate(input, format, option = '') {
+	static formatDate(input, format, option = '', language = LANGUAGES.VI) {
 		let result = '';
 
 		if (!input) return '';
@@ -43,6 +43,12 @@ class Functions {
 		switch (option) {
 			case 'startOfDay':
 				result = moment(input).startOf('day').valueOf();
+				break;
+			case 'dayOfWeek':
+				let isToday = moment(input).isSame(moment(), 'day');
+				result =
+					(isToday && moment(input).locale(language).calendar()) ||
+					moment(input).locale(language).format(DATE_FORMAT.DAY_OF_WEEK);
 				break;
 			default:
 				result = format && moment(input).format(format);
@@ -55,20 +61,13 @@ class Functions {
 	static getDaysOfWeek(language = LANGUAGES.VI) {
 		const result = [];
 
-		moment.updateLocale(language, {
-			weekdays: DATE_FORMAT.DAY_LOCALE[language],
-			calendar: {
-				sameDay: `[${DATE_FORMAT.CALENDER.SAME_DAY[language]}] - DD/MM`,
-			},
-		});
-
 		for (let index = 0; index < 7; index++) {
 			let timeStamp = moment(new Date()).locale(language).add(index, 'days').startOf('day').valueOf();
 			let isToday = moment(timeStamp).isSame(moment(), 'day');
 			let day = {};
 			day.label =
 				(isToday && moment(new Date()).locale(language).add(index, 'days').calendar()) ||
-				moment(new Date()).locale(language).add(index, 'days').format('dddd - DD/MM');
+				moment(new Date()).locale(language).add(index, 'days').format(DATE_FORMAT.DAY_OF_WEEK);
 			day.value = timeStamp;
 			result.push(day);
 		}
