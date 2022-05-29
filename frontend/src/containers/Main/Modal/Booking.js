@@ -68,7 +68,7 @@ class Booking extends Component {
 									{' ('}
 									{timeBooking.timeData[`value${keyLang}`]}
 									{' - '}
-									{`(${timeOfWeek})`}
+									{`${timeOfWeek}`}
 									{')'}
 								</strong>
 							</div>
