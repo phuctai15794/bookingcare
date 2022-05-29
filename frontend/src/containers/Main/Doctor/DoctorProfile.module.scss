@@ -1,7 +1,7 @@
 @import '../../../styles/variables';
 
 .doctorProfileInformation {
-	margin-bottom: 3rem;
+	margin-bottom: 2rem;
 	@include flex(flex-start, flex-start);
 
 	.doctorProfileAvatar {

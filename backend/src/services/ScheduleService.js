@@ -61,7 +61,7 @@ let createScheduleAPI = (data) => {
 let getScheduleByDateAPI = (doctorId, date) => {
 	return new Promise(async (resole, reject) => {
 		try {
-			const data = await db.Schedule.findAll({
+			let data = await db.Schedule.findAll({
 				raw: true,
 				nest: true,
 				include: [
@@ -76,6 +76,41 @@ let getScheduleByDateAPI = (doctorId, date) => {
 					date,
 				},
 			});
+
+			if (data) {
+				const doctorData = await db.User.findOne({
+					raw: true,
+					nest: true,
+					attributes: {
+						exclude: ['password'],
+					},
+					include: [
+						{
+							model: db.DoctorInfo,
+							as: 'infoData',
+							attributes: ['priceId'],
+							include: [
+								{
+									model: db.AllCode,
+									as: 'priceData',
+									attributes: ['valueVi', 'valueEn'],
+								},
+							],
+						},
+					],
+					where: {
+						id: doctorId,
+						roleId: 'R2',
+					},
+				});
+
+				if (doctorData) {
+					data = data.map((schedule) => {
+						schedule.infoData = doctorData.infoData;
+						return schedule;
+					});
+				}
+			}
 
 			resole(data);
 		} catch (error) {

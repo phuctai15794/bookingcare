@@ -39,6 +39,8 @@ class Booking extends Component {
 		const { onCloseBooking } = this.props;
 		const { fullName, phone, email, address, medicalReason, bookFor, gender } = this.state;
 		const keyLang = Functions.toCapitalizCase(language);
+		const priceMedical =
+			timeBooking && Functions.formatPrice(timeBooking.infoData.priceData[`value${keyLang}`], language);
 		const timeOfWeek = timeBooking && Functions.formatDate(timeBooking.date, Constants.DATE_FORMAT.STANDARD);
 
 		return (
@@ -58,13 +60,16 @@ class Booking extends Component {
 						<button className="btn-close" type="button" onClick={onCloseBooking}></button>
 					</div>
 					<div className={MainStyles.modalMainBody}>
-						<DoctorProfile doctorId={doctorId} />
+						{doctorId && <DoctorProfile doctorId={doctorId} />}
 						{timeBooking && (
 							<div className="text-info mb-3">
 								<strong>
+									{priceMedical}
+									{' ('}
 									{timeBooking.timeData[`value${keyLang}`]}
 									{' - '}
 									{`(${timeOfWeek})`}
+									{')'}
 								</strong>
 							</div>
 						)}

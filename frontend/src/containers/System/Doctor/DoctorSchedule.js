@@ -179,9 +179,7 @@ class DoctorSchedule extends Component {
 					return { ...time, isActive: isActive };
 				});
 
-			if (firstSchedule && firstSchedule.maxNumber) {
-				newState.maxNumberPatient = firstSchedule.maxNumber;
-			}
+			newState.maxNumberPatient = (firstSchedule && firstSchedule.maxNumber) || 0;
 
 			if (!_.isEmpty(newTimesByDate)) {
 				newState.times = newTimesByDate;
@@ -295,7 +293,7 @@ class DoctorSchedule extends Component {
 									id="maxNumberPatient"
 									name="maxNumberPatient"
 									required
-									value={maxNumberPatient}
+									value={maxNumberPatient || 0}
 									onChange={(event) => this.handleOnChangeNumberPatient(event)}
 								/>
 							</div>
