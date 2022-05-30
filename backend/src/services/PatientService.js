@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import db from '../models/index';
+import EmailService from './EmailService';
 
 let bookingPatientAPI = (data) => {
 	return new Promise(async (resole, reject) => {
@@ -35,6 +36,12 @@ let bookingPatientAPI = (data) => {
 				});
 
 				if (created) {
+					await EmailService.sendAPI({
+						to: user.email,
+						subject: 'Booking Information',
+						html: `<h3>Hello, ${user.firstName} ${user.lastName}</h3><p>Your schedule is booked</p>`,
+					});
+
 					message.text = 'Booking successfully';
 					message.type = 'success';
 				} else {
