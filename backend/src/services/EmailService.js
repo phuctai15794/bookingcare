@@ -1,26 +1,43 @@
 import nodemailer from 'nodemailer';
+import path from 'path';
+import fs from 'fs';
+import ejs from 'ejs';
+import juice from 'juice';
 
 let sendAPI = async (data) => {
 	// Create transporter object using the default SMTP transport
 	let transporter = nodemailer.createTransport({
-		host: process.env.MAIL_HOST,
-		port: process.env.MAIL_PORT,
-		secure: process.env.MAIL_SECURE, // true for 465, false for other ports
+		host: 'smtp.gmail.com',
+		port: 587,
+		secure: false, // true for 465, false for other ports
 		auth: {
 			user: process.env.MAIL_USER, // generated ethereal user
 			pass: process.env.MAIL_PASSWORD, // generated ethereal password
 		},
 	});
 
-	// Send mail with defined transport object
-	let info = await transporter.sendMail({
-		from: `${process.env.APP_NAME} <${process.env.MAIL_USER}>`, // sender address
-		to: data.to, // list of receivers
-		subject: data.subject, // Subject line
-		html: data.html, // html body
-	});
+	// Config options data
+	let options = {
+		from: `${process.env.APP_NAME} <${process.env.MAIL_USER}>`,
+		to: data.to,
+		subject: data.subject,
+	};
+	const templatePath = path.resolve(`src/libraries/templates/${data.templateName}.html`);
 
-	console.log(info);
+	// Check if template is exist and send
+	if (data.templateName && fs.existsSync(templatePath)) {
+		// Read and render html
+		const template = fs.readFileSync(templatePath, 'utf-8');
+		const html = ejs.render(template, data.templateVars);
+
+		// Html template with Inline CSS
+		options.html = juice(html);
+
+		// Send mail
+		return await transporter.sendMail(options);
+	} else {
+		return false;
+	}
 };
 
 module.exports = {

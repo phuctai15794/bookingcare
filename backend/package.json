@@ -21,6 +21,7 @@
         "express-ejs-layouts": "^2.5.1",
         "express-session": "^1.17.2",
         "jsonwebtoken": "^8.5.1",
+        "juice": "^8.0.0",
         "lodash": "^4.17.21",
         "method-override": "^3.0.0",
         "moment": "^2.29.3",

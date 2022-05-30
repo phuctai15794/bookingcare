@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import db from '../models/index';
 import EmailService from './EmailService';
+import { Functions, Constants } from '../utils';
 
 let bookingPatientAPI = (data) => {
 	return new Promise(async (resole, reject) => {
@@ -39,7 +40,12 @@ let bookingPatientAPI = (data) => {
 					await EmailService.sendAPI({
 						to: user.email,
 						subject: 'Booking Information',
-						html: `<h3>Hello, ${user.firstName} ${user.lastName}</h3><p>Your schedule is booked</p>`,
+						templateName: 'booking/patient',
+						templateVars: {
+							firstName: user.firstName,
+							lastName: user.lastName,
+							date: Functions.formatDate(data.date, Constants.DATE_FORMAT.STANDARD, 'unixValue'),
+						},
 					});
 
 					message.text = 'Booking successfully';
