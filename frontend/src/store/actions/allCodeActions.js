@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { ListAllCodeService } from '../../services/allCodeService';
+import { ListAllCodeService } from '../../services/AllCodeService';
 
 export const fetchAllCode = (type) => {
 	type = type.toUpperCase();

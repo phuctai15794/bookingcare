@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { CreateScheduleService, GetScheduleByDateService } from '../../services/scheduleService';
+import { CreateScheduleService, GetScheduleByDateService } from '../../services/ScheduleService';
 
 export const createSchedule = (data) => {
 	return async (dispatch) => {

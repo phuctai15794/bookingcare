@@ -6,7 +6,7 @@ import {
 	CreateUserService,
 	UpdateUserService,
 	DeleteUserService,
-} from '../../services/userService';
+} from '../../services/UserService';
 
 export const loginUser = (email, password) => {
 	return async (dispatch) => {

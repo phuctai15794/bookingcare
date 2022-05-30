@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { BookingPatientService } from '../../services/patientService';
+import { BookingPatientService } from '../../services/PatientService';
 
 export const bookingPatient = (data) => {
 	return async (dispatch) => {

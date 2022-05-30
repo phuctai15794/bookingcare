@@ -3,7 +3,7 @@ import axios from '../axios';
 import { dispatch } from '../redux';
 import actionTypes from '../store/actions/actionTypes';
 import { LocalStorage } from '../utils';
-import { RefreshTokenUserService } from './userService';
+import { RefreshTokenUserService } from './UserService';
 
 const RefreshTokenService = () => {
 	axios.callVerify.interceptors.request.use(

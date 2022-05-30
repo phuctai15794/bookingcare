@@ -6,7 +6,7 @@ import {
 	GetDetailDoctorService,
 	GetProfileDoctorService,
 	GetInfoDoctorService,
-} from '../../services/doctorService';
+} from '../../services/DoctorService';
 
 export const fetchDoctors = () => {
 	return async (dispatch) => {
