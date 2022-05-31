@@ -45,6 +45,9 @@ let bookingPatientAPI = (data) => {
 							firstName: user.firstName,
 							lastName: user.lastName,
 							date: Functions.formatDate(data.date, Constants.DATE_FORMAT.STANDARD, 'unixValue'),
+							timeBooking: '(8:00 - 9:00, Hôm nay - 31/05/2022)',
+							doctorName: 'Bác sĩ, Lavinia Crist',
+							redirectLink: 'https://google.com',
 						},
 					});
 

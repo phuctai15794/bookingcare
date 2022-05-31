@@ -23,12 +23,18 @@ let sendAPI = async (data) => {
 		subject: data.subject,
 	};
 	const templatePath = path.resolve(`src/libraries/templates/${data.templateName}.html`);
+	// const cssPath = path.resolve('src/public/email/styles.css');
 
 	// Check if template is exist and send
 	if (data.templateName && fs.existsSync(templatePath)) {
 		// Read and render html
 		const template = fs.readFileSync(templatePath, 'utf-8');
 		const html = ejs.render(template, data.templateVars);
+
+		// Options for juice
+		// const juiceOptions = {
+		// 	extraCss: fs.readFileSync(cssPath).toString()
+		// };
 
 		// Html template with Inline CSS
 		options.html = juice(html);

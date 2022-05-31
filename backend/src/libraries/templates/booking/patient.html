@@ -1,20 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Booking Information</title>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 
 <body>
-    <h4>Hi <%= firstName %> <%= lastName %></h4>
-    <p>Your schedule is booked successfully on <%= date %></p>
-    <p>Thank you, <%= firstName %> !</p>
+    <h3>Xin chào <%= firstName %> <%= lastName %>!</h3>
+    <p>Bạn nhận được email này vì bạn đã đặt lịch khám bệnh tại website BookingCare</p>
+    <p>Thông tin đặt lịch khám bệnh:</p>
+    <div>
+        <strong>Thời gian:</strong>
+        <span>
+            <%= timeBooking %>
+        </span>
+    </div>
+    <div>
+        <strong>Bác sĩ:</strong>
+        <span>
+            <%= doctorName %>
+        </span>
+    </div>
+    <p>Nếu các thông tin trên đúng sự thật. Vui lòng click vào đường link bên dưới để xác nhận và hoàn tất thủ tực đặt
+        lịch hẹn.</p>
+    <div><a href="<%= redirectLink %>">Xác nhận</a></div>
 </body>
 
 </html>
