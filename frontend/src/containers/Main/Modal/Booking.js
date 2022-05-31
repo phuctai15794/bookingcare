@@ -148,8 +148,6 @@ class Booking extends Component {
 
 			delete dataBooking.birthday;
 
-			console.log(dataBooking);
-
 			await bookingPatient(dataBooking);
 		}
 	};

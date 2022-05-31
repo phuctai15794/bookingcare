@@ -5,6 +5,7 @@ import AllCodeController from '../controllers/AllCodeController';
 import DoctorController from '../controllers/DoctorController';
 import ScheduleController from '../controllers/ScheduleController';
 import PatientController from '../controllers/PatientController';
+import VerifyController from '../controllers/VerifyController';
 import { Auths } from '../utils';
 
 // Init
@@ -49,6 +50,9 @@ let route = (app) => {
 
 	// API: Patient
 	router.post('/api/patient/booking', PatientController.bookingPatientAPI);
+
+	// API: Verify
+	router.post('/api/verify/booking', VerifyController.bookingPatientAPI);
 
 	return app.use('/', router);
 };

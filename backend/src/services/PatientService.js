@@ -1,6 +1,16 @@
+import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
 import db from '../models/index';
 import EmailService from './EmailService';
+
+let buildToken = () => {
+	return uuidv4();
+};
+
+let buildUrl = (token, doctorId) => {
+	let result = `${process.env.URL_FRONTEND}/verify/booking?token=${token}&doctorId=${doctorId}`;
+	return result;
+};
 
 let bookingPatientAPI = (data) => {
 	return new Promise(async (resole, reject) => {
@@ -24,6 +34,7 @@ let bookingPatientAPI = (data) => {
 			});
 
 			if (user) {
+				const token = buildToken();
 				const [booking, created] = await db.Booking.findOrCreate({
 					where: { patientId: user.id },
 					defaults: {
@@ -32,6 +43,7 @@ let bookingPatientAPI = (data) => {
 						patientId: user.id,
 						date: data.date,
 						timeType: data.timeType,
+						token,
 					},
 				});
 
@@ -46,7 +58,7 @@ let bookingPatientAPI = (data) => {
 							timeString: data.timeString,
 							doctorName: data.doctorName,
 							priceMedical: data.priceMedical,
-							redirectLink: 'https://google.com',
+							redirectLink: buildUrl(token, data.doctorId),
 						},
 					});
 
