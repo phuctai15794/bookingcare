@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import db from '../models/index';
 import EmailService from './EmailService';
-import { Functions, Constants } from '../utils';
 
 let bookingPatientAPI = (data) => {
 	return new Promise(async (resole, reject) => {
