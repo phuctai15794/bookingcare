@@ -39,7 +39,7 @@ let bookingPatientAPI = (data) => {
 				if (created) {
 					await EmailService.sendAPI({
 						to: user.email,
-						subject: 'Booking Information',
+						subject: 'Thông tin đặt lịch khám bệnh',
 						templateName: `booking/patient/${data.language}`,
 						templateVars: {
 							firstName: user.firstName,
