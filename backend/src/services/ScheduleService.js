@@ -66,6 +66,18 @@ let getScheduleByDateAPI = (doctorId, date) => {
 				nest: true,
 				include: [
 					{
+						model: db.User,
+						as: 'userData',
+						attributes: ['firstName', 'lastName'],
+						include: [
+							{
+								model: db.AllCode,
+								as: 'positionData',
+								attributes: ['valueVi', 'valueEn'],
+							},
+						],
+					},
+					{
 						model: db.AllCode,
 						as: 'timeData',
 						attributes: ['valueVi', 'valueEn'],

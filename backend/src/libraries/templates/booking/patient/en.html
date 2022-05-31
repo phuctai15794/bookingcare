@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Booking Information</title>
+</head>
+
+<body>
+    <h3>Dear <%= firstName %> <%= lastName %>!</h3>
+    <p>You received this email because you booked an appointment at the BookingCare website</p>
+    <p>Information to book a medical appointment:</p>
+    <div>
+        <strong>Time:</strong>
+        <span>
+            <%= timeString %>
+        </span>
+    </div>
+    <div>
+        <strong>Person in charge:</strong>
+        <span>
+            <%= doctorName %>
+        </span>
+    </div>
+    <div>
+        <strong>Cost:</strong>
+        <span>
+            <%= priceMedical %>
+        </span>
+    </div>
+    <p>If the above information is true. Please click on the link below to confirm and complete the appointment booking process.</p>
+    <div><a href="<%= redirectLink %>">Xác nhận</a></div>
+</body>
+
+</html>

@@ -14,17 +14,22 @@
     <div>
         <strong>Thời gian:</strong>
         <span>
-            <%= timeBooking %>
+            <%= timeString %>
         </span>
     </div>
     <div>
-        <strong>Bác sĩ:</strong>
+        <strong>Người khám:</strong>
         <span>
             <%= doctorName %>
         </span>
     </div>
-    <p>Nếu các thông tin trên đúng sự thật. Vui lòng click vào đường link bên dưới để xác nhận và hoàn tất thủ tực đặt
-        lịch hẹn.</p>
+    <div>
+        <strong>Chi phí:</strong>
+        <span>
+            <%= priceMedical %>
+        </span>
+    </div>
+    <p>Nếu các thông tin trên đúng sự thật. Vui lòng click vào đường link bên dưới để xác nhận và hoàn tất thủ tực đặt lịch hẹn.</p>
     <div><a href="<%= redirectLink %>">Xác nhận</a></div>
 </body>
 

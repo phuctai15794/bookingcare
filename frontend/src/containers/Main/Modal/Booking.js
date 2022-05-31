@@ -86,26 +86,41 @@ class Booking extends Component {
 				message.type = inputs[index];
 				message.text = `${inputs[index][0].toUpperCase()}${inputs[index].slice(1)} is missing`;
 				break;
-			} else if (inputs[index] === 'email' && !Functions.isEmail(this.state.attributes[inputs[index]])) {
-				message.type = inputs[index];
-				message.text = `Email is invalid`;
-				break;
-			} else if (inputs[index] === 'phone' && !Functions.isPhone(this.state.attributes[inputs[index]])) {
-				message.type = inputs[index];
-				message.text = `Phone is invalid`;
-				break;
-			} else if (inputs[index] === 'firstName' && !Functions.isAlphaNum(this.state.attributes[inputs[index]])) {
-				message.type = inputs[index];
-				message.text = `First name is invalid`;
-				break;
-			} else if (inputs[index] === 'lastName' && !Functions.isAlphaNum(this.state.attributes[inputs[index]])) {
-				message.type = inputs[index];
-				message.text = `Last name is invalid`;
-				break;
 			}
 		}
 
 		return message;
+	};
+
+	buildTimeBooking = () => {
+		const { language, timeBooking } = this.props;
+		const keyLang = Functions.toCapitalizCase(language);
+		return (
+			timeBooking &&
+			`${timeBooking.timeData[`value${keyLang}`]}, ${Functions.formatDate(
+				timeBooking.date,
+				Constants.DATE_FORMAT.DAY_OF_WEEK,
+				'dayOfWeek',
+				language,
+			)}`
+		);
+	};
+
+	buildPriceMedical = () => {
+		const { language, timeBooking } = this.props;
+		const keyLang = Functions.toCapitalizCase(language);
+		return timeBooking && Functions.formatPrice(timeBooking.infoData.priceData[`value${keyLang}`], language);
+	};
+
+	buildDoctorName = () => {
+		const { language, timeBooking } = this.props;
+		const keyLang = Functions.toCapitalizCase(language);
+		return (
+			timeBooking &&
+			`${timeBooking.userData.positionData[`value${keyLang}`]}, ${timeBooking.userData.firstName} ${
+				timeBooking.userData.lastName
+			}`
+		);
 	};
 
 	handleBooking = async () => {
@@ -115,16 +130,25 @@ class Booking extends Component {
 			document.getElementById(`${message.type}`).focus();
 			toast.error(message.text);
 		} else {
-			const { doctorId, timeBooking, bookingPatient } = this.props;
+			const { language, doctorId, timeBooking, bookingPatient } = this.props;
 			const { attributes } = this.state;
+			const priceMedical = this.buildPriceMedical();
+			const timeString = this.buildTimeBooking();
+			const doctorName = this.buildDoctorName();
 			const dataBooking = {
 				...attributes,
 				date: Functions.formatDate(attributes.birthday, '', 'startOfDay'),
 				timeType: timeBooking.timeType,
+				timeString,
+				priceMedical,
+				doctorName,
 				doctorId,
+				language,
 			};
 
 			delete dataBooking.birthday;
+
+			console.log(dataBooking);
 
 			await bookingPatient(dataBooking);
 		}
@@ -173,11 +197,8 @@ class Booking extends Component {
 		const { dataGender } = this.state;
 		const { firstName, lastName, phone, email, address, medicalReason, gender, birthday } = this.state.attributes;
 		const keyLang = Functions.toCapitalizCase(language);
-		const priceMedical =
-			timeBooking && Functions.formatPrice(timeBooking.infoData.priceData[`value${keyLang}`], language);
-		const timeOfWeek =
-			timeBooking &&
-			Functions.formatDate(timeBooking.date, Constants.DATE_FORMAT.DAY_OF_WEEK, 'dayOfWeek', language);
+		const priceMedical = this.buildPriceMedical();
+		const timeString = this.buildTimeBooking();
 		const optionsDefaultLang = {
 			gender: intl.formatMessage({ id: 'form.attributes.gender.optionDefault' }),
 		};
@@ -201,14 +222,7 @@ class Booking extends Component {
 					<div className={MainStyles.modalMainBody}>
 						{doctorId && <DoctorProfile doctorId={doctorId} />}
 						{timeBooking && (
-							<div className="alert alert-info mb-3">
-								{priceMedical}
-								{' ('}
-								{timeBooking.timeData[`value${keyLang}`]}
-								{', '}
-								{`${timeOfWeek}`}
-								{')'}
-							</div>
+							<div className="alert alert-info mb-3">{`${priceMedical} (${timeString})`}</div>
 						)}
 						<form action="#" method="POST" onSubmit={(event) => event.preventDefault()}>
 							<div className="row">

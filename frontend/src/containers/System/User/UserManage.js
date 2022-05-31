@@ -100,22 +100,6 @@ class UserManage extends Component {
 				message.type = inputs[index];
 				message.text = `${inputs[index][0].toUpperCase()}${inputs[index].slice(1)} is missing`;
 				break;
-			} else if (inputs[index] === 'email' && !Functions.isEmail(this.state.attributes[inputs[index]])) {
-				message.type = inputs[index];
-				message.text = `Email is invalid`;
-				break;
-			} else if (inputs[index] === 'phone' && !Functions.isPhone(this.state.attributes[inputs[index]])) {
-				message.type = inputs[index];
-				message.text = `Phone is invalid`;
-				break;
-			} else if (inputs[index] === 'firstName' && !Functions.isAlphaNum(this.state.attributes[inputs[index]])) {
-				message.type = inputs[index];
-				message.text = `First name is invalid`;
-				break;
-			} else if (inputs[index] === 'lastName' && !Functions.isAlphaNum(this.state.attributes[inputs[index]])) {
-				message.type = inputs[index];
-				message.text = `Last name is invalid`;
-				break;
 			}
 		}
 

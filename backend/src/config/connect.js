@@ -14,7 +14,7 @@ const { Sequelize } = require('@sequelize/core');
 const sequelize = new Sequelize('bookingcare', 'root', null, {
 	host: 'localhost',
 	dialect: 'mysql',
-	logging: false,
+	logging: true,
 });
 
 // Connect

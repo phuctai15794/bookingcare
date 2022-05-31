@@ -79,18 +79,6 @@ class Functions {
 		return jsonString && (jsonString[0] === '{' || jsonString[0] === '[' ? JSON.parse(jsonString) : jsonString);
 	}
 
-	static isEmail(str) {
-		return /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(str);
-	}
-
-	static isPhone(str) {
-		return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(str);
-	}
-
-	static isAlphaNum(str) {
-		return /^[a-zA-Z0-9]+$/.test(str);
-	}
-
 	static isNumber(numb) {
 		return /^[0-9]+$/.test(numb);
 	}
