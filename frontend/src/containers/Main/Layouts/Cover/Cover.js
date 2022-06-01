@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import MainStyles from '../../../styles/Main.module.scss';
+import MainStyles from '../../../../styles/Main.module.scss';
 import CoverStyles from './Cover.module.scss';
 
 class Cover extends Component {

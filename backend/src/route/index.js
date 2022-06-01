@@ -52,7 +52,7 @@ let route = (app) => {
 	router.post('/api/patient/booking', PatientController.bookingPatientAPI);
 
 	// API: Verify
-	router.post('/api/verify/booking', VerifyController.bookingPatientAPI);
+	router.get('/api/verify/booking', VerifyController.bookingPatientAPI);
 
 	return app.use('/', router);
 };

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { Constants } from '../../../utils';
-import MainStyles from '../../../styles/Main.module.scss';
+import { Constants } from '../../../../utils';
+import MainStyles from '../../../../styles/Main.module.scss';
 import FooterStyles from './Footer.module.scss';
 
 class Footer extends Component {

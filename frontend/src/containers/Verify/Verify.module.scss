@@ -1,0 +1,59 @@
+@import '../../styles/variables';
+
+.verifyMain {
+	background: #ebf0f5;
+	height: 100vh;
+	@include flex(center, center);
+	.verifyCard {
+		text-align: center;
+		background: white;
+		padding: 60px;
+		border-radius: 4px;
+		box-shadow: 0 2px 3px #c8d0d8;
+		display: inline-block;
+		margin: 0 auto;
+		&.success {
+			.verifyIcon {
+				background-color: #f8faf5;
+				i {
+					color: #9abc66;
+				}
+			}
+			.verifyStatus {
+				color: #9abc66;
+			}
+		}
+		&.error {
+			.verifyIcon {
+				background-color: #f8d7da;
+				i {
+					color: #bc6666;
+				}
+			}
+			.verifyStatus {
+				color: #bc6666;
+			}
+		}
+		.verifyIcon {
+			border-radius: 100%;
+			height: 200px;
+			width: 200px;
+			margin: 0 auto 1rem auto;
+			@include flex(center, center);
+			i {
+				font-size: 100px;
+				line-height: 1;
+				font-style: normal;
+			}
+		}
+		.verifyStatus {
+			font-weight: 900;
+			font-size: 40px;
+			margin-bottom: 10px;
+		}
+		.verifyMessage {
+			color: #404f5e;
+			font-size: 20px;
+		}
+	}
+}

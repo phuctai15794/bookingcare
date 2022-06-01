@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Navigation } from 'swiper';
-import Cover from '../Layouts/Cover';
+import Cover from '../Layouts/Cover/Cover';
 import Specialty from '../Section/Specialty';
 import HealthFacility from '../Section/HealthFacility';
 import DoctorInWeek from '../Section/DoctorInWeek';

@@ -1,7 +1,7 @@
 import VerifyService from '../services/VerifyService';
 
 let bookingPatientAPI = async (req, res) => {
-	let data = req.body;
+	let data = req.query;
 	let result = {
 		message: {
 			type: '',

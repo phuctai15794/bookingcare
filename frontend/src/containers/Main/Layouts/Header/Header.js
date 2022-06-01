@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import * as actions from '../../../store/actions';
-import { Constants } from '../../../utils';
-import MainStyles from '../../../styles/Main.module.scss';
+import * as actions from '../../../../store/actions';
+import { Constants } from '../../../../utils';
+import MainStyles from '../../../../styles/Main.module.scss';
 import HeaderStyles from './Header.module.scss';
 
 class Header extends Component {

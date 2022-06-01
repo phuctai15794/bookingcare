@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Constants } from '../../utils';
-import Header from './Layouts/Header';
-import Footer from './Layouts/Footer';
+import Header from './Layouts/Header/Header';
+import Footer from './Layouts/Footer/Footer';
 import Home from './Home/Home';
-import NotFound from './Layouts/NotFound';
+import NotFound from './Layouts/NotFound/NotFound';
+import Loading from './Layouts/Loading/Loading';
 import DoctorDetail from './Doctor/DoctorDetail';
 
 class Main extends Component {
@@ -25,6 +26,7 @@ class Main extends Component {
 					</>
 				</Switch>
 				<Footer />
+				<Loading />
 			</>
 		);
 	}

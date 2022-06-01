@@ -15,15 +15,15 @@ export const verifyBookingPatient = (data) => {
 };
 
 export const verifyBookingPatientStart = () => ({
-	type: actionTypes.VERIFY_BOOKING_START,
+	type: actionTypes.VERIFY_BOOKING_PATIENT_START,
 });
 
 export const verifyBookingPatientSuccess = (message) => ({
-	type: actionTypes.VERIFY_BOOKING_SUCCESS,
+	type: actionTypes.VERIFY_BOOKING_PATIENT_SUCCESS,
 	message,
 });
 
 export const verifyBookingPatientFail = (error) => ({
-	type: actionTypes.VERIFY_BOOKING_FAIL,
+	type: actionTypes.VERIFY_BOOKING_PATIENT_FAIL,
 	error,
 });
