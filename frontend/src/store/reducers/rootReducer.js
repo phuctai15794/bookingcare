@@ -5,6 +5,7 @@ import allCodeReducer from './allCodeReducer';
 import doctorReducer from './doctorReducer';
 import patientReducer from './patientReducer';
 import scheduleReducer from './scheduleReducer';
+import verifyReducer from './verifyReducer';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
@@ -28,6 +29,7 @@ const rootReducer = () =>
 		doctor: doctorReducer,
 		patient: patientReducer,
 		schedule: scheduleReducer,
+		verify: verifyReducer,
 	});
 
 export default rootReducer;

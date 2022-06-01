@@ -8,6 +8,7 @@ import { Constants } from '../utils';
 import '../styles/Styles.scss';
 import Main from './Main/Main';
 import System from './System/System';
+import VerifyBooking from './Verify/VerifyBooking';
 
 class App extends Component {
 	componentDidMount() {
@@ -26,6 +27,7 @@ class App extends Component {
 			<Router>
 				<div className="main">
 					<Switch>
+						<Route path={Constants.PATHS.VERIFY.BOOKING} component={VerifyBooking} />
 						<Route path={Constants.PATHS.SYSTEM.HOME} component={System} />
 						<Route path={Constants.PATHS.MAIN.HOME} component={Main} />
 					</Switch>

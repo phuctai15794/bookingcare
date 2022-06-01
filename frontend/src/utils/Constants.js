@@ -13,6 +13,9 @@ export const PATHS = {
 		LOGIN: '/system/login',
 		DASHBOARD: '/system/dashboard',
 	},
+	VERIFY: {
+		BOOKING: '/verify/booking',
+	},
 };
 
 export const DATE_FORMAT = {
