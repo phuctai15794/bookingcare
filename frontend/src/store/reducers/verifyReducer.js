@@ -10,7 +10,7 @@ const initialState = {
 	},
 };
 
-const patientReducer = (state = initialState, action) => {
+const verifyReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.VERIFY_BOOKING_PATIENT_START:
 			return {
@@ -46,4 +46,4 @@ const patientReducer = (state = initialState, action) => {
 	}
 };
 
-export default patientReducer;
+export default verifyReducer;

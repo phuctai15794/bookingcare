@@ -9,7 +9,8 @@ import 'react-image-lightbox/style.css';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
-import { Functions } from '../../../utils';
+import { Functions, HtmlRaw } from '../../../utils';
+import * as actions from '../../../store/actions';
 import SystemStyles from '../../../styles/System.module.scss';
 
 // Init a markdown parser
@@ -29,6 +30,7 @@ class SpecialtyManage extends Component {
 				type: '',
 			},
 		};
+		this.resetFile = React.createRef();
 	}
 
 	handleOnChangeEditor = ({ html, text }) => {
@@ -94,18 +96,69 @@ class SpecialtyManage extends Component {
 		return message;
 	};
 
-	handleCreate = () => {
+	handleCreate = async () => {
 		const message = this.handleValidateInput();
 
 		if (message.text) {
 			document.getElementById(`${message.type}`).focus();
 			toast.error(message.text);
 		} else {
-			console.log(this.state);
+			const { createSpecialty } = this.props;
+			const data = {
+				image: this.state.avatar,
+				contentHTML: this.state.contentHTML,
+				contentMarkdown: this.state.contentMarkdown,
+				name: this.state.nameSpecialty,
+			};
+
+			await createSpecialty(data);
 		}
 	};
 
-	componentDidUpdate(prevProps) {}
+	componentDidUpdate(prevProps) {
+		const { loadingSpecialty, messageSpecialty } = this.props;
+
+		if (prevProps.loadingSpecialty !== loadingSpecialty) {
+			if (loadingSpecialty) {
+				this.setState({
+					message: {
+						text: 'Creating data ...',
+						type: 'info',
+					},
+				});
+			} else {
+				this.setState({
+					message: messageSpecialty,
+				});
+			}
+		}
+
+		if (prevProps.messageSpecialty !== messageSpecialty) {
+			if (['success', 'info'].includes(messageSpecialty.type)) {
+				this.setState({
+					nameSpecialty: '',
+					avatar: '',
+					contentHTML: '',
+					contentMarkdown: '',
+					isZoomAvatar: false,
+					message: {
+						text: '',
+						type: '',
+					},
+				});
+
+				this.resetFile.current.value = '';
+
+				toast.success(<HtmlRaw>{`${messageSpecialty.text}`}</HtmlRaw>);
+			} else if (messageSpecialty.type === 'error') {
+				toast.error(<HtmlRaw>{`${messageSpecialty.text}`}</HtmlRaw>);
+			}
+
+			this.setState({
+				message: messageSpecialty,
+			});
+		}
+	}
 
 	render() {
 		const { nameSpecialty, avatar, contentMarkdown, isZoomAvatar, message } = this.state;
@@ -207,11 +260,16 @@ class SpecialtyManage extends Component {
 }
 
 const mapStateToProps = (state) => {
-	return {};
+	return {
+		loadingSpecialty: state.specialty.loading,
+		messageSpecialty: state.specialty.message,
+	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		createSpecialty: (data) => dispatch(actions.createSpecialty(data)),
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpecialtyManage);

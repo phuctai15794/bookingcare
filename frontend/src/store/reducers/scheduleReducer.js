@@ -9,7 +9,7 @@ const initialState = {
 	},
 };
 
-const doctorReducer = (state = initialState, action) => {
+const scheduleReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.CREATE_SCHEDULE_START:
 			return {
@@ -58,4 +58,4 @@ const doctorReducer = (state = initialState, action) => {
 	}
 };
 
-export default doctorReducer;
+export default scheduleReducer;
