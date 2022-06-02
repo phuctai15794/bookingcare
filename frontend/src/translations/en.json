@@ -143,6 +143,7 @@
 			"phone": "Phone",
 			"bookFor": "Book for",
 			"medicalReason": "Reason medical",
+			"nameSpecialty": "Name specialty",
 			"nameClinic": "Name clinic",
 			"addressClinic": "Address clinic",
 			"maxNumberPatient": "Number of patients booked",

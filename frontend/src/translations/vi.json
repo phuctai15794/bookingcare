@@ -143,6 +143,7 @@
 			"phone": "Số điện thoại",
 			"bookFor": "Đặt cho ai",
 			"medicalReason": "Lý do khám",
+			"nameSpecialty": "Tên chuyên khoa",
 			"nameClinic": "Tên phòng khám",
 			"addressClinic": "Địa chỉ phòng khám",
 			"maxNumberPatient": "Số lượng bệnh nhân đặt lịch",

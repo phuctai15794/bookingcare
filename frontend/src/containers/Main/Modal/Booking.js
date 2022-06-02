@@ -140,7 +140,7 @@ class Booking extends Component {
 				date: Functions.formatDate(attributes.birthday, '', 'startOfDay'),
 				timeType: timeBooking.timeType,
 				timeString,
-				priceMedical,
+				priceMedical: priceMedical ?? 'Trả sau',
 				doctorName,
 				doctorId,
 				language,

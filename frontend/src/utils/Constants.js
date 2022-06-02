@@ -83,22 +83,22 @@ export const SYSTEM_MENUS = {
 			],
 		},
 		{
-			// Clinic management
-			name: 'menu.admin.clinic-management.name',
-			menus: [
-				{
-					name: 'menu.admin.clinic-management.types.clinic',
-					link: `${PATHS.SYSTEM.HOME}/admin/clinic-manage`,
-				},
-			],
-		},
-		{
 			// Specialty management
 			name: 'menu.admin.specialty-management.name',
 			menus: [
 				{
 					name: 'menu.admin.specialty-management.types.specialty',
 					link: `${PATHS.SYSTEM.HOME}/admin/specialty-manage`,
+				},
+			],
+		},
+		{
+			// Clinic management
+			name: 'menu.admin.clinic-management.name',
+			menus: [
+				{
+					name: 'menu.admin.clinic-management.types.clinic',
+					link: `${PATHS.SYSTEM.HOME}/admin/clinic-manage`,
 				},
 			],
 		},
