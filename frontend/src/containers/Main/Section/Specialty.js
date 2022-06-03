@@ -1,15 +1,41 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import { Functions } from '../../../utils';
+import * as actions from '../../../store/actions';
 import MainStyles from '../../../styles/Main.module.scss';
 import SectionStyles from './Section.module.scss';
-// import SpecialtyImage from '../../../assets/images/specialty/specialty.jpg';
+import SpecialtyStyles from './Specialty.module.scss';
 
 class Specialty extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			specialtiesHome: [],
+		};
+	}
+
+	async componentDidMount() {
+		const { fetchSpecialtiesHome } = this.props;
+		await fetchSpecialtiesHome();
+	}
+
+	componentDidUpdate(prevProps) {
+		const { specialtiesHome } = this.props;
+
+		if (prevProps.specialtiesHome !== specialtiesHome) {
+			this.setState({
+				specialtiesHome,
+			});
+		}
+	}
+
 	render() {
-		const { settings } = this.props;
+		const { specialtiesHome } = this.state;
+		const { settings, loadingFetchSpecialtiesHome } = this.props;
 
 		return (
 			<>
@@ -24,44 +50,37 @@ class Specialty extends Component {
 							</strong>
 						</div>
 						<div className={SectionStyles.sectionSlider}>
-							<Swiper {...settings}>
-								{/* <SwiperSlide>
-									<div className={SectionStyles.sectionItem}>
-										<img src={SpecialtyImage} alt="Cơ xương khớp" />
-										<h3>Cơ xương khớp</h3>
-									</div>
-								</SwiperSlide>
-								<SwiperSlide>
-									<div className={SectionStyles.sectionItem}>
-										<img src={SpecialtyImage} alt="Thần kinh" />
-										<h3>Thần kinh</h3>
-									</div>
-								</SwiperSlide>
-								<SwiperSlide>
-									<div className={SectionStyles.sectionItem}>
-										<img src={SpecialtyImage} alt="Tiêu hóa" />
-										<h3>Tiêu hóa</h3>
-									</div>
-								</SwiperSlide>
-								<SwiperSlide>
-									<div className={SectionStyles.sectionItem}>
-										<img src={SpecialtyImage} alt="Tim mạch" />
-										<h3>Tim mạch</h3>
-									</div>
-								</SwiperSlide>
-								<SwiperSlide>
-									<div className={SectionStyles.sectionItem}>
-										<img src={SpecialtyImage} alt="Tai mũi họng" />
-										<h3>Tai mũi họng</h3>
-									</div>
-								</SwiperSlide>
-								<SwiperSlide>
-									<div className={SectionStyles.sectionItem}>
-										<img src={SpecialtyImage} alt="Cột sống" />
-										<h3>Cột sống</h3>
-									</div>
-								</SwiperSlide> */}
-							</Swiper>
+							{loadingFetchSpecialtiesHome ? (
+								<div className="alert alert-info">Loading data ...</div>
+							) : specialtiesHome && specialtiesHome.length ? (
+								<Swiper {...settings}>
+									{specialtiesHome.map((item) => {
+										let image = Functions.bufferToBase64(item.image);
+										let title = item.name;
+
+										return (
+											<SwiperSlide key={item.id}>
+												<div
+													className={`${SectionStyles.sectionItem} ${SpecialtyStyles.sectionItem}`}
+												>
+													<Link to={'/'} title={title}>
+														<img
+															onError={({ target }) => Functions.errorImage(target)}
+															src={image}
+															alt={title}
+														/>
+													</Link>
+													<h3>{title}</h3>
+												</div>
+											</SwiperSlide>
+										);
+									})}
+								</Swiper>
+							) : (
+								<div className="alert alert-warning">
+									<FormattedMessage id="app.no-results-found" />
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
@@ -71,11 +90,16 @@ class Specialty extends Component {
 }
 
 const mapStateToProps = (state) => {
-	return {};
+	return {
+		specialtiesHome: state.specialty.specialtiesHome,
+		loadingFetchSpecialtiesHome: state.specialty.loading,
+	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		fetchSpecialtiesHome: () => dispatch(actions.fetchSpecialtiesHome()),
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Specialty);

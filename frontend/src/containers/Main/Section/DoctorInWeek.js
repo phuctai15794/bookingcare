@@ -52,11 +52,11 @@ class DoctorInWeek extends Component {
 						<div className={SectionStyles.sectionSlider}>
 							{loadingFetchDoctorsInWeek ? (
 								<div className="alert alert-info">Loading data ...</div>
-							) : doctorsInWeek.length ? (
+							) : doctorsInWeek && doctorsInWeek.length ? (
 								<Swiper {...settings}>
 									{doctorsInWeek.map((doctor) => {
-										const avatar = Functions.bufferToBase64(doctor.image);
-										const title = `${doctor.positionData[`value${keyLang}`]}, ${doctor.firstName} ${
+										let avatar = Functions.bufferToBase64(doctor.image);
+										let title = `${doctor.positionData[`value${keyLang}`]}, ${doctor.firstName} ${
 											doctor.lastName
 										}`;
 

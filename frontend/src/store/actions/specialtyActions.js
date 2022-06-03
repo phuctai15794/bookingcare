@@ -1,36 +1,5 @@
 import actionTypes from './actionTypes';
-import {
-	ListSpecialtiesService,
-	ListSpecialtiesHomeService,
-	CreateSpecialtyService,
-} from '../../services/SpecialtyService';
-
-export const fetchSpecialties = () => {
-	return async (dispatch) => {
-		dispatch(fetchSpecialtiesStart());
-		await ListSpecialtiesService()
-			.then((response) => {
-				dispatch(fetchSpecialtiesSuccess(response.data.data));
-			})
-			.catch((error) => {
-				dispatch(fetchSpecialtiesFail(error));
-			});
-	};
-};
-
-export const fetchSpecialtiesStart = () => ({
-	type: actionTypes.FETCH_SPECIALTY_START,
-});
-
-export const fetchSpecialtiesSuccess = (data) => ({
-	type: actionTypes.FETCH_SPECIALTY_SUCCESS,
-	data,
-});
-
-export const fetchSpecialtiesFail = (error) => ({
-	type: actionTypes.FETCH_SPECIALTY_FAIL,
-	error,
-});
+import { ListSpecialtiesHomeService, CreateSpecialtyService } from '../../services/SpecialtyService';
 
 export const fetchSpecialtiesHome = () => {
 	return async (dispatch) => {
@@ -46,16 +15,16 @@ export const fetchSpecialtiesHome = () => {
 };
 
 export const fetchSpecialtiesHomeStart = () => ({
-	type: actionTypes.FETCH_DOCTOR_IN_WEEK_START,
+	type: actionTypes.FETCH_SPECIALTY_HOME_START,
 });
 
 export const fetchSpecialtiesHomeSuccess = (data) => ({
-	type: actionTypes.FETCH_DOCTOR_IN_WEEK_SUCCESS,
+	type: actionTypes.FETCH_SPECIALTY_HOME_SUCCESS,
 	data,
 });
 
 export const fetchSpecialtiesHomeFail = (error) => ({
-	type: actionTypes.FETCH_DOCTOR_IN_WEEK_FAIL,
+	type: actionTypes.FETCH_SPECIALTY_HOME_FAIL,
 	error,
 });
 
