@@ -1,5 +1,21 @@
 import SpecialtyService from '../services/SpecialtyService';
 
+let listAPI = async (req, res) => {
+	const specialties = await SpecialtyService.listAPI();
+
+	return res.status(200).json({
+		data: specialties,
+	});
+};
+
+let listHomeAPI = async (req, res) => {
+	const specialties = await SpecialtyService.listHomeAPI();
+
+	return res.status(200).json({
+		data: specialties,
+	});
+};
+
 let createSpecialtyAPI = async (req, res) => {
 	let data = req.body;
 	let result = {
@@ -25,5 +41,7 @@ let createSpecialtyAPI = async (req, res) => {
 };
 
 module.exports = {
+	listAPI,
+	listHomeAPI,
 	createSpecialtyAPI,
 };

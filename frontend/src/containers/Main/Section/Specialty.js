@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import MainStyles from '../../../styles/Main.module.scss';
 import SectionStyles from './Section.module.scss';
-import SpecialtyImage from '../../../assets/images/specialty/specialty.jpg';
+// import SpecialtyImage from '../../../assets/images/specialty/specialty.jpg';
 
 class Specialty extends Component {
 	render() {
@@ -25,7 +25,7 @@ class Specialty extends Component {
 						</div>
 						<div className={SectionStyles.sectionSlider}>
 							<Swiper {...settings}>
-								<SwiperSlide>
+								{/* <SwiperSlide>
 									<div className={SectionStyles.sectionItem}>
 										<img src={SpecialtyImage} alt="Cơ xương khớp" />
 										<h3>Cơ xương khớp</h3>
@@ -60,7 +60,7 @@ class Specialty extends Component {
 										<img src={SpecialtyImage} alt="Cột sống" />
 										<h3>Cột sống</h3>
 									</div>
-								</SwiperSlide>
+								</SwiperSlide> */}
 							</Swiper>
 						</div>
 					</div>

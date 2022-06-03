@@ -116,10 +116,10 @@ class SpecialtyManage extends Component {
 	};
 
 	componentDidUpdate(prevProps) {
-		const { loadingSpecialty, messageSpecialty } = this.props;
+		const { loadingCreateSpecialty, messageCreateSpecialty } = this.props;
 
-		if (prevProps.loadingSpecialty !== loadingSpecialty) {
-			if (loadingSpecialty) {
+		if (prevProps.loadingCreateSpecialty !== loadingCreateSpecialty) {
+			if (loadingCreateSpecialty) {
 				this.setState({
 					message: {
 						text: 'Creating data ...',
@@ -128,13 +128,13 @@ class SpecialtyManage extends Component {
 				});
 			} else {
 				this.setState({
-					message: messageSpecialty,
+					message: messageCreateSpecialty,
 				});
 			}
 		}
 
-		if (prevProps.messageSpecialty !== messageSpecialty) {
-			if (['success', 'info'].includes(messageSpecialty.type)) {
+		if (prevProps.messageCreateSpecialty !== messageCreateSpecialty) {
+			if (['success', 'info'].includes(messageCreateSpecialty.type)) {
 				this.setState({
 					nameSpecialty: '',
 					avatar: '',
@@ -149,13 +149,13 @@ class SpecialtyManage extends Component {
 
 				this.resetFile.current.value = '';
 
-				toast.success(<HtmlRaw>{`${messageSpecialty.text}`}</HtmlRaw>);
-			} else if (messageSpecialty.type === 'error') {
-				toast.error(<HtmlRaw>{`${messageSpecialty.text}`}</HtmlRaw>);
+				toast.success(<HtmlRaw>{`${messageCreateSpecialty.text}`}</HtmlRaw>);
+			} else if (messageCreateSpecialty.type === 'error') {
+				toast.error(<HtmlRaw>{`${messageCreateSpecialty.text}`}</HtmlRaw>);
 			}
 
 			this.setState({
-				message: messageSpecialty,
+				message: messageCreateSpecialty,
 			});
 		}
 	}
@@ -261,8 +261,8 @@ class SpecialtyManage extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		loadingSpecialty: state.specialty.loading,
-		messageSpecialty: state.specialty.message,
+		loadingCreateSpecialty: state.specialty.actions.create.loading,
+		messageCreateSpecialty: state.specialty.actions.create.message,
 	};
 };
 

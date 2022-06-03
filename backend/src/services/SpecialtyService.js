@@ -1,6 +1,34 @@
 import _ from 'lodash';
 import db from '../models/index';
 
+let listAPI = () => {
+	return new Promise(async (resole, reject) => {
+		try {
+			const data = await db.Specialty.findAll({
+				order: [['createdAt', 'DESC']],
+			});
+
+			resole(data);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};
+
+let listHomeAPI = () => {
+	return new Promise(async (resole, reject) => {
+		try {
+			const data = await db.Specialty.findAll({
+				order: [['createdAt', 'DESC']],
+			});
+
+			resole(data);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};
+
 let createSpecialtyAPI = (data) => {
 	return new Promise(async (resole, reject) => {
 		try {
@@ -32,5 +60,7 @@ let createSpecialtyAPI = (data) => {
 };
 
 module.exports = {
+	listAPI,
+	listHomeAPI,
 	createSpecialtyAPI,
 };
