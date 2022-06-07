@@ -1,6 +1,10 @@
 import axios from '../axios';
 import { LocalStorage } from '../utils';
 
+const ListSpecialtiesService = async () => {
+	return await axios.callAPI.get('/api/specialty/list');
+};
+
 const ListSpecialtiesHomeService = async () => {
 	return await axios.callAPI.get('/api/specialty/list-home');
 };
@@ -13,4 +17,4 @@ const CreateSpecialtyService = async (data) => {
 	});
 };
 
-export { ListSpecialtiesHomeService, CreateSpecialtyService };
+export { ListSpecialtiesService, ListSpecialtiesHomeService, CreateSpecialtyService };

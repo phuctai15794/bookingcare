@@ -53,6 +53,7 @@ let route = (app) => {
 	router.post('/api/patient/booking', PatientController.bookingPatientAPI);
 
 	// API: Specialty
+	router.get('/api/specialty/list', SpecialtyController.listAPI);
 	router.get('/api/specialty/list-home', SpecialtyController.listHomeAPI);
 	router.post('/api/specialty/create', Auths.verify, SpecialtyController.createSpecialtyAPI);
 

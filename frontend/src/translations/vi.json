@@ -123,6 +123,8 @@
 			"choose-a-price": "Chọn giá",
 			"choose-a-payment": "Chọn thanh toán",
 			"choose-a-province": "Chọn tỉnh thành",
+			"choose-a-specialty": "Chọn chuyên khoa",
+			"choose-a-clinic": "Chọn phòng khám",
 			"choose-a-date": "Chọn ngày",
 			"choose-a-time": "Chọn giờ"
 		},
@@ -130,7 +132,9 @@
 			"list-of-doctors": "Danh sách bác sĩ",
 			"list-of-prices": "Danh sách giá",
 			"list-of-payments": "Danh sách thanh toán",
-			"list-of-provinces": "Danh sách tỉnh thành"
+			"list-of-provinces": "Danh sách tỉnh thành",
+			"list-of-specialties": "Danh sách chuyên khoa",
+			"list-of-clinics": "Danh sách phòng khám"
 		},
 		"attributes": {
 			"avatar": "Ảnh đại diện",

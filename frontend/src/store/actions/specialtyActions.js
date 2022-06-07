@@ -1,5 +1,36 @@
 import actionTypes from './actionTypes';
-import { ListSpecialtiesHomeService, CreateSpecialtyService } from '../../services/SpecialtyService';
+import {
+	ListSpecialtiesService,
+	ListSpecialtiesHomeService,
+	CreateSpecialtyService,
+} from '../../services/SpecialtyService';
+
+export const fetchSpecialties = () => {
+	return async (dispatch) => {
+		dispatch(fetchSpecialtiesStart());
+		await ListSpecialtiesService()
+			.then((response) => {
+				dispatch(fetchSpecialtiesSuccess(response.data.data));
+			})
+			.catch((error) => {
+				dispatch(fetchSpecialtiesFail(error));
+			});
+	};
+};
+
+export const fetchSpecialtiesStart = () => ({
+	type: actionTypes.FETCH_SPECIALTY_START,
+});
+
+export const fetchSpecialtiesSuccess = (data) => ({
+	type: actionTypes.FETCH_SPECIALTY_SUCCESS,
+	data,
+});
+
+export const fetchSpecialtiesFail = (error) => ({
+	type: actionTypes.FETCH_SPECIALTY_FAIL,
+	error,
+});
 
 export const fetchSpecialtiesHome = () => {
 	return async (dispatch) => {

@@ -121,16 +121,20 @@
 			"cancel": "Cancel",
 			"choose-a-doctor": "Choose a doctor",
 			"choose-a-price": "Choose a price",
-			"choose-a-payment": "Chọn a payment",
-			"choose-a-province": "Chọn a province",
-			"choose-a-date": "Chọn a date",
-			"choose-a-time": "Chọn a time"
+			"choose-a-payment": "Choose a payment",
+			"choose-a-province": "Choose a province",
+			"choose-a-specialty": "Choose a specialty",
+			"choose-a-clinic": "Choose a clinic",
+			"choose-a-date": "Choose a date",
+			"choose-a-time": "Choose a time"
 		},
 		"others": {
 			"list-of-doctors": "List of doctors",
 			"list-of-prices": "List of prices",
 			"list-of-payments": "List of payments",
-			"list-of-provinces": "List of provinces"
+			"list-of-provinces": "List of provinces",
+			"list-of-specialties": "List of specialties",
+			"list-of-clinics": "List of clinics"
 		},
 		"attributes": {
 			"avatar": "Avatar",
@@ -157,7 +161,7 @@
 			},
 			"position": {
 				"title": "Position",
-				"optionDefault": "Chọn a position"
+				"optionDefault": "Choose a position"
 			},
 			"note": "Note",
 			"description": "Description",
