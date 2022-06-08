@@ -287,7 +287,9 @@ class DoctorManage extends Component {
 			const keyLang = Functions.toCapitalizCase(language);
 			let selectedPrice = null,
 				selectedPayment = null,
-				selectedProvince = null;
+				selectedProvince = null,
+				selectedSpecialty = null,
+				selectedClinic = null;
 
 			if (doctorDetail.infoData.priceData.keyMap) {
 				selectedPrice = {
@@ -307,6 +309,27 @@ class DoctorManage extends Component {
 				selectedProvince = {
 					value: doctorDetail.infoData.provinceData.keyMap,
 					label: `${doctorDetail.infoData.provinceData[`value${keyLang}`]}`,
+				};
+			}
+
+			if (doctorDetail.infoData.provinceData.keyMap) {
+				selectedProvince = {
+					value: doctorDetail.infoData.provinceData.keyMap,
+					label: `${doctorDetail.infoData.provinceData[`value${keyLang}`]}`,
+				};
+			}
+
+			if (doctorDetail.infoData.specialtyData.id) {
+				selectedSpecialty = {
+					value: doctorDetail.infoData.specialtyData.id,
+					label: doctorDetail.infoData.specialtyData.name,
+				};
+			}
+
+			if (doctorDetail.infoData.clinicData.id) {
+				selectedClinic = {
+					value: doctorDetail.infoData.clinicData.id,
+					label: doctorDetail.infoData.clinicData.name,
 				};
 			}
 
@@ -344,11 +367,11 @@ class DoctorManage extends Component {
 				},
 				selectSpecialties: {
 					list: optionsSpecialty || [],
-					selected: null,
+					selected: selectedSpecialty,
 				},
 				selectClinics: {
 					list: optionsClinic || [],
-					selected: null,
+					selected: selectedClinic,
 				},
 				isEdit: true,
 				message: {
