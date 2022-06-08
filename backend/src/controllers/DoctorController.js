@@ -30,15 +30,21 @@ let updateInfoAPI = async (req, res) => {
 	if (!data.doctorId) {
 		result.message.type = 'error';
 		result.message.text = 'Please choose a doctor';
-	} else if (!data.selectPrices.selected.value) {
+	} else if (!data.selectPrices.selected) {
 		result.message.type = 'error';
 		result.message.text = 'Please choose a price';
-	} else if (!data.selectPayments.selected.value) {
+	} else if (!data.selectPayments.selected) {
 		result.message.type = 'error';
 		result.message.text = 'Please choose a payment';
-	} else if (!data.selectProvinces.selected.value) {
+	} else if (!data.selectProvinces.selected) {
 		result.message.type = 'error';
 		result.message.text = 'Please choose a province';
+	} else if (!data.selectSpecialties.selected) {
+		result.message.type = 'error';
+		result.message.text = 'Please choose a specialty';
+		// } else if (!data.selectClinics.selected) {
+		// 	result.message.type = 'error';
+		// 	result.message.text = 'Please choose a clinic';
 	} else if (!data.contentHTML || !data.contentMarkdown) {
 		result.message.type = 'error';
 		result.message.text = 'Please enter your content';

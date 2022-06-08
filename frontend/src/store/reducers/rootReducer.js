@@ -6,6 +6,7 @@ import doctorReducer from './doctorReducer';
 import patientReducer from './patientReducer';
 import scheduleReducer from './scheduleReducer';
 import specialtyReducer from './specialtyReducer';
+import clinicReducer from './clinicReducer';
 import verifyReducer from './verifyReducer';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import storage from 'redux-persist/lib/storage';
@@ -31,6 +32,7 @@ const rootReducer = () =>
 		patient: patientReducer,
 		schedule: scheduleReducer,
 		specialty: specialtyReducer,
+		clinic: clinicReducer,
 		verify: verifyReducer,
 	});
 

@@ -5,4 +5,5 @@ export * from './doctorActions';
 export * from './patientActions';
 export * from './scheduleActions';
 export * from './specialtyActions';
+export * from './clinicActions';
 export * from './verifyActions';

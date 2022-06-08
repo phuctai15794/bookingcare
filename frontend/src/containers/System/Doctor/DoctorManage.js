@@ -118,11 +118,13 @@ class DoctorManage extends Component {
 	};
 
 	handleCancel = async () => {
-		const { doctors, prices, payments, provinces } = this.props;
+		const { doctors, prices, payments, provinces, specialties, clinics } = this.props;
 		const optionsDoctors = this.buildSelect(doctors, 'Doctor');
 		const optionsPrices = this.buildSelect(prices, 'Price');
 		const optionsPayments = this.buildSelect(payments, 'Payment');
 		const optionsProvince = this.buildSelect(provinces, 'Province');
+		const optionsSpecialty = this.buildSelect(specialties, 'Specialty');
+		const optionsClinic = this.buildSelect(clinics, 'Clinic');
 
 		this.setState({
 			doctorId: '',
@@ -147,6 +149,14 @@ class DoctorManage extends Component {
 			},
 			selectProvinces: {
 				list: optionsProvince || [],
+				selected: null,
+			},
+			selectSpecialties: {
+				list: optionsSpecialty || [],
+				selected: null,
+			},
+			selectClinics: {
+				list: optionsClinic || [],
 				selected: null,
 			},
 			message: {
@@ -179,7 +189,7 @@ class DoctorManage extends Component {
 							(type === 'Price' && Functions.formatPrice(`${item[`value${keyLang}`]}`, language)) ||
 							`${item[`value${keyLang}`]}`,
 					}))) ||
-				(type === 'Specialty' &&
+				(['Specialty', 'Clinic'].includes(type) &&
 					options.map((item) => ({
 						value: item.id,
 						label: item.name,
@@ -188,16 +198,18 @@ class DoctorManage extends Component {
 	};
 
 	async componentDidMount() {
-		const { fetchDoctors, fetchAllCode, fetchSpecialties } = this.props;
+		const { fetchDoctors, fetchAllCode, fetchSpecialties, fetchClinics } = this.props;
 		await fetchDoctors();
 		await fetchAllCode('PRICE');
 		await fetchAllCode('PAYMENT');
 		await fetchAllCode('PROVINCE');
 		await fetchSpecialties();
+		await fetchClinics();
 	}
 
 	componentDidUpdate(prevProps) {
-		const { language, doctors, doctorDetail, prices, payments, provinces, specialties, messageDoctor } = this.props;
+		const { language, doctors, doctorDetail, prices, payments, provinces, specialties, clinics, messageDoctor } =
+			this.props;
 
 		if (prevProps.doctors !== doctors || prevProps.language !== language) {
 			const optionsDoctors = this.buildSelect(doctors, 'Doctor');
@@ -243,7 +255,7 @@ class DoctorManage extends Component {
 			});
 		}
 
-		if (prevProps.specialties !== specialties || prevProps.language !== language) {
+		if (prevProps.specialties !== specialties) {
 			const optionsSpecialty = this.buildSelect(specialties, 'Specialty');
 
 			this.setState({
@@ -254,12 +266,24 @@ class DoctorManage extends Component {
 			});
 		}
 
+		if (prevProps.clinics !== clinics) {
+			const optionsClinic = this.buildSelect(clinics, 'Clinic');
+
+			this.setState({
+				selectClinics: {
+					...this.state.selectClinics,
+					list: optionsClinic || [],
+				},
+			});
+		}
+
 		if (prevProps.doctorDetail !== doctorDetail) {
 			const optionsDoctors = this.buildSelect(doctors, 'Doctor');
 			const optionsPrices = this.buildSelect(prices, 'Price');
 			const optionsPayments = this.buildSelect(payments, 'Payment');
 			const optionsProvince = this.buildSelect(provinces, 'Province');
 			const optionsSpecialty = this.buildSelect(specialties, 'Specialty');
+			const optionsClinic = this.buildSelect(clinics, 'Clinic');
 			const keyLang = Functions.toCapitalizCase(language);
 			let selectedPrice = null,
 				selectedPayment = null,
@@ -322,6 +346,10 @@ class DoctorManage extends Component {
 					list: optionsSpecialty || [],
 					selected: null,
 				},
+				selectClinics: {
+					list: optionsClinic || [],
+					selected: null,
+				},
 				isEdit: true,
 				message: {
 					text: '',
@@ -337,6 +365,7 @@ class DoctorManage extends Component {
 				const optionsPayments = this.buildSelect(payments, 'Payment');
 				const optionsProvince = this.buildSelect(provinces, 'Province');
 				const optionsSpecialty = this.buildSelect(specialties, 'Specialty');
+				const optionsClinic = this.buildSelect(clinics, 'Clinic');
 
 				this.setState({
 					doctorId: '',
@@ -365,6 +394,10 @@ class DoctorManage extends Component {
 					},
 					selectSpecialties: {
 						list: optionsSpecialty || [],
+						selected: null,
+					},
+					selectClinics: {
+						list: optionsClinic || [],
 						selected: null,
 					},
 					message: {
@@ -615,6 +648,7 @@ const mapStateToProps = (state) => {
 		payments: state.allCode.payments.data,
 		provinces: state.allCode.provinces.data,
 		specialties: state.specialty.specialties,
+		clinics: state.clinic.clinics,
 	};
 };
 
@@ -623,6 +657,7 @@ const mapDispatchToProps = (dispatch) => {
 		fetchDoctors: () => dispatch(actions.fetchDoctors()),
 		fetchAllCode: (type) => dispatch(actions.fetchAllCode(type)),
 		fetchSpecialties: () => dispatch(actions.fetchSpecialties()),
+		fetchClinics: () => dispatch(actions.fetchClinics()),
 		updateInfoDoctor: (data) => dispatch(actions.updateInfoDoctor(data)),
 		getDetailDoctor: (id) => dispatch(actions.getDetailDoctor(id)),
 	};
