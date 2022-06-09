@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
 import { Functions } from '../../../utils';
@@ -74,4 +73,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DoctorProfile));
+export default connect(mapStateToProps, mapDispatchToProps)(DoctorProfile);

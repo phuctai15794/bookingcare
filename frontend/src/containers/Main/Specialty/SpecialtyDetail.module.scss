@@ -26,4 +26,21 @@
 			}
 		}
 	}
+	.specialtyDetailDoctorList {
+		background-color: #f0f0f0;
+		border-top: 1px solid #cccccc;
+		.blockContent {
+			padding-top: 30px;
+			padding-bottom: 30px;
+			.specialtyDetailDoctorItem {
+				padding: 25px 20px;
+				background-color: #ffffff;
+				box-shadow: 0 1px 6px rgba(32, 33, 36, 0.1);
+				border-radius: 0.5rem;
+				&:not(:last-child) {
+					margin-bottom: 1rem;
+				}
+			}
+		}
+	}
 }

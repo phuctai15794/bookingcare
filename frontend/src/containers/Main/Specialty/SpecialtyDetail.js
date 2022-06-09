@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { HtmlRaw, Functions } from '../../../utils';
 import * as actions from '../../../store/actions';
+import DoctorSchedule from '../Doctor/DoctorSchedule';
+import DoctorProfile from '../Doctor/DoctorProfile';
 import MainStyles from '../../../styles/Main.module.scss';
 import SpecialtyDetailStyles from './SpecialtyDetail.module.scss';
 
@@ -12,6 +14,7 @@ class SpecialtyDetail extends Component {
 		super(props);
 		this.state = {
 			specialtyDetail: null,
+			doctorIds: [2, 4, 6, 8, 9],
 			isShowInfo: false,
 		};
 	}
@@ -39,7 +42,7 @@ class SpecialtyDetail extends Component {
 	}
 
 	render() {
-		const { specialtyDetail, isShowInfo } = this.state;
+		const { specialtyDetail, isShowInfo, doctorIds } = this.state;
 		const image = specialtyDetail && specialtyDetail.image && Functions.bufferToBase64(specialtyDetail.image);
 
 		return (
@@ -72,6 +75,41 @@ class SpecialtyDetail extends Component {
 								</div>
 							</div>
 						</div>
+						{doctorIds && (
+							<div className={SpecialtyDetailStyles.specialtyDetailDoctorList}>
+								<div className={`${MainStyles.blockContent} ${SpecialtyDetailStyles.blockContent}`}>
+									{doctorIds.map((doctor) => {
+										return (
+											<div
+												className={SpecialtyDetailStyles.specialtyDetailDoctorItem}
+												key={doctor}
+											>
+												<div className="row">
+													<div className="col-6">
+														<div
+															className={
+																SpecialtyDetailStyles.doctorDetailScheduleBooking
+															}
+														>
+															<DoctorProfile doctorId={doctor} />
+														</div>
+													</div>
+													<div className="col-6">
+														<div
+															className={
+																SpecialtyDetailStyles.doctorDetailScheduleInformation
+															}
+														>
+															<DoctorSchedule doctorId={doctor} />
+														</div>
+													</div>
+												</div>
+											</div>
+										);
+									})}
+								</div>
+							</div>
+						)}
 					</div>
 				) : (
 					<div className="alert alert-warning">
