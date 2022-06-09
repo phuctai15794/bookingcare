@@ -3,6 +3,7 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
 	specialties: [],
 	specialtiesHome: [],
+	specialtyDetail: null,
 	loading: false,
 	message: {
 		status: '',
@@ -123,6 +124,23 @@ const specialtyReducer = (state = initialState, action) => {
 						},
 					},
 				},
+			};
+		case actionTypes.GET_DETAIL_SPECIALTY_START:
+			return {
+				...state,
+				loading: true,
+			};
+		case actionTypes.GET_DETAIL_SPECIALTY_SUCCESS:
+			return {
+				...state,
+				specialtyDetail: action.data,
+				loading: false,
+			};
+		case actionTypes.GET_DETAIL_SPECIALTY_FAIL:
+			return {
+				...state,
+				specialtyDetail: null,
+				loading: false,
 			};
 		default:
 			return state;

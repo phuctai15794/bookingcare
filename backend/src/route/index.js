@@ -57,6 +57,7 @@ let route = (app) => {
 	router.get('/api/specialty/list', SpecialtyController.listAPI);
 	router.get('/api/specialty/list-home', SpecialtyController.listHomeAPI);
 	router.post('/api/specialty/create', Auths.verify, SpecialtyController.createSpecialtyAPI);
+	router.get('/api/specialty/detail/:id', SpecialtyController.getDetailAPI);
 
 	// API: Clinic
 	router.get('/api/clinic/list', ClinicController.listAPI);

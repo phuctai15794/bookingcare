@@ -17,4 +17,8 @@ const CreateSpecialtyService = async (data) => {
 	});
 };
 
-export { ListSpecialtiesService, ListSpecialtiesHomeService, CreateSpecialtyService };
+const GetDetailSpecialtyService = async (id) => {
+	return await axios.callAPI.get(`/api/specialty/detail/${id}`);
+};
+
+export { ListSpecialtiesService, ListSpecialtiesHomeService, CreateSpecialtyService, GetDetailSpecialtyService };

@@ -8,6 +8,7 @@ import Home from './Home/Home';
 import NotFound from './Layouts/NotFound/NotFound';
 import Loading from './Layouts/Loading/Loading';
 import DoctorDetail from './Doctor/DoctorDetail';
+import SpecialtyDetail from './Specialty/SpecialtyDetail';
 
 class Main extends Component {
 	render() {
@@ -20,6 +21,10 @@ class Main extends Component {
 						<div className="contain">
 							<Switch>
 								<Route path={`${Constants.PATHS.MAIN.DOCTOR_DETAIL}/:id`} component={DoctorDetail} />
+								<Route
+									path={`${Constants.PATHS.MAIN.SPECIALTY_DETAIL}/:id`}
+									component={SpecialtyDetail}
+								/>
 								<Route component={NotFound} />
 							</Switch>
 						</div>

@@ -7,6 +7,7 @@ export const PATHS = {
 	MAIN: {
 		HOME: '/',
 		DOCTOR_DETAIL: '/doctor-detail',
+		SPECIALTY_DETAIL: '/specialty-detail',
 	},
 	SYSTEM: {
 		HOME: '/system',

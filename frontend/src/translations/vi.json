@@ -1,6 +1,5 @@
 {
 	"app": {
-		"view-more": "Xem thêm",
 		"welcome": "Xin chào",
 		"notify": "Thông báo",
 		"or": "hoặc",
@@ -11,8 +10,10 @@
 		"medical-address": "Địa chỉ khám",
 		"medical-price": "Giá khám",
 		"medical-payment": "Phòng khám có thanh toán bằng hình thức",
+		"hide-less": "Ẩn bớt",
 		"hide-content": "Ẩn nội dung",
 		"view-detail": "Xem chi tiết",
+		"view-more": "Xem thêm",
 		"and-booking-free": "và đặt miễn phí",
 		"back-to-home": "Trở về trang chủ",
 		"not-found-title": "Không tìm thấy trang",

@@ -1,6 +1,5 @@
 {
 	"app": {
-		"view-more": "View more",
 		"welcome": "Welcome",
 		"notify": "Notification",
 		"or": "or",
@@ -11,8 +10,10 @@
 		"medical-address": "Medical address",
 		"medical-price": "Medical price",
 		"medical-payment": "The clinic is paid for by",
+		"hide-less": "Hide less",
 		"hide-content": "Hide content",
 		"view-detail": "View detail",
+		"view-more": "View more",
 		"and-booking-free": "and booking free",
 		"back-to-home": "Back to home",
 		"not-found-title": "Page not found",

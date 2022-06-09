@@ -3,6 +3,7 @@ import {
 	ListSpecialtiesService,
 	ListSpecialtiesHomeService,
 	CreateSpecialtyService,
+	GetDetailSpecialtyService,
 } from '../../services/SpecialtyService';
 
 export const fetchSpecialties = () => {
@@ -83,5 +84,32 @@ export const createSpecialtySuccess = (message) => ({
 
 export const createSpecialtyFail = (error) => ({
 	type: actionTypes.CREATE_SPECIALTY_FAIL,
+	error,
+});
+
+export const getDetailSpecialty = (id) => {
+	return async (dispatch) => {
+		dispatch(getDetailSpecialtyStart());
+		await GetDetailSpecialtyService(id)
+			.then((response) => {
+				dispatch(getDetailSpecialtySuccess(response.data.data));
+			})
+			.catch((error) => {
+				dispatch(getDetailSpecialtyFail(error));
+			});
+	};
+};
+
+export const getDetailSpecialtyStart = () => ({
+	type: actionTypes.GET_DETAIL_SPECIALTY_START,
+});
+
+export const getDetailSpecialtySuccess = (data) => ({
+	type: actionTypes.GET_DETAIL_SPECIALTY_SUCCESS,
+	data,
+});
+
+export const getDetailSpecialtyFail = (error) => ({
+	type: actionTypes.GET_DETAIL_SPECIALTY_FAIL,
 	error,
 });

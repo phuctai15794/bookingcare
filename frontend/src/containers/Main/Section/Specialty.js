@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { Functions } from '../../../utils';
+import { Constants, Functions } from '../../../utils';
 import * as actions from '../../../store/actions';
 import MainStyles from '../../../styles/Main.module.scss';
 import SectionStyles from './Section.module.scss';
@@ -63,7 +63,10 @@ class Specialty extends Component {
 												<div
 													className={`${SectionStyles.sectionItem} ${SpecialtyStyles.sectionItem}`}
 												>
-													<Link to={'/'} title={title}>
+													<Link
+														to={`${Constants.PATHS.MAIN.SPECIALTY_DETAIL}/${item.id}`}
+														title={title}
+													>
 														<img
 															onError={({ target }) => Functions.errorImage(target)}
 															src={image}

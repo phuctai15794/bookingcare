@@ -40,34 +40,32 @@ class DoctorDetail extends Component {
 		return (
 			<>
 				{doctorDetail ? (
-					<>
-						<div className={DoctorDetailStyles.doctorDetail}>
-							<div className={DoctorDetailStyles.doctorDetailTop}>
-								<div className={`${MainStyles.blockContent} ${DoctorDetailStyles.blockContent}`}>
-									<DoctorProfile doctorId={doctorDetail.id} />
-									<div className={DoctorDetailStyles.doctorDetailSchedule}>
-										<div className="row gx-5">
-											<div className="col-6">
-												<div className={DoctorDetailStyles.doctorDetailScheduleBooking}>
-													<DoctorSchedule doctorId={doctorDetail.id} />
-												</div>
+					<div className={DoctorDetailStyles.doctorDetail}>
+						<div className={DoctorDetailStyles.doctorDetailTop}>
+							<div className={`${MainStyles.blockContent} ${DoctorDetailStyles.blockContent}`}>
+								<DoctorProfile doctorId={doctorDetail.id} />
+								<div className={DoctorDetailStyles.doctorDetailSchedule}>
+									<div className="row gx-5">
+										<div className="col-6">
+											<div className={DoctorDetailStyles.doctorDetailScheduleBooking}>
+												<DoctorSchedule doctorId={doctorDetail.id} />
 											</div>
-											<div className="col-6">
-												<div className={DoctorDetailStyles.doctorDetailScheduleInformation}>
-													<DoctorInfo doctorId={doctorDetail.id} />
-												</div>
+										</div>
+										<div className="col-6">
+											<div className={DoctorDetailStyles.doctorDetailScheduleInformation}>
+												<DoctorInfo doctorId={doctorDetail.id} />
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div className={DoctorDetailStyles.doctorDetailContent}>
-								<div className={`${MainStyles.blockContent} ${DoctorDetailStyles.blockContent}`}>
-									<HtmlRaw>{doctorDetail.markdownData.contentHTML}</HtmlRaw>
-								</div>
+						</div>
+						<div className={DoctorDetailStyles.doctorDetailContent}>
+							<div className={`${MainStyles.blockContent} ${DoctorDetailStyles.blockContent}`}>
+								<HtmlRaw>{doctorDetail.markdownData.contentHTML}</HtmlRaw>
 							</div>
 						</div>
-					</>
+					</div>
 				) : (
 					<div className="alert alert-warning">
 						<FormattedMessage id="app.no-results-found" />

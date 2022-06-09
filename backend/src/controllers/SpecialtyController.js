@@ -40,8 +40,32 @@ let createSpecialtyAPI = async (req, res) => {
 	});
 };
 
+let getDetailAPI = async (req, res) => {
+	const id = req.params.id;
+	let result = {
+		message: {
+			type: '',
+			text: '',
+		},
+		info: {},
+	};
+
+	if (!id) {
+		result.message.type = 'error';
+		result.message.text = 'User is invalid';
+	} else {
+		result.info = await SpecialtyService.getDetailAPI(id);
+	}
+
+	return res.status(200).json({
+		data: result.info,
+		message: result.message,
+	});
+};
+
 module.exports = {
 	listAPI,
 	listHomeAPI,
 	createSpecialtyAPI,
+	getDetailAPI,
 };
