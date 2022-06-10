@@ -40,7 +40,7 @@ class DoctorInfo extends Component {
 
 		return (
 			<>
-				{doctorInfo && (
+				{doctorInfo && doctorInfo.nameClinic && doctorInfo.addressClinic && (
 					<div className={DoctorInfoStyles.doctorInfo}>
 						<div className={DoctorInfoStyles.doctorInfoTitle}>
 							<strong>

@@ -6,6 +6,7 @@ import { HtmlRaw, Functions } from '../../../utils';
 import * as actions from '../../../store/actions';
 import DoctorSchedule from '../Doctor/DoctorSchedule';
 import DoctorProfile from '../Doctor/DoctorProfile';
+import DoctorInfo from '../Doctor/DoctorInfo';
 import MainStyles from '../../../styles/Main.module.scss';
 import SpecialtyDetailStyles from './SpecialtyDetail.module.scss';
 
@@ -78,11 +79,11 @@ class SpecialtyDetail extends Component {
 						{doctorIds && (
 							<div className={SpecialtyDetailStyles.specialtyDetailDoctorList}>
 								<div className={`${MainStyles.blockContent} ${SpecialtyDetailStyles.blockContent}`}>
-									{doctorIds.map((doctor) => {
+									{doctorIds.map((doctorId) => {
 										return (
 											<div
 												className={SpecialtyDetailStyles.specialtyDetailDoctorItem}
-												key={doctor}
+												key={doctorId}
 											>
 												<div className="row">
 													<div className="col-6">
@@ -91,7 +92,7 @@ class SpecialtyDetail extends Component {
 																SpecialtyDetailStyles.doctorDetailScheduleBooking
 															}
 														>
-															<DoctorProfile doctorId={doctor} />
+															<DoctorProfile doctorId={doctorId} />
 														</div>
 													</div>
 													<div className="col-6">
@@ -100,7 +101,11 @@ class SpecialtyDetail extends Component {
 																SpecialtyDetailStyles.doctorDetailScheduleInformation
 															}
 														>
-															<DoctorSchedule doctorId={doctor} />
+															<DoctorSchedule doctorId={doctorId} />
+
+															<hr />
+
+															<DoctorInfo doctorId={doctorId} />
 														</div>
 													</div>
 												</div>
