@@ -14,15 +14,12 @@ class DoctorProfile extends Component {
 
 	async componentDidMount() {
 		const { doctorId, getProfileDoctor } = this.props;
+
 		await getProfileDoctor(doctorId);
-	}
 
-	componentDidUpdate(prevProps) {
-		const { doctorProfile } = this.props;
-
-		if (prevProps.doctorProfile !== doctorProfile) {
+		if (this.props.doctorProfile) {
 			this.setState({
-				doctorProfile,
+				doctorProfile: this.props.doctorProfile,
 			});
 		}
 	}
