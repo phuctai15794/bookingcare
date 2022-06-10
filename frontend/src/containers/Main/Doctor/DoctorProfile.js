@@ -25,7 +25,7 @@ class DoctorProfile extends Component {
 	}
 
 	render() {
-		const { language } = this.props;
+		const { language, classDoctorProfileName } = this.props;
 		const { doctorProfile } = this.state;
 		const keyLang = Functions.toCapitalizeCase(language);
 		const avatar = doctorProfile && doctorProfile.image && Functions.bufferToBase64(doctorProfile.image);
@@ -44,7 +44,11 @@ class DoctorProfile extends Component {
 								<img onError={({ target }) => Functions.errorImage(target)} src={avatar} alt={title} />
 							</div>
 							<div className={DoctorProfileStyles.doctorProfileIntroduce}>
-								<h3 className={DoctorProfileStyles.doctorProfileName}>{`${title}`}</h3>
+								<h3
+									className={`${DoctorProfileStyles.doctorProfileName} ${
+										classDoctorProfileName ?? ''
+									}`}
+								>{`${title}`}</h3>
 								<div className={DoctorProfileStyles.doctorProfileDescription}>{description}</div>
 							</div>
 						</div>

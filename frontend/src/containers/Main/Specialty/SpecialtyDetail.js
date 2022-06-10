@@ -92,7 +92,12 @@ class SpecialtyDetail extends Component {
 																SpecialtyDetailStyles.doctorDetailScheduleBooking
 															}
 														>
-															<DoctorProfile doctorId={doctorId} />
+															<DoctorProfile
+																doctorId={doctorId}
+																classDoctorProfileName={
+																	SpecialtyDetailStyles.specialtyDetailDoctorProfileName
+																}
+															/>
 														</div>
 													</div>
 													<div className="col-6">
