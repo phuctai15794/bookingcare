@@ -375,7 +375,7 @@ class UserManage extends Component {
 		const { avatar, email, password, firstName, lastName, address, phone, gender, roleId, positionId } =
 			this.state.attributes;
 		const { intl, language } = this.props;
-		const keyLang = Functions.toCapitalizCase(language);
+		const keyLang = Functions.toCapitalizeCase(language);
 		const optionsDefaultLang = {
 			gender: intl.formatMessage({ id: 'form.attributes.gender.optionDefault' }),
 			role: intl.formatMessage({ id: 'form.attributes.role.optionDefault' }),

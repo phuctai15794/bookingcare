@@ -27,7 +27,7 @@ class DoctorProfile extends Component {
 	render() {
 		const { language } = this.props;
 		const { doctorProfile } = this.state;
-		const keyLang = Functions.toCapitalizCase(language);
+		const keyLang = Functions.toCapitalizeCase(language);
 		const avatar = doctorProfile && doctorProfile.image && Functions.bufferToBase64(doctorProfile.image);
 		const title =
 			doctorProfile &&

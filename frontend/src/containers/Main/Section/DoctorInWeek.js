@@ -35,7 +35,7 @@ class DoctorInWeek extends Component {
 	render() {
 		const { doctorsInWeek } = this.state;
 		const { language, settings, loadingFetchDoctorsInWeek } = this.props;
-		const keyLang = Functions.toCapitalizCase(language);
+		const keyLang = Functions.toCapitalizeCase(language);
 
 		return (
 			<>

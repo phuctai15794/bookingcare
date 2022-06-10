@@ -24,14 +24,10 @@ class DoctorInfo extends Component {
 	async componentDidMount() {
 		const { doctorId, getInfoDoctor } = this.props;
 		await getInfoDoctor(doctorId);
-	}
 
-	componentDidUpdate(prevProps) {
-		const { doctorInfo } = this.props;
-
-		if (prevProps.doctorInfo !== doctorInfo) {
+		if (this.props.doctorInfo) {
 			this.setState({
-				doctorInfo: doctorInfo.infoData,
+				doctorInfo: this.props.doctorInfo.infoData,
 			});
 		}
 	}
@@ -39,7 +35,7 @@ class DoctorInfo extends Component {
 	render() {
 		const { isShowInfo, doctorInfo } = this.state;
 		const { language } = this.props;
-		const keyLang = Functions.toCapitalizCase(language);
+		const keyLang = Functions.toCapitalizeCase(language);
 		const priceMedical = doctorInfo && Functions.formatPrice(doctorInfo.priceData[`value${keyLang}`], language);
 
 		return (

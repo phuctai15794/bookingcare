@@ -236,7 +236,7 @@ class DoctorSchedule extends Component {
 	render() {
 		const { currentDate, select, times, maxNumberPatient, message } = this.state;
 		const { intl, language } = this.props;
-		const keyLang = Functions.toCapitalizCase(language);
+		const keyLang = Functions.toCapitalizeCase(language);
 		const selectLang = {
 			placeholder: intl.formatMessage({ id: 'form.others.list-of-doctors' }),
 			noMatched: intl.formatMessage({ id: 'app.no-results-found' }),

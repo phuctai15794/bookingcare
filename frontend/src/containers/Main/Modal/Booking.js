@@ -94,7 +94,7 @@ class Booking extends Component {
 
 	buildTimeBooking = () => {
 		const { language, timeBooking } = this.props;
-		const keyLang = Functions.toCapitalizCase(language);
+		const keyLang = Functions.toCapitalizeCase(language);
 		return (
 			timeBooking &&
 			`${timeBooking.timeData[`value${keyLang}`]}, ${Functions.formatDate(
@@ -108,13 +108,13 @@ class Booking extends Component {
 
 	buildPriceMedical = () => {
 		const { language, timeBooking } = this.props;
-		const keyLang = Functions.toCapitalizCase(language);
+		const keyLang = Functions.toCapitalizeCase(language);
 		return timeBooking && Functions.formatPrice(timeBooking.infoData.priceData[`value${keyLang}`], language);
 	};
 
 	buildDoctorName = () => {
 		const { language, timeBooking } = this.props;
-		const keyLang = Functions.toCapitalizCase(language);
+		const keyLang = Functions.toCapitalizeCase(language);
 		return (
 			timeBooking &&
 			`${timeBooking.userData.positionData[`value${keyLang}`]}, ${timeBooking.userData.firstName} ${
@@ -194,7 +194,7 @@ class Booking extends Component {
 		const { intl, language, isOpenBooking, doctorId, timeBooking, onCloseBooking } = this.props;
 		const { dataGender } = this.state;
 		const { firstName, lastName, phone, email, address, medicalReason, gender, birthday } = this.state.attributes;
-		const keyLang = Functions.toCapitalizCase(language);
+		const keyLang = Functions.toCapitalizeCase(language);
 		const priceMedical = this.buildPriceMedical();
 		const timeString = this.buildTimeBooking();
 		const optionsDefaultLang = {

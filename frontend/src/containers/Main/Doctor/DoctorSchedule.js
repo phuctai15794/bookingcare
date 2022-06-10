@@ -51,6 +51,12 @@ class DoctorSchedule extends Component {
 		if (!_.isEmpty(daysOfWeek)) {
 			const [firstDay] = daysOfWeek;
 			await getScheduleByDate(doctorId, firstDay.value);
+
+			if (this.props.schedulesByDate) {
+				this.setState({
+					schedulesByDate: this.props.schedulesByDate,
+				});
+			}
 		}
 
 		this.setState({
@@ -59,7 +65,7 @@ class DoctorSchedule extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		const { language, schedulesByDate } = this.props;
+		const { language } = this.props;
 
 		if (prevProps.language !== language) {
 			const daysOfWeek = Functions.getDaysOfWeek(language);
@@ -68,18 +74,12 @@ class DoctorSchedule extends Component {
 				daysOfWeek,
 			});
 		}
-
-		if (prevProps.schedulesByDate !== schedulesByDate) {
-			this.setState({
-				schedulesByDate,
-			});
-		}
 	}
 
 	render() {
 		const { isOpenBooking, timeBooking, selectedDay, daysOfWeek, schedulesByDate } = this.state;
 		const { language, doctorId } = this.props;
-		const keyLang = Functions.toCapitalizCase(language);
+		const keyLang = Functions.toCapitalizeCase(language);
 
 		return (
 			<>

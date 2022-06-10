@@ -87,7 +87,7 @@ class DoctorManage extends Component {
 				},
 			});
 		} else {
-			const keySelect = Functions.toCapitalizCase(type);
+			const keySelect = Functions.toCapitalizeCase(type);
 
 			this.setState({
 				[`select${keySelect}`]: {
@@ -168,7 +168,7 @@ class DoctorManage extends Component {
 
 	buildSelect = (options, type) => {
 		const { language } = this.props;
-		const keyLang = Functions.toCapitalizCase(language);
+		const keyLang = Functions.toCapitalizeCase(language);
 
 		return (
 			!_.isEmpty(options) &&
@@ -284,7 +284,7 @@ class DoctorManage extends Component {
 			const optionsProvince = this.buildSelect(provinces, 'Province');
 			const optionsSpecialty = this.buildSelect(specialties, 'Specialty');
 			const optionsClinic = this.buildSelect(clinics, 'Clinic');
-			const keyLang = Functions.toCapitalizCase(language);
+			const keyLang = Functions.toCapitalizeCase(language);
 			let selectedPrice = null,
 				selectedPayment = null,
 				selectedProvince = null,
