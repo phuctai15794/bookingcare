@@ -27,6 +27,7 @@ class DoctorSchedule extends Component {
 		await getScheduleByDate(doctorId, selectedDay);
 
 		this.setState({
+			schedulesByDate: this.props.schedulesByDate,
 			selectedDay,
 		});
 	};
@@ -52,16 +53,11 @@ class DoctorSchedule extends Component {
 			const [firstDay] = daysOfWeek;
 			await getScheduleByDate(doctorId, firstDay.value);
 
-			if (this.props.schedulesByDate) {
-				this.setState({
-					schedulesByDate: this.props.schedulesByDate,
-				});
-			}
+			this.setState({
+				schedulesByDate: this.props.schedulesByDate,
+				daysOfWeek,
+			});
 		}
-
-		this.setState({
-			daysOfWeek,
-		});
 	}
 
 	componentDidUpdate(prevProps) {
