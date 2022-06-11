@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import * as actions from '../../../store/actions';
-import { Functions } from '../../../utils';
+import { Constants, Functions, HtmlRaw } from '../../../utils';
+import MainStyles from '../../../styles/Main.module.scss';
 import DoctorProfileStyles from './DoctorProfile.module.scss';
 
 class DoctorProfile extends Component {
@@ -25,7 +28,7 @@ class DoctorProfile extends Component {
 	}
 
 	render() {
-		const { language, classDoctorProfileName } = this.props;
+		const { language, doctorId, isSmallTitle, isViewDetail } = this.props;
 		const { doctorProfile } = this.state;
 		const keyLang = Functions.toCapitalizeCase(language);
 		const avatar = doctorProfile && doctorProfile.image && Functions.bufferToBase64(doctorProfile.image);
@@ -46,10 +49,20 @@ class DoctorProfile extends Component {
 							<div className={DoctorProfileStyles.doctorProfileIntroduce}>
 								<h3
 									className={`${DoctorProfileStyles.doctorProfileName} ${
-										classDoctorProfileName ?? ''
+										isSmallTitle && DoctorProfileStyles.isSmallTitle
 									}`}
 								>{`${title}`}</h3>
-								<div className={DoctorProfileStyles.doctorProfileDescription}>{description}</div>
+								<div className={DoctorProfileStyles.doctorProfileDescription}>
+									{<HtmlRaw isPreWrap>{description}</HtmlRaw>}
+								</div>
+								{isViewDetail && (
+									<Link
+										className={`${MainStyles.viewMore} d-inline-block align-top pt-2`}
+										to={`${Constants.PATHS.MAIN.DOCTOR_DETAIL}/${doctorId}`}
+									>
+										<FormattedMessage id="app.view-more" />
+									</Link>
+								)}
 							</div>
 						</div>
 					</>

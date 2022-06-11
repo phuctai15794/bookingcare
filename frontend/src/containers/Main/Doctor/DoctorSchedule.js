@@ -134,9 +134,9 @@ class DoctorSchedule extends Component {
 					</div>
 				</div>
 				<Booking
+					doctorId={doctorId}
 					isOpenBooking={isOpenBooking}
 					timeBooking={timeBooking}
-					doctorId={doctorId}
 					onCloseBooking={this.handleCloseBooking}
 				/>
 			</>

@@ -15,7 +15,7 @@ class SpecialtyDetail extends Component {
 		super(props);
 		this.state = {
 			specialtyDetail: null,
-			doctorIds: [2, 4, 6, 8, 9],
+			doctorIds: null,
 			isShowInfo: false,
 		};
 	}
@@ -37,6 +37,7 @@ class SpecialtyDetail extends Component {
 
 		if (prevProps.specialtyDetail !== specialtyDetail) {
 			this.setState({
+				doctorIds: specialtyDetail.doctorIds,
 				specialtyDetail,
 			});
 		}
@@ -76,10 +77,10 @@ class SpecialtyDetail extends Component {
 								</div>
 							</div>
 						</div>
-						{doctorIds && (
-							<div className={SpecialtyDetailStyles.specialtyDetailDoctorList}>
-								<div className={`${MainStyles.blockContent} ${SpecialtyDetailStyles.blockContent}`}>
-									{doctorIds.map((doctorId) => {
+						<div className={SpecialtyDetailStyles.specialtyDetailDoctorList}>
+							<div className={`${MainStyles.blockContent} ${SpecialtyDetailStyles.blockContent}`}>
+								{doctorIds && doctorIds.length ? (
+									doctorIds.map((doctorId) => {
 										return (
 											<div
 												className={SpecialtyDetailStyles.specialtyDetailDoctorItem}
@@ -94,9 +95,8 @@ class SpecialtyDetail extends Component {
 														>
 															<DoctorProfile
 																doctorId={doctorId}
-																classDoctorProfileName={
-																	SpecialtyDetailStyles.specialtyDetailDoctorProfileName
-																}
+																isSmallTitle
+																isViewDetail
 															/>
 														</div>
 													</div>
@@ -116,10 +116,14 @@ class SpecialtyDetail extends Component {
 												</div>
 											</div>
 										);
-									})}
-								</div>
+									})
+								) : (
+									<div className="alert alert-warning">
+										<FormattedMessage id="app.no-results-found" />
+									</div>
+								)}
 							</div>
-						)}
+						</div>
 					</div>
 				) : (
 					<div className="alert alert-warning">

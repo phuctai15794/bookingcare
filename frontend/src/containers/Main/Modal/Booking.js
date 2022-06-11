@@ -149,6 +149,31 @@ class Booking extends Component {
 			delete dataBooking.birthday;
 
 			await bookingPatient(dataBooking);
+
+			const messageBookingPatient = this.props.messageBookingPatient;
+
+			if (messageBookingPatient) {
+				if (messageBookingPatient.type === 'success') {
+					this.setState({
+						attributes: {
+							firstName: '',
+							lastName: '',
+							phone: '',
+							email: '',
+							address: '',
+							medicalReason: '',
+							gender: '',
+							birthday: new Date(),
+						},
+					});
+
+					toast.success(<HtmlRaw>{`${messageBookingPatient.text}`}</HtmlRaw>);
+				} else if (messageBookingPatient.type === 'info') {
+					toast.info(<HtmlRaw>{`${messageBookingPatient.text}`}</HtmlRaw>);
+				} else if (messageBookingPatient.type === 'error') {
+					toast.error(<HtmlRaw>{`${messageBookingPatient.text}`}</HtmlRaw>);
+				}
+			}
 		}
 	};
 
@@ -158,30 +183,7 @@ class Booking extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		const { genders, messageBookingPatient } = this.props;
-
-		if (prevProps.messageBookingPatient.text !== messageBookingPatient.text) {
-			if (messageBookingPatient.type === 'success') {
-				this.setState({
-					attributes: {
-						firstName: '',
-						lastName: '',
-						phone: '',
-						email: '',
-						address: '',
-						medicalReason: '',
-						gender: '',
-						birthday: new Date(),
-					},
-				});
-
-				toast.success(<HtmlRaw>{`${messageBookingPatient.text}`}</HtmlRaw>);
-			} else if (messageBookingPatient.type === 'info') {
-				toast.info(<HtmlRaw>{`${messageBookingPatient.text}`}</HtmlRaw>);
-			} else if (messageBookingPatient.type === 'error') {
-				toast.error(<HtmlRaw>{`${messageBookingPatient.text}`}</HtmlRaw>);
-			}
-		}
+		const { genders } = this.props;
 
 		if (prevProps.genders !== genders) {
 			this.setState({
@@ -220,7 +222,9 @@ class Booking extends Component {
 					<div className={MainStyles.modalMainBody}>
 						{doctorId && <DoctorProfile doctorId={doctorId} />}
 						{timeBooking && (
-							<div className="alert alert-info mb-3">{`${priceMedical} (${timeString})`}</div>
+							<div className="alert alert-info mb-3">{`${priceMedical ?? 'Trả sau'} (${
+								timeString ?? ''
+							})`}</div>
 						)}
 						<form action="#" method="POST" onSubmit={(event) => event.preventDefault()}>
 							<div className="row">

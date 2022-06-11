@@ -21,6 +21,9 @@
 		.doctorProfileName {
 			font-weight: 600;
 			font-size: 23px;
+			&.isSmallTitle {
+				font-size: 20px;
+			}
 		}
 
 		.doctorProfileDescription {

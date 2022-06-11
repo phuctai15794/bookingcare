@@ -68,6 +68,17 @@ let getDetailAPI = (id) => {
 				},
 			});
 
+			if (data) {
+				const doctorIds = await db.DoctorInfo.findAll({
+					attributes: ['doctorId'],
+					where: {
+						specialtyId: id,
+					},
+				});
+
+				data.doctorIds = doctorIds && doctorIds.map((doctorId) => doctorId.doctorId);
+			}
+
 			resole(data);
 		} catch (error) {
 			reject(error);
