@@ -87,10 +87,10 @@ export const createSpecialtyFail = (error) => ({
 	error,
 });
 
-export const getDetailSpecialty = (id) => {
+export const getDetailSpecialty = (id, locationId) => {
 	return async (dispatch) => {
 		dispatch(getDetailSpecialtyStart());
-		await GetDetailSpecialtyService(id)
+		await GetDetailSpecialtyService(id, locationId)
 			.then((response) => {
 				dispatch(getDetailSpecialtySuccess(response.data.data));
 			})

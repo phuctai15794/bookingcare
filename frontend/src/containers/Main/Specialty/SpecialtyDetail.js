@@ -32,9 +32,11 @@ class SpecialtyDetail extends Component {
 	};
 
 	async componentDidMount() {
-		const { match, getDetailSpecialty } = this.props;
+		const { match, location, getDetailSpecialty } = this.props;
 		const doctorId = match.params.id;
-		await getDetailSpecialty(doctorId);
+		const queryParams = new URLSearchParams(location.search);
+		const locationId = queryParams.get('locationId') || 'ALL';
+		await getDetailSpecialty(doctorId, locationId);
 	}
 
 	componentDidUpdate(prevProps) {
@@ -150,7 +152,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getDetailSpecialty: (id) => dispatch(actions.getDetailSpecialty(id)),
+		getDetailSpecialty: (id, locationId) => dispatch(actions.getDetailSpecialty(id, locationId)),
 	};
 };
 

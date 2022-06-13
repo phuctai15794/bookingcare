@@ -17,8 +17,9 @@ const CreateSpecialtyService = async (data) => {
 	});
 };
 
-const GetDetailSpecialtyService = async (id) => {
-	return await axios.callAPI.get(`/api/specialty/detail/${id}`);
+const GetDetailSpecialtyService = async (id, locationId) => {
+	const url = `/api/specialty/detail/${id}${locationId && `?locationId=${locationId}`}`;
+	return await axios.callAPI.get(url);
 };
 
 export { ListSpecialtiesService, ListSpecialtiesHomeService, CreateSpecialtyService, GetDetailSpecialtyService };
