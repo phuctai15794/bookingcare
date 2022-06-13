@@ -33,7 +33,7 @@ class SpecialtyDetail extends Component {
 		});
 	};
 
-	handleOnChangeSelect = async (selectedOption, type) => {
+	handleOnChangeSelect = (selectedOption, type) => {
 		const keySelect = Functions.toCapitalizeCase(type);
 
 		this.setState({
