@@ -59,7 +59,7 @@ let createSpecialtyAPI = (data) => {
 	});
 };
 
-let getDetailAPI = (id) => {
+let getDetailAPI = (id, location) => {
 	return new Promise(async (resole, reject) => {
 		try {
 			const data = await db.Specialty.findOne({
@@ -69,14 +69,20 @@ let getDetailAPI = (id) => {
 			});
 
 			if (data) {
-				const doctorIds = await db.DoctorInfo.findAll({
-					attributes: ['doctorId'],
-					where: {
-						specialtyId: id,
-					},
+				const whereDoctorInfo = {
+					specialtyId: id,
+				};
+
+				if (location) {
+					whereDoctorInfo.provinceId = location;
+				}
+
+				const doctorInfos = await db.DoctorInfo.findAll({
+					attributes: ['doctorId', 'provinceId'],
+					where: whereDoctorInfo,
 				});
 
-				data.doctorIds = doctorIds && doctorIds.map((doctorId) => doctorId.doctorId);
+				data.doctorInfos = doctorInfos;
 			}
 
 			resole(data);

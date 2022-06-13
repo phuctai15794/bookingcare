@@ -42,6 +42,7 @@ let createSpecialtyAPI = async (req, res) => {
 
 let getDetailAPI = async (req, res) => {
 	const id = req.params.id;
+	const location = req.query.location;
 	let result = {
 		message: {
 			type: '',
@@ -54,7 +55,7 @@ let getDetailAPI = async (req, res) => {
 		result.message.type = 'error';
 		result.message.text = 'User is invalid';
 	} else {
-		result.info = await SpecialtyService.getDetailAPI(id);
+		result.info = await SpecialtyService.getDetailAPI(id, location);
 	}
 
 	return res.status(200).json({

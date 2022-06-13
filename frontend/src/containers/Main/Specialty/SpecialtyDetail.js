@@ -16,6 +16,7 @@ class SpecialtyDetail extends Component {
 		this.state = {
 			specialtyDetail: null,
 			doctorIds: null,
+			provinceIds: null,
 			isShowInfo: false,
 		};
 	}
@@ -24,6 +25,10 @@ class SpecialtyDetail extends Component {
 		this.setState({
 			isShowInfo: !this.state.isShowInfo,
 		});
+	};
+
+	buildIds = (ids, type) => {
+		return ids.map((id) => id[type]);
 	};
 
 	async componentDidMount() {
@@ -37,7 +42,8 @@ class SpecialtyDetail extends Component {
 
 		if (prevProps.specialtyDetail !== specialtyDetail) {
 			this.setState({
-				doctorIds: specialtyDetail.doctorIds,
+				doctorIds: this.buildIds(specialtyDetail.doctorInfos, 'doctorId'),
+				provinceIds: this.buildIds(specialtyDetail.doctorInfos, 'provinceId'),
 				specialtyDetail,
 			});
 		}
