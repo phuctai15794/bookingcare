@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2022 at 01:25 PM
+-- Generation Time: Jun 13, 2022 at 05:17 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -155,7 +155,7 @@ CREATE TABLE `doctorinfos` (
 
 INSERT INTO `doctorinfos` (`id`, `doctorId`, `priceId`, `specialtyId`, `clinicId`, `provinceId`, `paymentId`, `addressClinic`, `nameClinic`, `note`, `count`, `createdAt`, `updatedAt`) VALUES
 (1, 4, 'PRI2', '6', NULL, 'PRO2', 'PAY2', '20-22 Dương Quang Trung, Phường 12, Quận 10, Tp. HCM', 'Phòng khám Bệnh viện Đại học Y Dược 1', 'Đối với các đơn vị bảo hiểm không bảo lãnh trực tiếp, phòng khám xuất hoá đơn tài chính (hoá đơn đỏ) và hỗ trợ bệnh nhân hoàn thiện hồ sơ', NULL, '2022-06-05 20:37:19', '2022-06-08 20:47:47'),
-(2, 6, 'PRI3', '7', NULL, 'PRO3', 'PAY1', '207 Phố Huế - Hai Bà Trưng - Hà Nội', 'Phòng khám Chuyên khoa Da Liễu', 'Được ưu tiên khám trước khi đật khám qua BookingCare. Giá khám cho người nước ngoài là 30 USD', NULL, '2022-06-05 20:39:06', '2022-06-08 20:47:26'),
+(2, 6, 'PRI3', '6', NULL, 'PRO2', 'PAY1', '207 Phố Huế - Hai Bà Trưng - Hà Nội', 'Phòng khám Chuyên khoa Da Liễu', 'Được ưu tiên khám trước khi đật khám qua BookingCare. Giá khám cho người nước ngoài là 30 USD', NULL, '2022-06-05 20:39:06', '2022-06-08 20:47:26'),
 (3, 2, 'PRI6', '6', NULL, 'PRO6', 'PAY1', 'Số 52 Nguyễn Chí Thanh - Đống Đa - Hà Nội', 'Bệnh viện Đa khoa Bảo Sơn 2', 'Giá khám chưa bao gồm chi phí chụp chiếu, xét nghiệm', NULL, '2022-06-10 22:31:27', '2022-06-10 22:31:27'),
 (4, 9, 'PRI6', '4', NULL, 'PRO7', 'PAY2', 'Số 58 ngõ 120, Trường Chinh, Đống Đa, Hà Nội', 'Phòng khám Hà An', 'Phòng khám hiện không áp dụng bảo hiểm bảo lạnh trực tiếp và chưa có xuất hóa đơn tài chính (hóa đơn đỏ)', NULL, '2022-06-11 14:55:32', '2022-06-11 14:55:32');
 
