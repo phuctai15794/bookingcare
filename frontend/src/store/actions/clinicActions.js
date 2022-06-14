@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { ListClinicsService } from '../../services/ClinicService';
+import { ListClinicsService, CreateClinicService } from '../../services/ClinicService';
 
 export const fetchClinics = () => {
 	return async (dispatch) => {
@@ -25,5 +25,32 @@ export const fetchClinicsSuccess = (data) => ({
 
 export const fetchClinicsFail = (error) => ({
 	type: actionTypes.FETCH_CLINIC_FAIL,
+	error,
+});
+
+export const createClinic = (data) => {
+	return async (dispatch) => {
+		dispatch(createClinicStart());
+		await CreateClinicService(data)
+			.then((response) => {
+				dispatch(createClinicSuccess(response.data.message));
+			})
+			.catch((error) => {
+				dispatch(createClinicFail(error));
+			});
+	};
+};
+
+export const createClinicStart = () => ({
+	type: actionTypes.CREATE_CLINIC_START,
+});
+
+export const createClinicSuccess = (message) => ({
+	type: actionTypes.CREATE_CLINIC_SUCCESS,
+	message,
+});
+
+export const createClinicFail = (error) => ({
+	type: actionTypes.CREATE_CLINIC_FAIL,
 	error,
 });

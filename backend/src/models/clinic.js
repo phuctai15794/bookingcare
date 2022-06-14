@@ -16,8 +16,9 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			name: DataTypes.STRING,
 			address: DataTypes.STRING,
-			description: DataTypes.TEXT,
-			image: DataTypes.STRING,
+			contentHTML: DataTypes.TEXT('long'),
+			contentMarkdown: DataTypes.TEXT('long'),
+			image: DataTypes.BLOB,
 		},
 		{
 			sequelize,

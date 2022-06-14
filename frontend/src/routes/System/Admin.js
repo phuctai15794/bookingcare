@@ -4,6 +4,7 @@ import UserManage from '../../containers/System/User/UserManage';
 import DoctorManage from '../../containers/System/Doctor/DoctorManage';
 import DoctorSchedule from '../../containers/System/Doctor/DoctorSchedule';
 import SpecialtyManage from '../../containers/System/Specialty/SpecialtyManage';
+import ClinicManage from '../../containers/System/Clinic/ClinicManage';
 import { Constants } from '../../utils';
 
 class AdminRoute extends Component {
@@ -15,6 +16,7 @@ class AdminRoute extends Component {
 					<Route path={`${Constants.PATHS.SYSTEM.HOME}/admin/doctor-manage`} component={DoctorManage} />
 					<Route path={`${Constants.PATHS.SYSTEM.HOME}/admin/doctor-schedule`} component={DoctorSchedule} />
 					<Route path={`${Constants.PATHS.SYSTEM.HOME}/admin/specialty-manage`} component={SpecialtyManage} />
+					<Route path={`${Constants.PATHS.SYSTEM.HOME}/admin/clinic-manage`} component={ClinicManage} />
 					<Route
 						component={() => {
 							return <Redirect to={Constants.PATHS.SYSTEM.DASHBOARD} />;

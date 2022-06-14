@@ -61,6 +61,7 @@ let route = (app) => {
 
 	// API: Clinic
 	router.get('/api/clinic/list', ClinicController.listAPI);
+	router.post('/api/clinic/create', Auths.verify, ClinicController.createClinicAPI);
 
 	// API: Verify
 	router.get('/api/verify/booking', VerifyController.bookingPatientAPI);

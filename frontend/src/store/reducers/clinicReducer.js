@@ -16,6 +16,13 @@ const initialState = {
 				type: '',
 			},
 		},
+		create: {
+			loading: false,
+			message: {
+				text: '',
+				type: '',
+			},
+		},
 	},
 };
 
@@ -53,6 +60,44 @@ const clinicReducer = (state = initialState, action) => {
 					...state.actions,
 					fetch: {
 						...state.actions.fetch,
+						loading: false,
+						message: {
+							text: 'Error. Please try again later',
+							type: 'error',
+						},
+					},
+				},
+			};
+		case actionTypes.CREATE_CLINIC_START:
+			return {
+				...state,
+				actions: {
+					...state.actions,
+					create: {
+						...state.actions.create,
+						loading: true,
+					},
+				},
+			};
+		case actionTypes.CREATE_CLINIC_SUCCESS:
+			return {
+				...state,
+				actions: {
+					...state.actions,
+					create: {
+						...state.actions.create,
+						loading: false,
+						message: action.message,
+					},
+				},
+			};
+		case actionTypes.CREATE_CLINIC_FAIL:
+			return {
+				...state,
+				actions: {
+					...state.actions,
+					create: {
+						...state.actions.create,
 						loading: false,
 						message: {
 							text: 'Error. Please try again later',
