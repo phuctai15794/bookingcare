@@ -88,7 +88,7 @@ class SpecialtyDetail extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		const { language, specialtyDetail, provinces } = this.props;
+		const { language, location, specialtyDetail, provinces } = this.props;
 
 		if (prevProps.specialtyDetail !== specialtyDetail) {
 			this.setState({
@@ -100,11 +100,21 @@ class SpecialtyDetail extends Component {
 
 		if (prevProps.provinces !== provinces || prevProps.language !== language) {
 			const optionsProvince = this.buildSelect(provinces);
+			const queryParams = new URLSearchParams(location.search);
+			const locationId = queryParams.get('locationId') || 'ALL';
+			const selectedProvince =
+				locationId === 'ALL'
+					? {
+							value: 'ALL',
+							label: 'Toàn quốc',
+					  }
+					: optionsProvince.filter((option) => option.value === locationId);
 
 			this.setState({
 				selectProvinces: {
 					...this.state.selectProvinces,
 					list: [...this.state.selectProvinces.list, ...optionsProvince],
+					selected: selectedProvince,
 				},
 			});
 		}
