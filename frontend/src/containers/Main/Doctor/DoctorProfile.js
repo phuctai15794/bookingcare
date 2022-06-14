@@ -17,12 +17,12 @@ class DoctorProfile extends Component {
 
 	async componentDidMount() {
 		const { doctorId, getProfileDoctor } = this.props;
-
 		await getProfileDoctor(doctorId);
+		const { doctorProfile } = this.props;
 
-		if (this.props.doctorProfile) {
+		if (doctorProfile) {
 			this.setState({
-				doctorProfile: this.props.doctorProfile,
+				doctorProfile,
 			});
 		}
 	}

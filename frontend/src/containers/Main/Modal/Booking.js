@@ -180,12 +180,9 @@ class Booking extends Component {
 	async componentDidMount() {
 		const { fetchAllCode } = this.props;
 		await fetchAllCode('GENDER');
-	}
-
-	componentDidUpdate(prevProps) {
 		const { genders } = this.props;
 
-		if (prevProps.genders !== genders) {
+		if (genders) {
 			this.setState({
 				dataGender: genders,
 			});

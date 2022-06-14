@@ -24,10 +24,11 @@ class DoctorInfo extends Component {
 	async componentDidMount() {
 		const { doctorId, getInfoDoctor } = this.props;
 		await getInfoDoctor(doctorId);
+		const { doctorInfo } = this.props;
 
-		if (this.props.doctorInfo) {
+		if (doctorInfo) {
 			this.setState({
-				doctorInfo: this.props.doctorInfo.infoData,
+				doctorInfo: doctorInfo.infoData,
 			});
 		}
 	}

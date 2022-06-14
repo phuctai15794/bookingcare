@@ -52,11 +52,14 @@ class DoctorSchedule extends Component {
 		if (!_.isEmpty(daysOfWeek)) {
 			const [firstDay] = daysOfWeek;
 			await getScheduleByDate(doctorId, firstDay.value);
+			const { schedulesByDate } = this.props;
 
-			this.setState({
-				schedulesByDate: this.props.schedulesByDate,
-				daysOfWeek,
-			});
+			if (schedulesByDate) {
+				this.setState({
+					schedulesByDate,
+					daysOfWeek,
+				});
+			}
 		}
 	}
 
