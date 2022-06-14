@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import Select from 'react-select';
-import { HtmlRaw, Functions } from '../../../utils';
+import { HtmlRaw, Functions, Constants } from '../../../utils';
 import * as actions from '../../../store/actions';
 import DoctorSchedule from '../Doctor/DoctorSchedule';
 import DoctorProfile from '../Doctor/DoctorProfile';
@@ -20,7 +20,12 @@ class SpecialtyDetail extends Component {
 			doctorIds: null,
 			provinceIds: null,
 			selectProvinces: {
-				list: [],
+				list: [
+					{
+						value: 'ALL',
+						label: 'Toàn quốc',
+					},
+				],
 				selected: null,
 			},
 			isShowInfo: false,
@@ -33,8 +38,18 @@ class SpecialtyDetail extends Component {
 		});
 	};
 
-	handleOnChangeSelect = (selectedOption, type) => {
+	handleOnChangeSelect = async (selectedOption, type) => {
+		const { match, history, getDetailSpecialty } = this.props;
+		const id = match.params.id;
+		const specialtyId = isNaN(id) ? id.split('?')[0] : id;
+		const locationId = selectedOption.value;
 		const keySelect = Functions.toCapitalizeCase(type);
+
+		history.replace({
+			pathname: `${Constants.PATHS.MAIN.SPECIALTY_DETAIL}/${specialtyId}${
+				locationId && `?locationId=${locationId}`
+			}`,
+		});
 
 		this.setState({
 			[`select${keySelect}`]: {
@@ -42,6 +57,8 @@ class SpecialtyDetail extends Component {
 				selected: selectedOption,
 			},
 		});
+
+		await getDetailSpecialty(specialtyId, locationId);
 	};
 
 	buildIds = (ids, type) => {
@@ -52,22 +69,22 @@ class SpecialtyDetail extends Component {
 		const { language } = this.props;
 		const keyLang = Functions.toCapitalizeCase(language);
 
-		return (
-			!_.isEmpty(options) &&
-			options.map((item) => ({
-				value: item.keyMap,
-				label: `${item[`value${keyLang}`]}`,
-			}))
-		);
+		return !_.isEmpty(options)
+			? options.map((item) => ({
+					value: item.keyMap,
+					label: `${item[`value${keyLang}`]}`,
+			  }))
+			: [];
 	};
 
 	async componentDidMount() {
 		const { match, location, getDetailSpecialty, fetchAllCode } = this.props;
-		const doctorId = match.params.id;
+		const id = match.params.id;
+		const specialtyId = isNaN(id) ? id.split('?')[0] : id;
 		const queryParams = new URLSearchParams(location.search);
 		const locationId = queryParams.get('locationId') || 'ALL';
 		await fetchAllCode('PROVINCE');
-		await getDetailSpecialty(doctorId, locationId);
+		await getDetailSpecialty(specialtyId, locationId);
 	}
 
 	componentDidUpdate(prevProps) {
@@ -87,7 +104,7 @@ class SpecialtyDetail extends Component {
 			this.setState({
 				selectProvinces: {
 					...this.state.selectProvinces,
-					list: optionsProvince || [],
+					list: [...this.state.selectProvinces.list, ...optionsProvince],
 				},
 			});
 		}
