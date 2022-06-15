@@ -110,6 +110,12 @@
 				"types": {
 					"schedule": "Schedule management"
 				}
+			},
+			"patient-management": {
+				"name": "Patient",
+				"types": {
+					"patient": "Patient management"
+				}
 			}
 		}
 	},

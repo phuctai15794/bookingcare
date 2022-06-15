@@ -110,6 +110,12 @@
 				"types": {
 					"schedule": "Quản lý lịch khám"
 				}
+			},
+			"patient-management": {
+				"name": "Bệnh nhân",
+				"types": {
+					"patient": "Quản lý bệnh nhân"
+				}
 			}
 		}
 	},

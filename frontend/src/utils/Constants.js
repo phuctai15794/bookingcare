@@ -75,7 +75,7 @@ export const SYSTEM_MENUS = {
 				},
 				{
 					name: 'menu.doctor.user-management.types.schedule',
-					link: `${PATHS.SYSTEM.HOME}/admin/doctor-schedule`,
+					link: `${PATHS.SYSTEM.HOME}/admin/schedule-manage`,
 				},
 				{
 					name: 'menu.admin.user-management.types.admin',
@@ -126,7 +126,11 @@ export const SYSTEM_MENUS = {
 			menus: [
 				{
 					name: 'menu.doctor.user-management.types.schedule',
-					link: `${PATHS.SYSTEM.HOME}/doctor/doctor-schedule`,
+					link: `${PATHS.SYSTEM.HOME}/doctor/schedule-manage`,
+				},
+				{
+					name: 'menu.doctor.patient-management.types.patient',
+					link: `${PATHS.SYSTEM.HOME}/doctor/patient-manage`,
 				},
 			],
 		},

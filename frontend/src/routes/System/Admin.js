@@ -14,7 +14,7 @@ class AdminRoute extends Component {
 				<Switch>
 					<Route path={`${Constants.PATHS.SYSTEM.HOME}/admin/user-manage`} component={UserManage} />
 					<Route path={`${Constants.PATHS.SYSTEM.HOME}/admin/doctor-manage`} component={DoctorManage} />
-					<Route path={`${Constants.PATHS.SYSTEM.HOME}/admin/doctor-schedule`} component={DoctorSchedule} />
+					<Route path={`${Constants.PATHS.SYSTEM.HOME}/admin/schedule-manage`} component={DoctorSchedule} />
 					<Route path={`${Constants.PATHS.SYSTEM.HOME}/admin/specialty-manage`} component={SpecialtyManage} />
 					<Route path={`${Constants.PATHS.SYSTEM.HOME}/admin/clinic-manage`} component={ClinicManage} />
 					<Route
