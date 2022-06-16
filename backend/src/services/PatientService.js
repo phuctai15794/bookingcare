@@ -30,6 +30,7 @@ let bookingPatientAPI = (data) => {
 					phone: data.phone,
 					address: data.address,
 					gender: data.gender,
+					medicalReason: data.medicalReason,
 				},
 			});
 
@@ -58,6 +59,7 @@ let bookingPatientAPI = (data) => {
 							timeString: data.timeString,
 							doctorName: data.doctorName,
 							priceMedical: data.priceMedical,
+							medicalReason: data.medicalReason,
 							redirectLink: buildUrl(token, data.doctorId),
 						},
 					});

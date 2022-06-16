@@ -37,6 +37,39 @@ let listAPI = (limit) => {
 	});
 };
 
+let listPatientAPI = (id, date) => {
+	return new Promise(async (resole, reject) => {
+		try {
+			const whereBooking = {
+				statusId: 'S2',
+				doctorId: id,
+			};
+
+			if (date) {
+				whereBooking.date = date;
+			}
+
+			const data = await db.Booking.findAll({
+				raw: true,
+				nest: true,
+				include: [
+					{
+						model: db.User,
+						as: 'patientData',
+						attributes: ['firstName', 'lastName', 'email', 'medicalReason', 'address', 'phone', 'gender'],
+					},
+				],
+				where: whereBooking,
+				order: [['createdAt', 'DESC']],
+			});
+
+			resole(data);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};
+
 let listInWeekAPI = () => {
 	return new Promise(async (resole, reject) => {
 		try {
@@ -318,6 +351,7 @@ let getInfoAPI = (id) => {
 module.exports = {
 	listAPI,
 	listInWeekAPI,
+	listPatientAPI,
 	updateInfoAPI,
 	getDetailAPI,
 	getProfileAPI,
