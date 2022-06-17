@@ -111,10 +111,10 @@
 					"schedule": "Quản lý lịch khám"
 				}
 			},
-			"patient-management": {
-				"name": "Bệnh nhân",
+			"appointment-management": {
+				"name": "Lịch hẹn",
 				"types": {
-					"patient": "Quản lý bệnh nhân"
+					"appointment": "Quản lý lịch hẹn"
 				}
 			}
 		}

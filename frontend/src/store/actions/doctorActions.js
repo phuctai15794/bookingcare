@@ -2,6 +2,7 @@ import actionTypes from './actionTypes';
 import {
 	ListDoctorsService,
 	ListDoctorsInWeekService,
+	ListAppointmentsService,
 	UpdateInfoDoctorService,
 	GetDetailDoctorService,
 	GetProfileDoctorService,
@@ -59,6 +60,33 @@ export const fetchDoctorsInWeekSuccess = (data) => ({
 
 export const fetchDoctorsInWeekFail = (error) => ({
 	type: actionTypes.FETCH_DOCTOR_IN_WEEK_FAIL,
+	error,
+});
+
+export const fetchAppointments = (id, date) => {
+	return async (dispatch) => {
+		dispatch(fetchAppointmentsStart());
+		await ListAppointmentsService(id, date)
+			.then((response) => {
+				dispatch(fetchAppointmentsSuccess(response.data.data));
+			})
+			.catch((error) => {
+				dispatch(fetchAppointmentsFail(error));
+			});
+	};
+};
+
+export const fetchAppointmentsStart = () => ({
+	type: actionTypes.FETCH_APPOINTMENT_START,
+});
+
+export const fetchAppointmentsSuccess = (data) => ({
+	type: actionTypes.FETCH_APPOINTMENT_SUCCESS,
+	data,
+});
+
+export const fetchAppointmentsFail = (error) => ({
+	type: actionTypes.FETCH_APPOINTMENT_FAIL,
 	error,
 });
 

@@ -111,10 +111,10 @@
 					"schedule": "Schedule management"
 				}
 			},
-			"patient-management": {
-				"name": "Patient",
+			"appointment-management": {
+				"name": "Appointment",
 				"types": {
-					"patient": "Patient management"
+					"appointment": "Appointment management"
 				}
 			}
 		}

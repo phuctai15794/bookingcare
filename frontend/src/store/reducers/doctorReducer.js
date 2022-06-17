@@ -6,6 +6,7 @@ const initialState = {
 	doctorProfile: null,
 	doctorInfo: null,
 	doctorsInWeek: [],
+	appointments: [],
 	loading: false,
 	message: {
 		text: '',
@@ -47,6 +48,23 @@ const doctorReducer = (state = initialState, action) => {
 			return {
 				...state,
 				doctorsInWeek: [],
+				loading: false,
+			};
+		case actionTypes.FETCH_APPOINTMENT_START:
+			return {
+				...state,
+				loading: true,
+			};
+		case actionTypes.FETCH_APPOINTMENT_SUCCESS:
+			return {
+				...state,
+				appointments: action.data,
+				loading: false,
+			};
+		case actionTypes.FETCH_APPOINTMENT_FAIL:
+			return {
+				...state,
+				appointments: [],
 				loading: false,
 			};
 		case actionTypes.UPDATE_INFO_DOCTOR_START:

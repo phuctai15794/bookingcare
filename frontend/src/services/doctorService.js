@@ -9,6 +9,11 @@ const ListDoctorsService = async () => {
 	return await axios.callAPI.get('/api/doctor/list');
 };
 
+const ListAppointmentsService = async (id, date) => {
+	let query = Number(date) ? `?date=${date}` : '';
+	return await axios.callAPI.get(`/api/doctor/appointment/list/${id}${query}`);
+};
+
 const UpdateInfoDoctorService = async (data) => {
 	return await axios.callVerify.post('/api/doctor/update-info', data, {
 		headers: {
@@ -32,6 +37,7 @@ const GetInfoDoctorService = async (id) => {
 export {
 	ListDoctorsService,
 	ListDoctorsInWeekService,
+	ListAppointmentsService,
 	UpdateInfoDoctorService,
 	GetDetailDoctorService,
 	GetProfileDoctorService,

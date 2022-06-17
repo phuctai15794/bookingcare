@@ -129,8 +129,8 @@ export const SYSTEM_MENUS = {
 					link: `${PATHS.SYSTEM.HOME}/doctor/schedule-manage`,
 				},
 				{
-					name: 'menu.doctor.patient-management.types.patient',
-					link: `${PATHS.SYSTEM.HOME}/doctor/patient-manage`,
+					name: 'menu.doctor.appointment-management.types.appointment',
+					link: `${PATHS.SYSTEM.HOME}/doctor/appointment-manage`,
 				},
 			],
 		},

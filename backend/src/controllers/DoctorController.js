@@ -18,7 +18,7 @@ let listInWeekAPI = async (req, res) => {
 	});
 };
 
-let listPatientAPI = async (req, res) => {
+let listAppointmentAPI = async (req, res) => {
 	const id = req.params.id;
 	const date = req.query.date;
 	let result = {
@@ -26,18 +26,18 @@ let listPatientAPI = async (req, res) => {
 			type: '',
 			text: '',
 		},
-		patient: {},
+		appointments: {},
 	};
 
 	if (!id) {
 		result.message.type = 'error';
 		result.message.text = 'User is invalid';
 	} else {
-		result.patient = await DoctorService.listPatientAPI(id, date);
+		result.appointments = await DoctorService.listAppointmentAPI(id, date);
 	}
 
 	return res.status(200).json({
-		data: result.patient,
+		data: result.appointments,
 		message: result.message,
 	});
 };
@@ -153,7 +153,7 @@ let getInfoAPI = async (req, res) => {
 module.exports = {
 	listAPI,
 	listInWeekAPI,
-	listPatientAPI,
+	listAppointmentAPI,
 	updateInfoAPI,
 	getDetailAPI,
 	getProfileAPI,

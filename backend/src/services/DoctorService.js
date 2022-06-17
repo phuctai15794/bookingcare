@@ -37,7 +37,7 @@ let listAPI = (limit) => {
 	});
 };
 
-let listPatientAPI = (id, date) => {
+let listAppointmentAPI = (id, date) => {
 	return new Promise(async (resole, reject) => {
 		try {
 			const whereBooking = {
@@ -45,7 +45,7 @@ let listPatientAPI = (id, date) => {
 				doctorId: id,
 			};
 
-			if (date) {
+			if (Number(date)) {
 				whereBooking.date = date;
 			}
 
@@ -57,6 +57,23 @@ let listPatientAPI = (id, date) => {
 						model: db.User,
 						as: 'patientData',
 						attributes: ['firstName', 'lastName', 'email', 'medicalReason', 'address', 'phone', 'gender'],
+						include: [
+							{
+								model: db.AllCode,
+								as: 'genderData',
+								attributes: ['valueVi', 'valueEn'],
+							},
+						],
+					},
+					{
+						model: db.AllCode,
+						as: 'statusData',
+						attributes: ['valueVi', 'valueEn'],
+					},
+					{
+						model: db.AllCode,
+						as: 'timeBookingData',
+						attributes: ['valueVi', 'valueEn'],
 					},
 				],
 				where: whereBooking,
@@ -351,7 +368,7 @@ let getInfoAPI = (id) => {
 module.exports = {
 	listAPI,
 	listInWeekAPI,
-	listPatientAPI,
+	listAppointmentAPI,
 	updateInfoAPI,
 	getDetailAPI,
 	getProfileAPI,
