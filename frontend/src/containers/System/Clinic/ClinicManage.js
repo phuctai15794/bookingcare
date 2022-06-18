@@ -34,7 +34,7 @@ class ClinicManage extends Component {
 		this.resetFile = React.createRef();
 	}
 
-	handleOnChangeEditor = ({ html, text }) => {
+	handleChangeEditor = ({ html, text }) => {
 		this.setState({
 			contentHTML: html,
 			contentMarkdown: text,
@@ -45,7 +45,7 @@ class ClinicManage extends Component {
 		});
 	};
 
-	handleOnChangeInput = (event, type) => {
+	handleChangeInput = (event, type) => {
 		this.setState({
 			[type]: event.target.value,
 			message: {
@@ -61,7 +61,7 @@ class ClinicManage extends Component {
 		});
 	};
 
-	handleOnChangeAvatar = async (event) => {
+	handleChangeAvatar = async (event) => {
 		const avatar = event.target.files[0];
 		let avatarBase64 = '';
 
@@ -213,7 +213,7 @@ class ClinicManage extends Component {
 										id="file"
 										lang="vi"
 										ref={this.resetFile}
-										onChange={(event) => this.handleOnChangeAvatar(event)}
+										onChange={(event) => this.handleChangeAvatar(event)}
 									/>
 								</div>
 							</div>
@@ -230,7 +230,7 @@ class ClinicManage extends Component {
 									name="nameClinic"
 									required
 									value={nameClinic}
-									onChange={(event) => this.handleOnChangeInput(event, 'nameClinic')}
+									onChange={(event) => this.handleChangeInput(event, 'nameClinic')}
 								/>
 							</div>
 							<div className="col-6 mb-3">
@@ -244,7 +244,7 @@ class ClinicManage extends Component {
 									name="address"
 									required
 									value={address}
-									onChange={(event) => this.handleOnChangeInput(event, 'address')}
+									onChange={(event) => this.handleChangeInput(event, 'address')}
 								/>
 							</div>
 							<div className="col-12">
@@ -255,7 +255,7 @@ class ClinicManage extends Component {
 									<MdEditor
 										style={{ height: '400px' }}
 										renderHTML={(text) => mdParser.render(text)}
-										onChange={this.handleOnChangeEditor}
+										onChange={this.handleChangeEditor}
 										value={contentMarkdown}
 									/>
 								}

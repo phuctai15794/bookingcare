@@ -29,7 +29,7 @@ class DoctorSchedule extends Component {
 		});
 	};
 
-	handleOnChangeSelect = async (event) => {
+	handleChangeDate = async (event) => {
 		const { doctorId, getScheduleByDate } = this.props;
 		const selectedDay = event.target.value;
 		await getScheduleByDate(doctorId, selectedDay);
@@ -102,7 +102,7 @@ class DoctorSchedule extends Component {
 								name="selectedDay"
 								required
 								value={selectedDay}
-								onChange={(event) => this.handleOnChangeSelect(event)}
+								onChange={(event) => this.handleChangeDate(event)}
 							>
 								{!_.isEmpty(daysOfWeek) &&
 									daysOfWeek.map((day) => {

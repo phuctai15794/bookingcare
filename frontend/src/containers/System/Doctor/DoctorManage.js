@@ -59,7 +59,7 @@ class DoctorManage extends Component {
 		};
 	}
 
-	handleOnChangeEditor = ({ html, text }) => {
+	handleChangeEditor = ({ html, text }) => {
 		this.setState({
 			contentHTML: html,
 			contentMarkdown: text,
@@ -70,7 +70,7 @@ class DoctorManage extends Component {
 		});
 	};
 
-	handleOnChangeSelect = async (selectedOption, type) => {
+	handleChangeSelect = async (selectedOption, type) => {
 		if (type === 'doctors') {
 			const { getDetailDoctor } = this.props;
 			await getDetailDoctor(selectedOption.value);
@@ -102,7 +102,7 @@ class DoctorManage extends Component {
 		}
 	};
 
-	handleOnChangeInput = (event, type) => {
+	handleChangeInput = (event, type) => {
 		this.setState({
 			[type]: event.target.value,
 			message: {
@@ -492,7 +492,7 @@ class DoctorManage extends Component {
 									options={selectDoctors.list}
 									isSearchable
 									noOptionsMessage={() => selectLang.noMatched}
-									onChange={(selectedOption) => this.handleOnChangeSelect(selectedOption, 'doctors')}
+									onChange={(selectedOption) => this.handleChangeSelect(selectedOption, 'doctors')}
 								/>
 							</div>
 							<div className="col-3 mb-3">
@@ -505,7 +505,7 @@ class DoctorManage extends Component {
 									options={selectPrices.list}
 									isSearchable
 									noOptionsMessage={() => selectLang.noMatched}
-									onChange={(selectedOption) => this.handleOnChangeSelect(selectedOption, 'prices')}
+									onChange={(selectedOption) => this.handleChangeSelect(selectedOption, 'prices')}
 								/>
 							</div>
 							<div className="col-3 mb-3">
@@ -518,7 +518,7 @@ class DoctorManage extends Component {
 									options={selectPayments.list}
 									isSearchable
 									noOptionsMessage={() => selectLang.noMatched}
-									onChange={(selectedOption) => this.handleOnChangeSelect(selectedOption, 'payments')}
+									onChange={(selectedOption) => this.handleChangeSelect(selectedOption, 'payments')}
 								/>
 							</div>
 							<div className="col-3 mb-3">
@@ -532,7 +532,7 @@ class DoctorManage extends Component {
 									isSearchable
 									noOptionsMessage={() => selectLang.noMatched}
 									onChange={(selectedOption) =>
-										this.handleOnChangeSelect(selectedOption, 'provinces')
+										this.handleChangeSelect(selectedOption, 'provinces')
 									}
 								/>
 							</div>
@@ -547,7 +547,7 @@ class DoctorManage extends Component {
 									isSearchable
 									noOptionsMessage={() => selectLang.noMatched}
 									onChange={(selectedOption) =>
-										this.handleOnChangeSelect(selectedOption, 'specialties')
+										this.handleChangeSelect(selectedOption, 'specialties')
 									}
 								/>
 							</div>
@@ -561,7 +561,7 @@ class DoctorManage extends Component {
 									options={selectClinics.list}
 									isSearchable
 									noOptionsMessage={() => selectLang.noMatched}
-									onChange={(selectedOption) => this.handleOnChangeSelect(selectedOption, 'clinics')}
+									onChange={(selectedOption) => this.handleChangeSelect(selectedOption, 'clinics')}
 								/>
 							</div>
 							<div className="col-6 mb-3">
@@ -575,7 +575,7 @@ class DoctorManage extends Component {
 									name="nameClinic"
 									required
 									value={nameClinic}
-									onChange={(event) => this.handleOnChangeInput(event, 'nameClinic')}
+									onChange={(event) => this.handleChangeInput(event, 'nameClinic')}
 								/>
 							</div>
 							<div className="col-12 mb-3">
@@ -589,7 +589,7 @@ class DoctorManage extends Component {
 									name="addressClinic"
 									required
 									value={addressClinic}
-									onChange={(event) => this.handleOnChangeInput(event, 'addressClinic')}
+									onChange={(event) => this.handleChangeInput(event, 'addressClinic')}
 								/>
 							</div>
 							<div className="col-6 mb-3">
@@ -602,7 +602,7 @@ class DoctorManage extends Component {
 									name="note"
 									rows="5"
 									value={note}
-									onChange={(event) => this.handleOnChangeInput(event, 'note')}
+									onChange={(event) => this.handleChangeInput(event, 'note')}
 								></textarea>
 							</div>
 							<div className="col-6 mb-3">
@@ -615,7 +615,7 @@ class DoctorManage extends Component {
 									name="description"
 									rows="5"
 									value={description}
-									onChange={(event) => this.handleOnChangeInput(event, 'description')}
+									onChange={(event) => this.handleChangeInput(event, 'description')}
 								></textarea>
 							</div>
 							<div className="col-12">
@@ -626,7 +626,7 @@ class DoctorManage extends Component {
 									<MdEditor
 										style={{ height: '400px' }}
 										renderHTML={(text) => mdParser.render(text)}
-										onChange={this.handleOnChangeEditor}
+										onChange={this.handleChangeEditor}
 										value={contentMarkdown}
 									/>
 								}

@@ -43,7 +43,7 @@ class UserManage extends Component {
 		};
 	}
 
-	handleOnChangeAvatar = async (event) => {
+	handleChangeAvatar = async (event) => {
 		const avatar = event.target.files[0];
 		let avatarBase64 = '';
 
@@ -69,7 +69,7 @@ class UserManage extends Component {
 		});
 	};
 
-	handleOnChangeInput = (event, input) => {
+	handleChangeInput = (event, input) => {
 		this.setState({
 			attributes: {
 				...this.state.attributes,
@@ -82,7 +82,7 @@ class UserManage extends Component {
 		});
 	};
 
-	handleOnKeyPressInput = async (event) => {
+	handleEnterInput = async (event) => {
 		if (event.which === 13) {
 			await this.handleSaveUser();
 		}
@@ -429,7 +429,7 @@ class UserManage extends Component {
 										id="file"
 										lang="vi"
 										ref={this.resetFile}
-										onChange={(event) => this.handleOnChangeAvatar(event)}
+										onChange={(event) => this.handleChangeAvatar(event)}
 									/>
 								</div>
 							</div>
@@ -447,8 +447,8 @@ class UserManage extends Component {
 									required
 									value={email}
 									disabled={action === Constants.SYSTEM_ACTIONS.EDIT ? 'disabled' : ''}
-									onChange={(event) => this.handleOnChangeInput(event, 'email')}
-									onKeyPress={(event) => this.handleOnKeyPressInput(event)}
+									onChange={(event) => this.handleChangeInput(event, 'email')}
+									onKeyPress={(event) => this.handleEnterInput(event)}
 								/>
 							</div>
 							<div className="col-3">
@@ -463,8 +463,8 @@ class UserManage extends Component {
 									required
 									value={password}
 									disabled={action === Constants.SYSTEM_ACTIONS.EDIT ? 'disabled' : ''}
-									onChange={(event) => this.handleOnChangeInput(event, 'password')}
-									onKeyPress={(event) => this.handleOnKeyPressInput(event)}
+									onChange={(event) => this.handleChangeInput(event, 'password')}
+									onKeyPress={(event) => this.handleEnterInput(event)}
 								/>
 							</div>
 							<div className="col-3">
@@ -478,8 +478,8 @@ class UserManage extends Component {
 									name="firstName"
 									required
 									value={firstName}
-									onChange={(event) => this.handleOnChangeInput(event, 'firstName')}
-									onKeyPress={(event) => this.handleOnKeyPressInput(event)}
+									onChange={(event) => this.handleChangeInput(event, 'firstName')}
+									onKeyPress={(event) => this.handleEnterInput(event)}
 								/>
 							</div>
 							<div className="col-3">
@@ -493,8 +493,8 @@ class UserManage extends Component {
 									name="lastName"
 									required
 									value={lastName}
-									onChange={(event) => this.handleOnChangeInput(event, 'lastName')}
-									onKeyPress={(event) => this.handleOnKeyPressInput(event)}
+									onChange={(event) => this.handleChangeInput(event, 'lastName')}
+									onKeyPress={(event) => this.handleEnterInput(event)}
 								/>
 							</div>
 						</div>
@@ -510,8 +510,8 @@ class UserManage extends Component {
 									name="address"
 									required
 									value={address}
-									onChange={(event) => this.handleOnChangeInput(event, 'address')}
-									onKeyPress={(event) => this.handleOnKeyPressInput(event)}
+									onChange={(event) => this.handleChangeInput(event, 'address')}
+									onKeyPress={(event) => this.handleEnterInput(event)}
 								/>
 							</div>
 							<div className="col-3">
@@ -525,8 +525,8 @@ class UserManage extends Component {
 									name="phone"
 									required
 									value={phone}
-									onChange={(event) => this.handleOnChangeInput(event, 'phone')}
-									onKeyPress={(event) => this.handleOnKeyPressInput(event)}
+									onChange={(event) => this.handleChangeInput(event, 'phone')}
+									onKeyPress={(event) => this.handleEnterInput(event)}
 								/>
 							</div>
 							<div className="col-2">
@@ -539,7 +539,7 @@ class UserManage extends Component {
 									name="gender"
 									required
 									value={gender}
-									onChange={(event) => this.handleOnChangeInput(event, 'gender')}
+									onChange={(event) => this.handleChangeInput(event, 'gender')}
 								>
 									<option value="">{optionsDefaultLang.gender}</option>
 									{!_.isEmpty(dataGender)
@@ -563,7 +563,7 @@ class UserManage extends Component {
 									name="roleId"
 									required
 									value={roleId}
-									onChange={(event) => this.handleOnChangeInput(event, 'roleId')}
+									onChange={(event) => this.handleChangeInput(event, 'roleId')}
 								>
 									<option value="">{optionsDefaultLang.role}</option>
 									{!_.isEmpty(dataRole)
@@ -587,7 +587,7 @@ class UserManage extends Component {
 									name="positionId"
 									required
 									value={positionId}
-									onChange={(event) => this.handleOnChangeInput(event, 'positionId')}
+									onChange={(event) => this.handleChangeInput(event, 'positionId')}
 								>
 									<option value="">{optionsDefaultLang.position}</option>
 									{!_.isEmpty(dataPosition)

@@ -20,19 +20,19 @@ class Login extends Component {
 		};
 	}
 
-	handleOnChangeLogin = (event, type) => {
+	handleChangeInput = (event, type) => {
 		this.setState({
 			[type]: event.target.value,
 		});
 	};
 
-	handleOnClickShowHidePassword = () => {
+	handleShowHidePassword = () => {
 		this.setState({
 			isShowPassword: !this.state.isShowPassword,
 		});
 	};
 
-	handleOnClickLogin = async () => {
+	handleLogin = async () => {
 		this.setState({
 			message: {
 				type: '',
@@ -44,9 +44,9 @@ class Login extends Component {
 		await loginUser(this.state.email, this.state.password);
 	};
 
-	handleOnKeyPressLogin = (event) => {
+	handleEnterInput = (event) => {
 		if (event.which === 13) {
-			this.handleOnClickLogin();
+			this.handleLogin();
 		} else {
 			this.setState({
 				message: {
@@ -93,8 +93,8 @@ class Login extends Component {
 									className="form-control"
 									placeholder="Enter your email"
 									value={email}
-									onChange={(event) => this.handleOnChangeLogin(event, 'email')}
-									onKeyPress={(event) => this.handleOnKeyPressLogin(event)}
+									onChange={(event) => this.handleChangeInput(event, 'email')}
+									onKeyPress={(event) => this.handleEnterInput(event)}
 								/>
 							</div>
 							<div className={`${LoginStyles.loginInput} mb-4`}>
@@ -105,12 +105,12 @@ class Login extends Component {
 										className="form-control"
 										placeholder="Enter your password"
 										value={password}
-										onChange={(event) => this.handleOnChangeLogin(event, 'password')}
-										onKeyPress={(event) => this.handleOnKeyPressLogin(event)}
+										onChange={(event) => this.handleChangeInput(event, 'password')}
+										onKeyPress={(event) => this.handleEnterInput(event)}
 									/>
 									<div
 										className="input-group-append"
-										onClick={() => this.handleOnClickShowHidePassword()}
+										onClick={() => this.handleShowHidePassword()}
 									>
 										<span className="input-group-text h-100">
 											<i>
@@ -120,7 +120,7 @@ class Login extends Component {
 									</div>
 								</div>
 							</div>
-							<button className={LoginStyles.loginButton} onClick={() => this.handleOnClickLogin()}>
+							<button className={LoginStyles.loginButton} onClick={() => this.handleLogin()}>
 								Login
 							</button>
 							<div className={LoginStyles.loginForgot}>Forgot your password ?</div>

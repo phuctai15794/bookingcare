@@ -72,7 +72,7 @@ class Booking extends Component {
 		});
 	};
 
-	handleOnChangeInput = (event, input) => {
+	handleChangeInput = (event, input) => {
 		this.setState({
 			attributes: {
 				...this.state.attributes,
@@ -85,7 +85,7 @@ class Booking extends Component {
 		});
 	};
 
-	handleOnKeyPressInput = async (event) => {
+	handleEnterInput = async (event) => {
 		if (event.which === 13) {
 			await this.handleBooking();
 		}
@@ -241,8 +241,8 @@ class Booking extends Component {
 										name="firstName"
 										required
 										value={firstName}
-										onChange={(event) => this.handleOnChangeInput(event, 'firstName')}
-										onKeyPress={(event) => this.handleOnKeyPressInput(event)}
+										onChange={(event) => this.handleChangeInput(event, 'firstName')}
+										onKeyPress={(event) => this.handleEnterInput(event)}
 									/>
 								</div>
 								<div className="col-6 mb-3">
@@ -256,8 +256,8 @@ class Booking extends Component {
 										name="lastName"
 										required
 										value={lastName}
-										onChange={(event) => this.handleOnChangeInput(event, 'lastName')}
-										onKeyPress={(event) => this.handleOnKeyPressInput(event)}
+										onChange={(event) => this.handleChangeInput(event, 'lastName')}
+										onKeyPress={(event) => this.handleEnterInput(event)}
 									/>
 								</div>
 								<div className="col-6 mb-3">
@@ -271,8 +271,8 @@ class Booking extends Component {
 										name="phone"
 										required
 										value={phone}
-										onChange={(event) => this.handleOnChangeInput(event, 'phone')}
-										onKeyPress={(event) => this.handleOnKeyPressInput(event)}
+										onChange={(event) => this.handleChangeInput(event, 'phone')}
+										onKeyPress={(event) => this.handleEnterInput(event)}
 									/>
 								</div>
 								<div className="col-6 mb-3">
@@ -286,8 +286,8 @@ class Booking extends Component {
 										name="email"
 										required
 										value={email}
-										onChange={(event) => this.handleOnChangeInput(event, 'email')}
-										onKeyPress={(event) => this.handleOnKeyPressInput(event)}
+										onChange={(event) => this.handleChangeInput(event, 'email')}
+										onKeyPress={(event) => this.handleEnterInput(event)}
 									/>
 								</div>
 								<div className="col-6 mb-3">
@@ -315,8 +315,8 @@ class Booking extends Component {
 										name="address"
 										required
 										value={address}
-										onChange={(event) => this.handleOnChangeInput(event, 'address')}
-										onKeyPress={(event) => this.handleOnKeyPressInput(event)}
+										onChange={(event) => this.handleChangeInput(event, 'address')}
+										onKeyPress={(event) => this.handleEnterInput(event)}
 									/>
 								</div>
 								<div className="col-6 mb-3">
@@ -330,8 +330,8 @@ class Booking extends Component {
 										name="medicalReason"
 										required
 										value={medicalReason}
-										onChange={(event) => this.handleOnChangeInput(event, 'medicalReason')}
-										onKeyPress={(event) => this.handleOnKeyPressInput(event)}
+										onChange={(event) => this.handleChangeInput(event, 'medicalReason')}
+										onKeyPress={(event) => this.handleEnterInput(event)}
 									/>
 								</div>
 								<div className="col-6">
@@ -344,7 +344,7 @@ class Booking extends Component {
 										name="gender"
 										required
 										value={gender}
-										onChange={(event) => this.handleOnChangeInput(event, 'gender')}
+										onChange={(event) => this.handleChangeInput(event, 'gender')}
 									>
 										<option value="">{optionsDefaultLang.gender}</option>
 										{!_.isEmpty(dataGender)

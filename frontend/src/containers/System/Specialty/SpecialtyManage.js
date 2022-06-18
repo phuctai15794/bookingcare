@@ -33,7 +33,7 @@ class SpecialtyManage extends Component {
 		this.resetFile = React.createRef();
 	}
 
-	handleOnChangeEditor = ({ html, text }) => {
+	handleChangeEditor = ({ html, text }) => {
 		this.setState({
 			contentHTML: html,
 			contentMarkdown: text,
@@ -44,7 +44,7 @@ class SpecialtyManage extends Component {
 		});
 	};
 
-	handleOnChangeInput = (event, type) => {
+	handleChangeInput = (event, type) => {
 		this.setState({
 			[type]: event.target.value,
 			message: {
@@ -60,7 +60,7 @@ class SpecialtyManage extends Component {
 		});
 	};
 
-	handleOnChangeAvatar = async (event) => {
+	handleChangeAvatar = async (event) => {
 		const avatar = event.target.files[0];
 		let avatarBase64 = '';
 
@@ -210,7 +210,7 @@ class SpecialtyManage extends Component {
 										id="file"
 										lang="vi"
 										ref={this.resetFile}
-										onChange={(event) => this.handleOnChangeAvatar(event)}
+										onChange={(event) => this.handleChangeAvatar(event)}
 									/>
 								</div>
 							</div>
@@ -225,7 +225,7 @@ class SpecialtyManage extends Component {
 									name="nameSpecialty"
 									required
 									value={nameSpecialty}
-									onChange={(event) => this.handleOnChangeInput(event, 'nameSpecialty')}
+									onChange={(event) => this.handleChangeInput(event, 'nameSpecialty')}
 								/>
 							</div>
 							<div className="col-12">
@@ -236,7 +236,7 @@ class SpecialtyManage extends Component {
 									<MdEditor
 										style={{ height: '400px' }}
 										renderHTML={(text) => mdParser.render(text)}
-										onChange={this.handleOnChangeEditor}
+										onChange={this.handleChangeEditor}
 										value={contentMarkdown}
 									/>
 								}

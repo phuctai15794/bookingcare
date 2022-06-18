@@ -31,7 +31,7 @@ class DoctorSchedule extends Component {
 		};
 	}
 
-	handleOnChangeSelect = async (selectedOption) => {
+	handleChangeDoctor = async (selectedOption) => {
 		const { getScheduleByDate } = this.props;
 		const { currentDate } = this.state;
 		const dateSelected = Functions.formatDate(currentDate, '', 'startOfDay');
@@ -49,7 +49,7 @@ class DoctorSchedule extends Component {
 		});
 	};
 
-	handleOnChangeDate = async (selectedDated) => {
+	handleChangeDate = async (selectedDated) => {
 		const { getScheduleByDate } = this.props;
 		const { select } = this.state;
 
@@ -63,7 +63,7 @@ class DoctorSchedule extends Component {
 		});
 	};
 
-	handleOnChangeNumberPatient = (event) => {
+	handleChangeNumberPatient = (event) => {
 		const maxNumberPatient = event.target.value;
 
 		if (!Functions.isNumber(maxNumberPatient)) {
@@ -123,7 +123,7 @@ class DoctorSchedule extends Component {
 		);
 	};
 
-	handleOnClickChooseTime = (timeId) => {
+	handleChooseTime = (timeId) => {
 		const { times } = this.state;
 		const newTimes =
 			!_.isEmpty(times) &&
@@ -267,7 +267,7 @@ class DoctorSchedule extends Component {
 									options={select.list}
 									isSearchable
 									noOptionsMessage={() => selectLang.noMatched}
-									onChange={this.handleOnChangeSelect}
+									onChange={this.handleChangeDoctor}
 								/>
 							</div>
 							<div className="col-4 mb-3">
@@ -280,7 +280,7 @@ class DoctorSchedule extends Component {
 									minDate={subDays(new Date(), 0)}
 									disabledKeyboardNavigation
 									closeOnScroll={true}
-									onChange={(date) => this.handleOnChangeDate(date)}
+									onChange={(date) => this.handleChangeDate(date)}
 								/>
 							</div>
 							<div className="col-4 mb-3">
@@ -294,7 +294,7 @@ class DoctorSchedule extends Component {
 									name="maxNumberPatient"
 									required
 									value={maxNumberPatient || 0}
-									onChange={(event) => this.handleOnChangeNumberPatient(event)}
+									onChange={(event) => this.handleChangeNumberPatient(event)}
 								/>
 							</div>
 							<div className="col-12">
@@ -311,7 +311,7 @@ class DoctorSchedule extends Component {
 															time.isActive && 'active'
 														} me-2 mb-2`}
 														key={time.id}
-														onClick={() => this.handleOnClickChooseTime(time.id)}
+														onClick={() => this.handleChooseTime(time.id)}
 													>
 														{time[`value${keyLang}`]}
 													</button>

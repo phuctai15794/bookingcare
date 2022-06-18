@@ -26,7 +26,7 @@ class DoctorAppointment extends Component {
 		};
 	}
 
-	handleOnClickCancelFilter = async () => {
+	handleCancelFilter = async () => {
 		const { history, fetchAppointments } = this.props;
 		const date = 0;
 		const userInfo = LocalStorage.get('userInfo');
@@ -42,7 +42,7 @@ class DoctorAppointment extends Component {
 		await fetchAppointments(userInfo.id, date);
 	};
 
-	handleOnChangeDate = async (selectedDated) => {
+	handleChangeDate = async (selectedDated) => {
 		const { history, fetchAppointments } = this.props;
 		const date = Functions.formatDate(selectedDated, '', 'startOfDay');
 		const userInfo = LocalStorage.get('userInfo');
@@ -113,7 +113,7 @@ class DoctorAppointment extends Component {
 									selected={currentDate}
 									disabledKeyboardNavigation
 									closeOnScroll={true}
-									onChange={(date) => this.handleOnChangeDate(date)}
+									onChange={(date) => this.handleChangeDate(date)}
 								/>
 							</div>
 							{hasFilter && (
@@ -121,7 +121,7 @@ class DoctorAppointment extends Component {
 									<button
 										type="button"
 										className="btn btn-sm btn-danger text-light px-3 py-2"
-										onClick={() => this.handleOnClickCancelFilter()}
+										onClick={() => this.handleCancelFilter()}
 									>
 										<i>
 											<FontAwesomeIcon className="me-2" icon={faTimesCircle} />
