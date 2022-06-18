@@ -154,7 +154,7 @@
 			"fullName": "Fullname",
 			"firstName": "First name",
 			"lastName": "Last name",
-			"birthday": "Birthday",
+			"clinicDate": "Clinic date",
 			"address": "Address",
 			"phone": "Phone",
 			"bookFor": "Book for",

@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
 import db from '../models/index';
@@ -37,7 +38,13 @@ let bookingPatientAPI = (data) => {
 			if (user) {
 				const token = buildToken();
 				const [booking, created] = await db.Booking.findOrCreate({
-					where: { patientId: user.id },
+					where: {
+						statusId: {
+							[Op.in]: ['S1', 'S2'],
+						},
+						patientId: user.id,
+						date: data.date,
+					},
 					defaults: {
 						statusId: 'S1',
 						doctorId: data.doctorId,

@@ -24,7 +24,7 @@ class Booking extends Component {
 				address: '',
 				medicalReason: '',
 				gender: '',
-				birthday: new Date(),
+				clinicDate: new Date(),
 			},
 			dataGender: [],
 			message: {
@@ -46,7 +46,7 @@ class Booking extends Component {
 		this.setState({
 			attributes: {
 				...this.state.attributes,
-				birthday: dateSelected,
+				clinicDate: dateSelected,
 			},
 			message: {
 				text: '',
@@ -137,7 +137,7 @@ class Booking extends Component {
 			const doctorName = this.buildDoctorName();
 			const dataBooking = {
 				...attributes,
-				date: Functions.formatDate(attributes.birthday, '', 'startOfDay'),
+				date: Functions.formatDate(attributes.clinicDate, '', 'startOfDay'),
 				timeType: timeBooking.timeType,
 				timeString,
 				priceMedical: priceMedical ?? 'Trả sau',
@@ -145,8 +145,6 @@ class Booking extends Component {
 				doctorId,
 				language,
 			};
-
-			delete dataBooking.birthday;
 
 			await bookingPatient(dataBooking);
 
@@ -163,7 +161,7 @@ class Booking extends Component {
 							address: '',
 							medicalReason: '',
 							gender: '',
-							birthday: new Date(),
+							clinicDate: new Date(),
 						},
 					});
 
@@ -192,7 +190,7 @@ class Booking extends Component {
 	render() {
 		const { intl, language, isOpenBooking, doctorId, timeBooking, onCloseBooking } = this.props;
 		const { dataGender } = this.state;
-		const { firstName, lastName, phone, email, address, medicalReason, gender, birthday } = this.state.attributes;
+		const { firstName, lastName, phone, email, address, medicalReason, gender, clinicDate } = this.state.attributes;
 		const keyLang = Functions.toCapitalizeCase(language);
 		const priceMedical = this.buildPriceMedical();
 		const timeString = this.buildTimeBooking();
@@ -287,12 +285,13 @@ class Booking extends Component {
 								</div>
 								<div className="col-6 mb-3">
 									<label className="fw-bold mb-1">
-										<FormattedMessage id="form.attributes.birthday" />:
+										<FormattedMessage id="form.attributes.clinicDate" />:
 									</label>
 									<DatePicker
 										className="form-control"
-										selected={birthday}
-										maxDate={subDays(new Date(), 0)}
+										selected={clinicDate}
+										// maxDate={subDays(new Date(), 0)}
+										minDate={subDays(new Date(), 0)}
 										disabledKeyboardNavigation
 										closeOnScroll={true}
 										onChange={(date) => this.handleOnChangeDate(date)}
