@@ -195,7 +195,7 @@ class Booking extends Component {
 	}
 
 	render() {
-		const { intl, language, isOpenBooking, doctorId, timeBooking, onCloseBooking } = this.props;
+		const { intl, language, isOpenModal, doctorId, timeBooking, handleCloseModal } = this.props;
 		const { dataGender } = this.state;
 		const { firstName, lastName, phone, email, address, medicalReason, gender, clinicDate } = this.state.attributes;
 		const keyLang = Functions.toCapitalizeCase(language);
@@ -210,7 +210,7 @@ class Booking extends Component {
 				<Modal
 					className={MainStyles.modalMain}
 					size="lg"
-					isOpen={isOpenBooking}
+					isOpen={isOpenModal}
 					centered={true}
 					keyboard={true}
 					backdrop={true}
@@ -219,7 +219,7 @@ class Booking extends Component {
 						<strong>
 							<FormattedMessage id="app.schedule-booking" />
 						</strong>
-						<button className="btn-close" type="button" onClick={onCloseBooking}></button>
+						<button className="btn-close" type="button" onClick={handleCloseModal}></button>
 					</div>
 					<div className={MainStyles.modalMainBody}>
 						{doctorId && <DoctorProfile doctorId={doctorId} />}
@@ -365,7 +365,7 @@ class Booking extends Component {
 						<button className="btn btn-sm btn-primary px-3 py-2 me-2" onClick={() => this.handleBooking()}>
 							<FormattedMessage id="form.actions.booking" />
 						</button>
-						<button className="btn btn-sm btn-secondary px-3 py-2" onClick={onCloseBooking}>
+						<button className="btn btn-sm btn-secondary px-3 py-2" onClick={handleCloseModal}>
 							<FormattedMessage id="form.actions.cancel" />
 						</button>
 					</div>

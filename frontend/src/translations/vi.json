@@ -5,6 +5,7 @@
 		"or": "hoặc",
 		"person": "người",
 		"persons": "người",
+		"remedy": "Đơn thuốc",
 		"schedule-booking": "Đặt lịch khám",
 		"medical-schedule": "Lịch khám",
 		"medical-address": "Địa chỉ khám",
@@ -128,6 +129,7 @@
 			"cancel": "Hủy bỏ",
 			"cancelFilter": "Bỏ lọc",
 			"action": "Thao tác",
+			"send": "Gửi",
 			"confirm": "Xác nhận",
 			"invoice": "Gửi hóa đơn",
 			"choose-a-doctor": "Chọn bác sĩ",
@@ -149,6 +151,7 @@
 		},
 		"attributes": {
 			"avatar": "Ảnh đại diện",
+			"fileAttach": "Tập tin đính kèm",
 			"time": "Thời gian",
 			"email": "Email",
 			"password": "Mật khẩu",

@@ -5,6 +5,7 @@
 		"or": "or",
 		"person": "person",
 		"persons": "persons",
+		"remedy": "Remedy",
 		"schedule-booking": "Schedule booking",
 		"medical-schedule": "Medical schedule",
 		"medical-address": "Medical address",
@@ -128,6 +129,7 @@
 			"cancel": "Cancel",
 			"cancelFilter": "Cancel filter",
 			"action": "Action",
+			"send": "Send",
 			"confirm": "Confirm",
 			"invoice": "Invoice",
 			"choose-a-doctor": "Choose a doctor",
@@ -149,6 +151,7 @@
 		},
 		"attributes": {
 			"avatar": "Avatar",
+			"fileAttach": "File attachment",
 			"time": "Time",
 			"email": "Email",
 			"password": "Password",

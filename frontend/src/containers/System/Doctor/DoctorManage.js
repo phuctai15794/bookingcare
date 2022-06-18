@@ -531,9 +531,7 @@ class DoctorManage extends Component {
 									options={selectProvinces.list}
 									isSearchable
 									noOptionsMessage={() => selectLang.noMatched}
-									onChange={(selectedOption) =>
-										this.handleChangeSelect(selectedOption, 'provinces')
-									}
+									onChange={(selectedOption) => this.handleChangeSelect(selectedOption, 'provinces')}
 								/>
 							</div>
 							<div className="col-3 mb-3">

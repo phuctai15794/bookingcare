@@ -108,10 +108,7 @@ class Login extends Component {
 										onChange={(event) => this.handleChangeInput(event, 'password')}
 										onKeyPress={(event) => this.handleEnterInput(event)}
 									/>
-									<div
-										className="input-group-append"
-										onClick={() => this.handleShowHidePassword()}
-									>
+									<div className="input-group-append" onClick={() => this.handleShowHidePassword()}>
 										<span className="input-group-text h-100">
 											<i>
 												<FontAwesomeIcon icon={isShowPassword ? faEyeSlash : faEye} />

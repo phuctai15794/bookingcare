@@ -10,12 +10,15 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Constants, Functions, LocalStorage } from '../../../utils';
 import * as actions from '../../../store/actions';
+import Remedy from '../Modal/Remedy';
 import SystemStyles from '../../../styles/System.module.scss';
 
 class DoctorAppointment extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			isOpenModal: false,
+			dataConfirm: null,
 			appointments: [],
 			currentDate: new Date(),
 			hasFilter: false,
@@ -59,6 +62,25 @@ class DoctorAppointment extends Component {
 		await fetchAppointments(userInfo.id, date);
 	};
 
+	handleCloseModal = () => {
+		this.setState({
+			isOpenModal: false,
+		});
+	};
+
+	handleConfirm = (item) => {
+		const data = {
+			doctorId: item.doctorId,
+			patientId: item.patientId,
+			email: item.patientData.email,
+		};
+
+		this.setState({
+			isOpenModal: true,
+			dataConfirm: data,
+		});
+	};
+
 	async componentDidMount() {
 		const { location, fetchAppointments } = this.props;
 		const userInfo = LocalStorage.get('userInfo');
@@ -85,7 +107,7 @@ class DoctorAppointment extends Component {
 	}
 
 	render() {
-		const { appointments, currentDate, hasFilter, message } = this.state;
+		const { appointments, isOpenModal, dataConfirm, currentDate, hasFilter, message } = this.state;
 		const { language } = this.props;
 		const keyLang = Functions.toCapitalizeCase(language);
 
@@ -166,6 +188,7 @@ class DoctorAppointment extends Component {
 															<button
 																type="button"
 																className="btn btn-sm btn-warning text-light me-3 px-3 py-2"
+																onClick={() => this.handleConfirm(item)}
 															>
 																<i>
 																	<FontAwesomeIcon
@@ -198,6 +221,7 @@ class DoctorAppointment extends Component {
 						</div>
 					</form>
 				</div>
+				<Remedy isOpenModal={isOpenModal} dataConfirm={dataConfirm} handleCloseModal={this.handleCloseModal} />
 			</>
 		);
 	}

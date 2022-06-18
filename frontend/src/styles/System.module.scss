@@ -24,3 +24,23 @@
 		}
 	}
 }
+
+.modalMain {
+	.modalMainHeader {
+		padding: 15px;
+		border-bottom: 1px solid #dee2e6;
+		@include flex(center, space-between);
+		strong {
+			font-size: 15px;
+			font-weight: 600;
+			text-transform: capitalize;
+		}
+	}
+	.modalMainBody {
+		padding: 20px 15px;
+	}
+	.modalMainFooter {
+		padding: 15px;
+		border-top: 1px solid #dee2e6;
+	}
+}

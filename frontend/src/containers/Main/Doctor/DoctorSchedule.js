@@ -13,7 +13,7 @@ class DoctorSchedule extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isOpenBooking: false,
+			isOpenModal: false,
 			timeBooking: null,
 			selectedDay: '',
 			daysOfWeek: [],
@@ -24,7 +24,7 @@ class DoctorSchedule extends Component {
 	listenToEmitter = () => {
 		Emitter.on('CLOSE_MODAL_BOOKING', () => {
 			this.setState({
-				isOpenBooking: false,
+				isOpenModal: false,
 			});
 		});
 	};
@@ -40,17 +40,17 @@ class DoctorSchedule extends Component {
 		});
 	};
 
-	handleOpenBooking = (time) => {
+	handleOpenModal = (time) => {
 		this.setState({
-			isOpenBooking: true,
+			isOpenModal: true,
 			timeBooking: time,
 		});
 		Emitter.emit('CLEAR_DATA_MODAL_BOOKING');
 	};
 
-	handleCloseBooking = () => {
+	handleCloseModal = () => {
 		this.setState({
-			isOpenBooking: false,
+			isOpenModal: false,
 		});
 	};
 
@@ -87,7 +87,7 @@ class DoctorSchedule extends Component {
 	}
 
 	render() {
-		const { isOpenBooking, timeBooking, selectedDay, daysOfWeek, schedulesByDate } = this.state;
+		const { isOpenModal, timeBooking, selectedDay, daysOfWeek, schedulesByDate } = this.state;
 		const { language, doctorId } = this.props;
 		const keyLang = Functions.toCapitalizeCase(language);
 
@@ -127,7 +127,7 @@ class DoctorSchedule extends Component {
 										<button
 											className={`btn ${DoctorScheduleStyles.doctorScheduleButtonTime} rounded-0 me-2 mb-2`}
 											key={time.id}
-											onClick={() => this.handleOpenBooking(time)}
+											onClick={() => this.handleOpenModal(time)}
 										>
 											{time.timeData[`value${keyLang}`]}
 										</button>
@@ -149,9 +149,9 @@ class DoctorSchedule extends Component {
 				</div>
 				<Booking
 					doctorId={doctorId}
-					isOpenBooking={isOpenBooking}
+					isOpenModal={isOpenModal}
 					timeBooking={timeBooking}
-					onCloseBooking={this.handleCloseBooking}
+					handleCloseModal={this.handleCloseModal}
 				/>
 			</>
 		);
