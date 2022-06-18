@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { FormattedMessage } from 'react-intl';
 // import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleCheck, faFileInvoice } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck, faFileInvoice, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Functions, LocalStorage } from '../../../utils';
+import { Constants, Functions, LocalStorage } from '../../../utils';
 import * as actions from '../../../store/actions';
 import SystemStyles from '../../../styles/System.module.scss';
 
@@ -17,6 +18,7 @@ class DoctorAppointment extends Component {
 		this.state = {
 			appointments: [],
 			currentDate: new Date(),
+			hasFilter: false,
 			message: {
 				text: '',
 				type: '',
@@ -24,16 +26,51 @@ class DoctorAppointment extends Component {
 		};
 	}
 
-	handleOnChangeDate = async (selectedDated) => {
+	handleOnClickCancelFilter = async () => {
+		const { history, fetchAppointments } = this.props;
+		const date = 0;
+		const userInfo = LocalStorage.get('userInfo');
+
+		history.replace({
+			pathname: `${Constants.PATHS.SYSTEM.HOME}/doctor/appointment-manage`,
+		});
+
 		this.setState({
+			hasFilter: false,
+		});
+
+		await fetchAppointments(userInfo.id, date);
+	};
+
+	handleOnChangeDate = async (selectedDated) => {
+		const { history, fetchAppointments } = this.props;
+		const date = Functions.formatDate(selectedDated, '', 'startOfDay');
+		const userInfo = LocalStorage.get('userInfo');
+
+		history.replace({
+			pathname: `${Constants.PATHS.SYSTEM.HOME}/doctor/appointment-manage/?date=${date}`,
+		});
+
+		this.setState({
+			hasFilter: true,
 			currentDate: selectedDated,
 		});
+
+		await fetchAppointments(userInfo.id, date);
 	};
 
 	async componentDidMount() {
-		const { fetchAppointments } = this.props;
+		const { location, fetchAppointments } = this.props;
 		const userInfo = LocalStorage.get('userInfo');
-		const date = 0;
+		const queryParams = new URLSearchParams(location.search);
+		const date = queryParams.get('date') || 0;
+
+		if (date) {
+			this.setState({
+				hasFilter: true,
+			});
+		}
+
 		await fetchAppointments(userInfo.id, date);
 	}
 
@@ -48,7 +85,7 @@ class DoctorAppointment extends Component {
 	}
 
 	render() {
-		const { appointments, currentDate, message } = this.state;
+		const { appointments, currentDate, hasFilter, message } = this.state;
 		const { language } = this.props;
 		const keyLang = Functions.toCapitalizeCase(language);
 
@@ -79,6 +116,20 @@ class DoctorAppointment extends Component {
 									onChange={(date) => this.handleOnChangeDate(date)}
 								/>
 							</div>
+							{hasFilter && (
+								<div className="col-12 mb-2">
+									<button
+										type="button"
+										className="btn btn-sm btn-danger text-light px-3 py-2"
+										onCick={() => this.handleOnClickCancelFilter()}
+									>
+										<i>
+											<FontAwesomeIcon className="me-2" icon={faTimesCircle} />
+										</i>
+										<FormattedMessage id="form.actions.cancelFilter" />
+									</button>
+								</div>
+							)}
 							{!_.isEmpty(appointments) && (
 								<div className="col-12">
 									<table className="table table-bordered">
@@ -163,4 +214,4 @@ const mapDispatchToProps = (dispatch) => {
 	return { fetchAppointments: (id, date) => dispatch(actions.fetchAppointments(id, date)) };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DoctorAppointment);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DoctorAppointment));

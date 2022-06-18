@@ -46,9 +46,7 @@ class SpecialtyDetail extends Component {
 		const keySelect = Functions.toCapitalizeCase(type);
 
 		history.replace({
-			pathname: `${Constants.PATHS.MAIN.SPECIALTY_DETAIL}/${specialtyId}${
-				locationId && `?locationId=${locationId}`
-			}`,
+			pathname: `${Constants.PATHS.MAIN.SPECIALTY_DETAIL}/${specialtyId}${`?locationId=${locationId}`}`,
 		});
 
 		this.setState({
