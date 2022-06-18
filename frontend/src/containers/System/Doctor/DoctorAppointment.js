@@ -121,7 +121,7 @@ class DoctorAppointment extends Component {
 									<button
 										type="button"
 										className="btn btn-sm btn-danger text-light px-3 py-2"
-										onCick={() => this.handleOnClickCancelFilter()}
+										onClick={() => this.handleOnClickCancelFilter()}
 									>
 										<i>
 											<FontAwesomeIcon className="me-2" icon={faTimesCircle} />
