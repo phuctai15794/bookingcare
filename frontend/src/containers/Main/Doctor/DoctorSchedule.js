@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { FormattedMessage } from 'react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import { Functions } from '../../../utils';
+import { Emitter, Functions } from '../../../utils';
 import * as actions from '../../../store/actions';
 import Booking from '../Modal/Booking';
 import DoctorScheduleStyles from './DoctorSchedule.module.scss';
@@ -20,6 +20,14 @@ class DoctorSchedule extends Component {
 			schedulesByDate: [],
 		};
 	}
+
+	listenToEmitter = () => {
+		Emitter.on('CLOSE_MODAL_BOOKING', () => {
+			this.setState({
+				isOpenBooking: false,
+			});
+		});
+	};
 
 	handleOnChangeSelect = async (event) => {
 		const { doctorId, getScheduleByDate } = this.props;
@@ -37,6 +45,7 @@ class DoctorSchedule extends Component {
 			isOpenBooking: true,
 			timeBooking: time,
 		});
+		Emitter.emit('CLEAR_DATA_MODAL_BOOKING');
 	};
 
 	handleCloseBooking = () => {
@@ -48,6 +57,8 @@ class DoctorSchedule extends Component {
 	async componentDidMount() {
 		const { language, doctorId, getScheduleByDate } = this.props;
 		const daysOfWeek = Functions.getDaysOfWeek(language);
+
+		this.listenToEmitter();
 
 		if (!_.isEmpty(daysOfWeek)) {
 			const [firstDay] = daysOfWeek;

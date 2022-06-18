@@ -8,7 +8,7 @@ import subDays from 'date-fns/subDays';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as actions from '../../../store/actions';
-import { HtmlRaw, Functions, Constants } from '../../../utils';
+import { Emitter, HtmlRaw, Functions, Constants } from '../../../utils';
 import DoctorProfile from '../Doctor/DoctorProfile';
 import MainStyles from '../../../styles/Main.module.scss';
 
@@ -33,6 +33,23 @@ class Booking extends Component {
 			},
 		};
 	}
+
+	listenToEmitter = () => {
+		Emitter.on('CLEAR_DATA_MODAL_BOOKING', () => {
+			this.setState({
+				attributes: {
+					firstName: '',
+					lastName: '',
+					phone: '',
+					email: '',
+					address: '',
+					medicalReason: '',
+					gender: '',
+					clinicDate: new Date(),
+				},
+			});
+		});
+	};
 
 	handleShowHideInfo = () => {
 		this.setState({
@@ -152,19 +169,7 @@ class Booking extends Component {
 
 			if (messageBookingPatient) {
 				if (messageBookingPatient.type === 'success') {
-					this.setState({
-						attributes: {
-							firstName: '',
-							lastName: '',
-							phone: '',
-							email: '',
-							address: '',
-							medicalReason: '',
-							gender: '',
-							clinicDate: new Date(),
-						},
-					});
-
+					Emitter.emit('CLOSE_MODAL_BOOKING');
 					toast.success(<HtmlRaw>{`${messageBookingPatient.text}`}</HtmlRaw>);
 				} else if (messageBookingPatient.type === 'info') {
 					toast.info(<HtmlRaw>{`${messageBookingPatient.text}`}</HtmlRaw>);
@@ -179,6 +184,8 @@ class Booking extends Component {
 		const { fetchAllCode } = this.props;
 		await fetchAllCode('GENDER');
 		const { genders } = this.props;
+
+		this.listenToEmitter();
 
 		if (genders) {
 			this.setState({
