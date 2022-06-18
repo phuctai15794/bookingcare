@@ -283,9 +283,18 @@ let listAPI = () => {
 	return new Promise(async (resole, reject) => {
 		try {
 			const data = await db.User.findAll({
+				raw: true,
+				nest: true,
 				attributes: {
 					exclude: ['password'],
 				},
+				include: [
+					{
+						model: db.AllCode,
+						as: 'genderData',
+						attributes: ['valueVi', 'valueEn'],
+					},
+				],
 				order: [['createdAt', 'DESC']],
 			});
 

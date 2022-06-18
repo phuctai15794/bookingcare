@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { FormattedMessage } from 'react-intl';
 // import { toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleCheck, faFileInvoice } from '@fortawesome/free-solid-svg-icons';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { HtmlRaw, Constants, Functions, LocalStorage } from '../../../utils';
+import { Functions, LocalStorage } from '../../../utils';
 import * as actions from '../../../store/actions';
 import SystemStyles from '../../../styles/System.module.scss';
 
@@ -47,6 +49,8 @@ class DoctorAppointment extends Component {
 
 	render() {
 		const { appointments, currentDate, message } = this.state;
+		const { language } = this.props;
+		const keyLang = Functions.toCapitalizeCase(language);
 
 		return (
 			<>
@@ -75,6 +79,71 @@ class DoctorAppointment extends Component {
 									onChange={(date) => this.handleOnChangeDate(date)}
 								/>
 							</div>
+							{!_.isEmpty(appointments) && (
+								<div className="col-12">
+									<table className="table table-bordered">
+										<thead>
+											<tr>
+												<th scope="col">#</th>
+												<th scope="col">
+													<FormattedMessage id="form.attributes.time" />
+												</th>
+												<th scope="col">
+													<FormattedMessage id="form.attributes.fullName" />
+												</th>
+												<th scope="col">
+													<FormattedMessage id="form.attributes.address" />
+												</th>
+												<th scope="col">
+													<FormattedMessage id="form.attributes.gender.title" />
+												</th>
+												<th scope="col" className="text-center">
+													<FormattedMessage id="form.actions.action" />
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											{appointments.map((item, index) => {
+												return (
+													<tr key={item.id}>
+														<th scope="row">{index + 1}</th>
+														<td>{item.timeBookingData[`value${keyLang}`]}</td>
+														<td>{`${item.patientData.firstName} ${item.patientData.lastName}`}</td>
+														<td>{item.patientData.address}</td>
+														<td>{item.patientData.genderData[`value${keyLang}`]}</td>
+														<td className="text-center">
+															<button
+																type="button"
+																className="btn btn-sm btn-warning text-light me-3 px-3 py-2"
+															>
+																<i>
+																	<FontAwesomeIcon
+																		className="me-2"
+																		icon={faCircleCheck}
+																	/>
+																</i>
+																<FormattedMessage id="form.actions.confirm" />
+															</button>
+															<button
+																type="button"
+																className="btn btn-sm btn-info text-light px-3 py-2"
+															>
+																<i>
+																	<FontAwesomeIcon
+																		className="me-2"
+																		icon={faFileInvoice}
+																	/>
+																</i>
+																<FormattedMessage id="form.actions.invoice" />
+															</button>
+														</td>
+													</tr>
+												);
+											})}
+										</tbody>
+									</table>
+								</div>
+							)}
 						</div>
 					</form>
 				</div>

@@ -7,7 +7,7 @@ import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import * as actions from '../../../store/actions';
-import { HtmlRaw } from '../../../utils';
+import { HtmlRaw, Functions } from '../../../utils';
 import SystemStyles from '../../../styles/System.module.scss';
 
 class UserList extends Component {
@@ -72,7 +72,8 @@ class UserList extends Component {
 
 	render() {
 		const { users } = this.state;
-		const { loadingFetchUsers } = this.props;
+		const { language, loadingFetchUsers } = this.props;
+		const keyLang = Functions.toCapitalizeCase(language);
 
 		return (
 			<>
@@ -88,14 +89,26 @@ class UserList extends Component {
 								<thead>
 									<tr>
 										<th scope="col">#</th>
-										<th scope="col">First name</th>
-										<th scope="col">Last name</th>
-										<th scope="col">Email</th>
-										<th scope="col">Address</th>
-										<th scope="col">Gender</th>
-										<th scope="col">Phone</th>
+										<th scope="col">
+											<FormattedMessage id="form.attributes.firstName" />
+										</th>
+										<th scope="col">
+											<FormattedMessage id="form.attributes.lastName" />
+										</th>
+										<th scope="col">
+											<FormattedMessage id="form.attributes.email" />
+										</th>
+										<th scope="col">
+											<FormattedMessage id="form.attributes.address" />
+										</th>
+										<th scope="col">
+											<FormattedMessage id="form.attributes.gender.title" />
+										</th>
+										<th scope="col">
+											<FormattedMessage id="form.attributes.phone" />
+										</th>
 										<th scope="col" className="text-center">
-											Action
+											<FormattedMessage id="form.actions.action" />
 										</th>
 									</tr>
 								</thead>
@@ -108,7 +121,7 @@ class UserList extends Component {
 												<td>{user.lastName}</td>
 												<td>{user.email}</td>
 												<td>{user.address}</td>
-												<td>{user.gender === 'M' ? 'Male' : 'Female'}</td>
+												<td>{user.genderData[`value${keyLang}`]}</td>
 												<td>{user.phone}</td>
 												<td className="text-center">
 													<button
@@ -149,6 +162,7 @@ class UserList extends Component {
 
 const mapStateToProps = (state) => {
 	return {
+		language: state.app.language,
 		users: state.user.users,
 		loadingFetchUsers: state.user.actions.fetch.loading,
 	};
