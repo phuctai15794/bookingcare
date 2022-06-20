@@ -9,16 +9,8 @@ class Remedy extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			attributes: {
-				firstName: '',
-				lastName: '',
-				phone: '',
-				email: '',
-				address: '',
-				medicalReason: '',
-				gender: '',
-				clinicDate: new Date(),
-			},
+			email: '',
+			fileAttach: '',
 			message: {
 				text: '',
 				type: '',
@@ -27,10 +19,39 @@ class Remedy extends Component {
 		this.resetFile = React.createRef();
 	}
 
-	componentDidMount() {}
+	handleChangeInput = (event, type) => {
+		this.setState({
+			[type]: event.target.value,
+			message: {
+				text: '',
+				type: '',
+			},
+		});
+	};
+
+	componentDidMount() {
+		const { dataConfirm } = this.props;
+
+		if (dataConfirm) {
+			this.setState({
+				email: dataConfirm.email,
+			});
+		}
+	}
+
+	componentDidUpdate(prevProps) {
+		const { dataConfirm } = this.props;
+
+		if (prevProps.dataConfirm !== dataConfirm) {
+			this.setState({
+				email: dataConfirm.email,
+			});
+		}
+	}
 
 	render() {
-		const { isOpenModal, dataConfirm, handleCloseModal } = this.props;
+		const { email } = this.state;
+		const { isOpenModal, dataConfirm, handleSend, handleCloseModal } = this.props;
 
 		return (
 			<>
@@ -77,15 +98,15 @@ class Remedy extends Component {
 											id="email"
 											name="email"
 											required
-											readOnly
-											value={dataConfirm.email}
+											value={email}
+											onChange={(event) => this.handleChangeInput(event, 'email')}
 										/>
 									</div>
 								</div>
 							</form>
 						</div>
 						<div className={SystemStyles.modalMainFooter}>
-							<button className="btn btn-sm btn-primary px-3 py-2 me-2">
+							<button className="btn btn-sm btn-primary px-3 py-2 me-2" onClick={handleSend}>
 								<FormattedMessage id="form.actions.send" />
 							</button>
 							<button className="btn btn-sm btn-secondary px-3 py-2" onClick={handleCloseModal}>

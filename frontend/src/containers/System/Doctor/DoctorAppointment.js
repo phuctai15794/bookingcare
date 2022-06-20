@@ -62,6 +62,10 @@ class DoctorAppointment extends Component {
 		await fetchAppointments(userInfo.id, date);
 	};
 
+	handleSend = () => {
+		alert('Click me');
+	};
+
 	handleCloseModal = () => {
 		this.setState({
 			isOpenModal: false,
@@ -221,7 +225,12 @@ class DoctorAppointment extends Component {
 						</div>
 					</form>
 				</div>
-				<Remedy isOpenModal={isOpenModal} dataConfirm={dataConfirm} handleCloseModal={this.handleCloseModal} />
+				<Remedy
+					isOpenModal={isOpenModal}
+					dataConfirm={dataConfirm}
+					handleSend={this.handleSend}
+					handleCloseModal={this.handleCloseModal}
+				/>
 			</>
 		);
 	}
