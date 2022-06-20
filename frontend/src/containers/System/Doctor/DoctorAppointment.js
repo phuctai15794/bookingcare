@@ -62,8 +62,8 @@ class DoctorAppointment extends Component {
 		await fetchAppointments(userInfo.id, date);
 	};
 
-	handleSend = () => {
-		alert('Click me');
+	handleSend = (dataConfirm) => {
+		console.log(dataConfirm);
 	};
 
 	handleCloseModal = () => {

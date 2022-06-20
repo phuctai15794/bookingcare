@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Modal } from 'reactstrap';
 // import { toast } from 'react-toastify';
+import { Functions } from '../../../utils';
 import SystemStyles from '../../../styles/System.module.scss';
 
 class Remedy extends Component {
@@ -19,6 +20,16 @@ class Remedy extends Component {
 		this.resetFile = React.createRef();
 	}
 
+	handleChangeFile = async (event) => {
+		const file = event.target.files[0];
+		let fileAttachBase64 = await Functions.toBase64(file);
+
+		this.setState({
+			...this.state,
+			fileAttach: fileAttachBase64,
+		});
+	};
+
 	handleChangeInput = (event, type) => {
 		this.setState({
 			[type]: event.target.value,
@@ -26,6 +37,14 @@ class Remedy extends Component {
 				text: '',
 				type: '',
 			},
+		});
+	};
+
+	handleSend = () => {
+		const { handleSend } = this.props;
+		handleSend({
+			email: this.state.email,
+			fileAttach: this.state.fileAttach,
 		});
 	};
 
@@ -51,7 +70,7 @@ class Remedy extends Component {
 
 	render() {
 		const { email } = this.state;
-		const { isOpenModal, dataConfirm, handleSend, handleCloseModal } = this.props;
+		const { isOpenModal, dataConfirm, handleCloseModal } = this.props;
 
 		return (
 			<>
@@ -85,6 +104,7 @@ class Remedy extends Component {
 												id="file"
 												lang="vi"
 												ref={this.resetFile}
+												onChange={(event) => this.handleChangeFile(event)}
 											/>
 										</div>
 									</div>
@@ -106,7 +126,7 @@ class Remedy extends Component {
 							</form>
 						</div>
 						<div className={SystemStyles.modalMainFooter}>
-							<button className="btn btn-sm btn-primary px-3 py-2 me-2" onClick={handleSend}>
+							<button className="btn btn-sm btn-primary px-3 py-2 me-2" onClick={this.handleSend}>
 								<FormattedMessage id="form.actions.send" />
 							</button>
 							<button className="btn btn-sm btn-secondary px-3 py-2" onClick={handleCloseModal}>
