@@ -3,6 +3,7 @@ import {
 	ListDoctorsService,
 	ListDoctorsInWeekService,
 	ListAppointmentsService,
+	SendRemedyService,
 	UpdateInfoDoctorService,
 	GetDetailDoctorService,
 	GetProfileDoctorService,
@@ -87,6 +88,33 @@ export const fetchAppointmentsSuccess = (data) => ({
 
 export const fetchAppointmentsFail = (error) => ({
 	type: actionTypes.FETCH_APPOINTMENT_FAIL,
+	error,
+});
+
+export const sendRemedy = (data) => {
+	return async (dispatch) => {
+		dispatch(sendRemedyStart());
+		await SendRemedyService(data)
+			.then((response) => {
+				dispatch(sendRemedySuccess(response.data.message));
+			})
+			.catch((error) => {
+				dispatch(sendRemedyFail(error));
+			});
+	};
+};
+
+export const sendRemedyStart = () => ({
+	type: actionTypes.SEND_REMEDY_START,
+});
+
+export const sendRemedySuccess = (message) => ({
+	type: actionTypes.SEND_REMEDY_SUCCESS,
+	message,
+});
+
+export const sendRemedyFail = (error) => ({
+	type: actionTypes.SEND_REMEDY_FAIL,
 	error,
 });
 

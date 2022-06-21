@@ -41,8 +41,11 @@ class Remedy extends Component {
 	};
 
 	handleSend = () => {
-		const { handleSend } = this.props;
+		const { handleSend, dataConfirm } = this.props;
 		handleSend({
+			doctorId: dataConfirm.doctorId,
+			patientId: dataConfirm.patientId,
+			timeType: dataConfirm.timeType,
 			email: this.state.email,
 			fileAttach: this.state.fileAttach,
 		});

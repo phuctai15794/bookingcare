@@ -14,6 +14,14 @@ const ListAppointmentsService = async (id, date) => {
 	return await axios.callAPI.get(`/api/doctor/appointment/list/${id}${query}`);
 };
 
+const SendRemedyService = async (data) => {
+	return await axios.callVerify.post('/api/doctor/send-remedy', data, {
+		headers: {
+			authorization: `Bearer ${LocalStorage.get('accessToken')}`,
+		},
+	});
+};
+
 const UpdateInfoDoctorService = async (data) => {
 	return await axios.callVerify.post('/api/doctor/update-info', data, {
 		headers: {
@@ -38,6 +46,7 @@ export {
 	ListDoctorsService,
 	ListDoctorsInWeekService,
 	ListAppointmentsService,
+	SendRemedyService,
 	UpdateInfoDoctorService,
 	GetDetailDoctorService,
 	GetProfileDoctorService,

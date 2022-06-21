@@ -121,6 +121,50 @@ let listInWeekAPI = () => {
 	});
 };
 
+let sendRemedyAPI = (data) => {
+	return new Promise(async (resole, reject) => {
+		try {
+			const message = {
+				text: '',
+				type: '',
+			};
+
+			// Get detail appointment
+			const appointmentDetail = await db.Booking.findOne({
+				where: {
+					statusId: 'S2',
+					doctorId: data.doctorId,
+					patientId: data.patientId,
+					timeType: data.timeType,
+				},
+			});
+
+			// Update appointment
+			if (appointmentDetail) {
+				await db.Booking.update(
+					{
+						statusId: 'S3',
+						updatedAt: new Date(),
+					},
+					{
+						where: { id: appointmentDetail.id },
+					},
+				);
+
+				message.text = 'Send remedy successfully';
+				message.type = 'success';
+			} else {
+				message.text = 'Data is invalid';
+				message.type = 'error';
+			}
+
+			resole(message);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};
+
 let updateInfoAPI = (data) => {
 	return new Promise(async (resole, reject) => {
 		try {
@@ -369,6 +413,7 @@ module.exports = {
 	listAPI,
 	listInWeekAPI,
 	listAppointmentAPI,
+	sendRemedyAPI,
 	updateInfoAPI,
 	getDetailAPI,
 	getProfileAPI,

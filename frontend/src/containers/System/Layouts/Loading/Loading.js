@@ -4,11 +4,11 @@ import LoadingStyles from './Loading.module.scss';
 
 class Loading extends Component {
 	render() {
-		const { loading } = this.props;
+		const { loading, loadingSendRemedy } = this.props;
 
 		return (
 			<>
-				{loading && (
+				{(loading || loadingSendRemedy) && (
 					<div className={LoadingStyles.loadingPage}>
 						<div className={`${LoadingStyles.ispinner} ${LoadingStyles.ispinnerLarge}`}>
 							<div className={LoadingStyles.ispinnerBlade}></div>
@@ -30,6 +30,7 @@ class Loading extends Component {
 const mapStateToProps = (state) => {
 	return {
 		loading: state.user.loading,
+		loadingSendRemedy: state.doctor.actions.sendRemedy.loading,
 	};
 };
 

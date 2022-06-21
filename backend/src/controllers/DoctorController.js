@@ -42,6 +42,27 @@ let listAppointmentAPI = async (req, res) => {
 	});
 };
 
+let sendRemedyAPI = async (req, res) => {
+	let data = req.body;
+	let result = {
+		message: {
+			type: '',
+			text: '',
+		},
+	};
+
+	if (!data.doctorId || !data.patientId || !data.timeType || !data.email) {
+		result.message.type = 'error';
+		result.message.text = 'Data is invalid';
+	} else {
+		result.message = await DoctorService.sendRemedyAPI(data);
+	}
+
+	return res.status(200).json({
+		message: result.message,
+	});
+};
+
 let updateInfoAPI = async (req, res) => {
 	let data = req.body;
 	let result = {
@@ -154,6 +175,7 @@ module.exports = {
 	listAPI,
 	listInWeekAPI,
 	listAppointmentAPI,
+	sendRemedyAPI,
 	updateInfoAPI,
 	getDetailAPI,
 	getProfileAPI,

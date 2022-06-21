@@ -8,6 +8,15 @@ const initialState = {
 	doctorsInWeek: [],
 	appointments: [],
 	loading: false,
+	actions: {
+		sendRemedy: {
+			loading: false,
+			message: {
+				text: '',
+				type: '',
+			},
+		},
+	},
 	message: {
 		text: '',
 		type: '',
@@ -66,6 +75,46 @@ const doctorReducer = (state = initialState, action) => {
 				...state,
 				appointments: [],
 				loading: false,
+			};
+		case actionTypes.SEND_REMEDY_START:
+			return {
+				...state,
+				actions: {
+					...state.actions,
+					sendRemedy: {
+						...state.actions.sendRemedy,
+						loading: true,
+					},
+				},
+			};
+		case actionTypes.SEND_REMEDY_SUCCESS:
+			return {
+				...state,
+				users: action.data,
+				actions: {
+					...state.actions,
+					sendRemedy: {
+						...state.actions.sendRemedy,
+						loading: false,
+						message: action.message,
+					},
+				},
+			};
+		case actionTypes.SEND_REMEDY_FAIL:
+			return {
+				...state,
+				users: [],
+				actions: {
+					...state.actions,
+					sendRemedy: {
+						...state.actions.sendRemedy,
+						loading: false,
+						message: {
+							text: 'Error. Please try again later',
+							type: 'error',
+						},
+					},
+				},
 			};
 		case actionTypes.UPDATE_INFO_DOCTOR_START:
 			return {

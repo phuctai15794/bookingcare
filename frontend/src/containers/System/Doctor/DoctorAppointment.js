@@ -62,8 +62,17 @@ class DoctorAppointment extends Component {
 		await fetchAppointments(userInfo.id, date);
 	};
 
-	handleSend = (dataConfirm) => {
-		console.log(dataConfirm);
+	handleSend = async (dataConfirm) => {
+		const { sendRemedy } = this.props;
+		const data = {
+			doctorId: dataConfirm.doctorId,
+			patientId: dataConfirm.patientId,
+			timeType: dataConfirm.timeType,
+			email: dataConfirm.email,
+			fileAttach: dataConfirm.fileAttach,
+		};
+
+		await sendRemedy(data);
 	};
 
 	handleCloseModal = () => {
@@ -76,6 +85,7 @@ class DoctorAppointment extends Component {
 		const data = {
 			doctorId: item.doctorId,
 			patientId: item.patientId,
+			timeType: item.timeType,
 			email: item.patientData.email,
 		};
 
@@ -191,7 +201,7 @@ class DoctorAppointment extends Component {
 														<td className="text-center">
 															<button
 																type="button"
-																className="btn btn-sm btn-warning text-light me-3 px-3 py-2"
+																className="btn btn-sm btn-warning me-3 px-3 py-2"
 																onClick={() => this.handleConfirm(item)}
 															>
 																<i>
@@ -244,7 +254,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return { fetchAppointments: (id, date) => dispatch(actions.fetchAppointments(id, date)) };
+	return {
+		fetchAppointments: (id, date) => dispatch(actions.fetchAppointments(id, date)),
+		sendRemedy: (data) => dispatch(actions.sendRemedy(data)),
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DoctorAppointment));
