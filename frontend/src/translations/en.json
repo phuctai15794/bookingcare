@@ -158,6 +158,7 @@
 			"fullName": "Fullname",
 			"firstName": "First name",
 			"lastName": "Last name",
+			"statusAppointment": "Status appointment",
 			"clinicDate": "Clinic date",
 			"address": "Address",
 			"phone": "Phone",

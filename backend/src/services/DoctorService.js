@@ -41,7 +41,6 @@ let listAppointmentAPI = (id, date) => {
 	return new Promise(async (resole, reject) => {
 		try {
 			const whereBooking = {
-				statusId: 'S2',
 				doctorId: id,
 			};
 
@@ -73,6 +72,11 @@ let listAppointmentAPI = (id, date) => {
 					{
 						model: db.AllCode,
 						as: 'timeBookingData',
+						attributes: ['valueVi', 'valueEn'],
+					},
+					{
+						model: db.AllCode,
+						as: 'statusData',
 						attributes: ['valueVi', 'valueEn'],
 					},
 				],

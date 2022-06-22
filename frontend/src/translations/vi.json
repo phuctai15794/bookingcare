@@ -158,6 +158,7 @@
 			"fullName": "Họ và tên",
 			"firstName": "Tên",
 			"lastName": "Họ",
+			"statusAppointment": "Trạng thái đặt hẹn",
 			"clinicDate": "Ngày khám",
 			"address": "Địa chỉ",
 			"phone": "Số điện thoại",

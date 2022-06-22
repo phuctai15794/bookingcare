@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck, faFileInvoice, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Constants, Functions, LocalStorage } from '../../../utils';
+import { Emitter, Constants, Functions, LocalStorage } from '../../../utils';
 import * as actions from '../../../store/actions';
 import Remedy from '../Modal/Remedy';
 import SystemStyles from '../../../styles/System.module.scss';
@@ -28,6 +28,18 @@ class DoctorAppointment extends Component {
 			},
 		};
 	}
+
+	listenToEmitter = () => {
+		Emitter.on('CLOSE_MODAL_REMEDY', () => {
+			this.setState({
+				isOpenModal: false,
+			});
+		});
+		Emitter.on('FETCH_APPOINTMENT', async (data) => {
+			const { fetchAppointments } = this.props;
+			await fetchAppointments(data.doctorId, data.date);
+		});
+	};
 
 	handleCancelFilter = async () => {
 		const { history, fetchAppointments } = this.props;
@@ -100,6 +112,8 @@ class DoctorAppointment extends Component {
 		const userInfo = LocalStorage.get('userInfo');
 		const queryParams = new URLSearchParams(location.search);
 		const date = queryParams.get('date') || 0;
+
+		this.listenToEmitter();
 
 		if (date) {
 			this.setState({
@@ -184,6 +198,9 @@ class DoctorAppointment extends Component {
 												<th scope="col">
 													<FormattedMessage id="form.attributes.gender.title" />
 												</th>
+												<th scope="col">
+													<FormattedMessage id="form.attributes.statusAppointment" />
+												</th>
 												<th scope="col" className="text-center">
 													<FormattedMessage id="form.actions.action" />
 												</th>
@@ -198,6 +215,7 @@ class DoctorAppointment extends Component {
 														<td>{`${item.patientData.firstName} ${item.patientData.lastName}`}</td>
 														<td>{item.patientData.address}</td>
 														<td>{item.patientData.genderData[`value${keyLang}`]}</td>
+														<td>{item.statusData[`value${keyLang}`]}</td>
 														<td className="text-center">
 															<button
 																type="button"

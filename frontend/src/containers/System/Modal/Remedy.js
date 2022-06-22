@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Modal } from 'reactstrap';
-// import { toast } from 'react-toastify';
-import { Functions } from '../../../utils';
+import { toast } from 'react-toastify';
+import { Emitter, Functions, HtmlRaw } from '../../../utils';
 import SystemStyles from '../../../styles/System.module.scss';
 
 class Remedy extends Component {
@@ -62,12 +62,26 @@ class Remedy extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		const { dataConfirm } = this.props;
+		const { dataConfirm, messageSendRemedy } = this.props;
 
 		if (prevProps.dataConfirm !== dataConfirm) {
 			this.setState({
 				email: dataConfirm.email,
 			});
+		}
+
+		if (prevProps.messageSendRemedy !== messageSendRemedy) {
+			if (messageSendRemedy.type === 'success') {
+				console.log(dataConfirm);
+				Emitter.emit('CLOSE_MODAL_REMEDY');
+				Emitter.emit('FETCH_APPOINTMENT', {
+					doctorId: dataConfirm.doctorId,
+					date: 0,
+				});
+				toast.success(<HtmlRaw>{`${messageSendRemedy.text}`}</HtmlRaw>);
+			} else if (messageSendRemedy.type === 'error') {
+				toast.error(<HtmlRaw>{`${messageSendRemedy.text}`}</HtmlRaw>);
+			}
 		}
 	}
 
@@ -144,7 +158,9 @@ class Remedy extends Component {
 }
 
 const mapStateToProps = (state) => {
-	return {};
+	return {
+		messageSendRemedy: state.doctor.actions.sendRemedy.message,
+	};
 };
 
 const mapDispatchToProps = (dispatch) => {
