@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import db from '../models/index';
+import EmailService from './EmailService';
 
 let listAPI = (limit) => {
 	return new Promise(async (resole, reject) => {
@@ -154,6 +155,20 @@ let sendRemedyAPI = (data) => {
 						where: { id: appointmentDetail.id },
 					},
 				);
+
+				await EmailService.sendAPI({
+					to: data.email,
+					subject: 'Kết quả khám bệnh',
+					attachments: {
+						filename: 'text1.png',
+						content: data.fileAttach,
+						encoding: 'base64',
+					},
+					templateName: `booking/remedy/${data.language}`,
+					templateVars: {
+						email: data.email,
+					},
+				});
 
 				message.text = 'Send remedy successfully';
 				message.type = 'success';

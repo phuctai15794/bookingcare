@@ -75,8 +75,9 @@ class DoctorAppointment extends Component {
 	};
 
 	handleSend = async (dataConfirm) => {
-		const { sendRemedy } = this.props;
+		const { language, sendRemedy } = this.props;
 		const data = {
+			language,
 			doctorId: dataConfirm.doctorId,
 			patientId: dataConfirm.patientId,
 			timeType: dataConfirm.timeType,

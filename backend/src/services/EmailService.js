@@ -21,6 +21,7 @@ let sendAPI = async (data) => {
 		from: `${process.env.APP_NAME} <${process.env.MAIL_USER}>`,
 		to: data.to,
 		subject: data.subject,
+		attachments: (data.attachments && data.attachments.content !== '') || '',
 	};
 	const templatePath = path.resolve(`src/libraries/templates/${data.templateName}.html`);
 	// const cssPath = path.resolve('src/public/email/styles.css');
