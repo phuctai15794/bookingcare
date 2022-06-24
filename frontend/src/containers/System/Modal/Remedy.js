@@ -46,6 +46,8 @@ class Remedy extends Component {
 			doctorId: dataConfirm.doctorId,
 			patientId: dataConfirm.patientId,
 			timeType: dataConfirm.timeType,
+			firstName: dataConfirm.firstName,
+			lastName: dataConfirm.lastName,
 			email: this.state.email,
 			fileAttach: this.state.fileAttach,
 		});
@@ -72,7 +74,6 @@ class Remedy extends Component {
 
 		if (prevProps.messageSendRemedy !== messageSendRemedy) {
 			if (messageSendRemedy.type === 'success') {
-				console.log(dataConfirm);
 				Emitter.emit('CLOSE_MODAL_REMEDY');
 				Emitter.emit('FETCH_APPOINTMENT', {
 					doctorId: dataConfirm.doctorId,

@@ -10,33 +10,7 @@
 <body>
     <h3>Dear <%= firstName %> <%= lastName %>!</h3>
     <p>You received this email because you booked an appointment at the BookingCare website</p>
-    <p>Information to book a medical appointment:</p>
-    <div>
-        <strong>Time:</strong>
-        <span>
-            <%= timeString %>
-        </span>
-    </div>
-    <div>
-        <strong>Person in charge:</strong>
-        <span>
-            <%= doctorName %>
-        </span>
-    </div>
-    <div>
-        <strong>Medical reason:</strong>
-        <span>
-            <%= medicalReason %>
-        </span>
-    </div>
-    <div>
-        <strong>Cost:</strong>
-        <span>
-            <%= priceMedical %>
-        </span>
-    </div>
-    <p>If the above information is true. Please click on the link below to confirm and complete the appointment booking process.</p>
-    <div><a href="<%= redirectLink %>">Xác nhận</a></div>
+    <p>Prescription/invoice information is sent in the attached file</p>
 </body>
 
 </html>

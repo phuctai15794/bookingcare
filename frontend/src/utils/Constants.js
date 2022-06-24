@@ -35,6 +35,10 @@ export const DATE_FORMAT = {
 	},
 };
 
+export const STATUS_CLINIC = {
+	S2: 'S2',
+};
+
 export const SYSTEM_ACTIONS = {
 	CREATE: 'CREATE',
 	EDIT: 'EDIT',

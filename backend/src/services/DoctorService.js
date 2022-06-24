@@ -159,14 +159,17 @@ let sendRemedyAPI = (data) => {
 				await EmailService.sendAPI({
 					to: data.email,
 					subject: 'Kết quả khám bệnh',
-					attachments: {
-						filename: 'text1.png',
-						content: data.fileAttach,
-						encoding: 'base64',
-					},
+					attachments: [
+						{
+							filename: `remedy-${data.patientId}-${data.firstName}-${data.lastName}.png`,
+							content: data.fileAttach,
+							encoding: 'base64',
+						},
+					],
 					templateName: `booking/remedy/${data.language}`,
 					templateVars: {
-						email: data.email,
+						firstName: data.firstName,
+						lastName: data.lastName,
 					},
 				});
 

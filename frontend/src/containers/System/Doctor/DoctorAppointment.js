@@ -81,6 +81,8 @@ class DoctorAppointment extends Component {
 			doctorId: dataConfirm.doctorId,
 			patientId: dataConfirm.patientId,
 			timeType: dataConfirm.timeType,
+			firstName: dataConfirm.firstName,
+			lastName: dataConfirm.lastName,
 			email: dataConfirm.email,
 			fileAttach: dataConfirm.fileAttach,
 		};
@@ -99,6 +101,8 @@ class DoctorAppointment extends Component {
 			doctorId: item.doctorId,
 			patientId: item.patientId,
 			timeType: item.timeType,
+			firstName: item.patientData.firstName,
+			lastName: item.patientData.lastName,
 			email: item.patientData.email,
 		};
 
@@ -218,19 +222,35 @@ class DoctorAppointment extends Component {
 														<td>{item.patientData.genderData[`value${keyLang}`]}</td>
 														<td>{item.statusData[`value${keyLang}`]}</td>
 														<td className="text-center">
-															<button
-																type="button"
-																className="btn btn-sm btn-warning me-3 px-3 py-2"
-																onClick={() => this.handleConfirm(item)}
-															>
-																<i>
-																	<FontAwesomeIcon
-																		className="me-2"
-																		icon={faCircleCheck}
-																	/>
-																</i>
-																<FormattedMessage id="form.actions.confirm" />
-															</button>
+															{Constants.STATUS_CLINIC.S2 === item.statusId ? (
+																<button
+																	type="button"
+																	className="btn btn-sm btn-warning me-3 px-3 py-2"
+																	onClick={() => this.handleConfirm(item)}
+																>
+																	<i>
+																		<FontAwesomeIcon
+																			className="me-2"
+																			icon={faCircleCheck}
+																		/>
+																	</i>
+																	<FormattedMessage id="form.actions.confirm" />
+																</button>
+															) : (
+																<button
+																	type="button"
+																	className="btn btn-sm btn-success me-3 px-3 py-2"
+																>
+																	<i>
+																		<FontAwesomeIcon
+																			className="me-2"
+																			icon={faCircleCheck}
+																		/>
+																	</i>
+																	<FormattedMessage id="form.actions.confirmed" />
+																</button>
+															)}
+
 															<button
 																type="button"
 																className="btn btn-sm btn-info text-light px-3 py-2"
