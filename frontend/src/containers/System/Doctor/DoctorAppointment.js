@@ -225,7 +225,7 @@ class DoctorAppointment extends Component {
 															{Constants.STATUS_CLINIC.S2 === item.statusId ? (
 																<button
 																	type="button"
-																	className="btn btn-sm btn-warning me-3 px-3 py-2"
+																	className="btn btn-sm btn-warning px-3 py-2"
 																	onClick={() => this.handleConfirm(item)}
 																>
 																	<i>
@@ -239,7 +239,7 @@ class DoctorAppointment extends Component {
 															) : (
 																<button
 																	type="button"
-																	className="btn btn-sm btn-success me-3 px-3 py-2"
+																	className="btn btn-sm btn-success px-3 py-2"
 																>
 																	<i>
 																		<FontAwesomeIcon
@@ -250,19 +250,6 @@ class DoctorAppointment extends Component {
 																	<FormattedMessage id="form.actions.confirmed" />
 																</button>
 															)}
-
-															<button
-																type="button"
-																className="btn btn-sm btn-info text-light px-3 py-2"
-															>
-																<i>
-																	<FontAwesomeIcon
-																		className="me-2"
-																		icon={faFileInvoice}
-																	/>
-																</i>
-																<FormattedMessage id="form.actions.invoice" />
-															</button>
 														</td>
 													</tr>
 												);
