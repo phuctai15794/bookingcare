@@ -77,8 +77,6 @@ let getDetailAPI = (id, locationId) => {
 					whereDoctorInfo.provinceId = locationId;
 				}
 
-				console.log(whereDoctorInfo);
-
 				const doctorInfos = await db.DoctorInfo.findAll({
 					attributes: ['doctorId', 'provinceId'],
 					where: whereDoctorInfo,
