@@ -224,7 +224,7 @@ class DoctorAppointment extends Component {
 															{Constants.STATUS_CLINIC.S2 === item.statusId ? (
 																<button
 																	type="button"
-																	className="btn btn-sm btn-warning px-3 py-2"
+																	className="btn btn-sm btn-info text-white px-3 py-2"
 																	onClick={() => this.handleConfirm(item)}
 																>
 																	<i>
@@ -234,6 +234,13 @@ class DoctorAppointment extends Component {
 																		/>
 																	</i>
 																	<FormattedMessage id="form.actions.confirm" />
+																</button>
+															) : Constants.STATUS_CLINIC.S1 === item.statusId ? (
+																<button
+																	type="button"
+																	className="btn btn-sm btn-warning px-3 py-2"
+																>
+																	<FormattedMessage id="form.actions.new" />
 																</button>
 															) : (
 																<button
