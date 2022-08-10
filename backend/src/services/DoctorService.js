@@ -43,6 +43,7 @@ let listAppointmentAPI = (id, date) => {
 		try {
 			const whereBooking = {
 				doctorId: id,
+				statusId: 'S2',
 			};
 
 			if (Number(date)) {
